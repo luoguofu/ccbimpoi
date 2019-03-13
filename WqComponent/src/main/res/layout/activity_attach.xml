@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_setting_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_reused_topbanner" />
+
+    <include
+        android:id="@+id/nullAttach"
+        layout="@layout/view_null"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/headerView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone" />
+
+    <com.weqia.utils.view.pullrefresh.PullToRefreshListView
+        android:id="@+id/pl_attach"
+        style="@style/common_lv" />
+
+</LinearLayout>

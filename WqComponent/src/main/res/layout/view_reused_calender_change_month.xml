@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_header"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white" >
+
+    <ImageView
+        android:id="@+id/previous_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/default_new_interval"
+        android:src="@drawable/btn_rili_left" />
+
+    <ImageView
+        android:id="@+id/next_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/next_month"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/default_new_interval"
+        android:src="@drawable/btn_rili_right" />
+
+    <TextView
+        android:id="@+id/current_month"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@id/next_month"
+        android:layout_toRightOf="@id/previous_month"
+        android:gravity="center"
+        android:text="@string/current_month_placeholder"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        layout="@layout/view_setting_line_full" />
+
+</RelativeLayout>

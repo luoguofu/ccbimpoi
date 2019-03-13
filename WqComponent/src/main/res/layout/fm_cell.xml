@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_file_content"
+        style="@style/cell_list_item_small">
+
+
+        <ImageView
+            android:id="@+id/adapter_icon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/f_folder" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/adapter_txt"
+                style="@style/cell_lv_item_tv_title"
+                android:layout_width="match_parent"
+                android:text="密码.txt" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_interval"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/adapter_size"
+                    style="@style/common_tv_webo_comment"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    style="@style/common_tv_webo_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivOperate"
+                style="@style/setting_image_arrow"
+                android:contentDescription="@string/app_name" />
+
+            <CheckBox
+                android:id="@+id/file_select"
+                style="@style/mCheckbox"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:visibility="gone" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivDiv"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/default_new_interval"
+        android:layout_marginRight="@dimen/default_new_interval"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/dv_line" />
+
+
+</LinearLayout>

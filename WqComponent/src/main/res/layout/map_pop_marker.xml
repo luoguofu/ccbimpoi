@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_daohang"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+       >
+
+        <LinearLayout
+            android:id="@+id/ivNavi"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@+id/ivNavi"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addrTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="[位置]"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/addrContent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="浙江省杭州市西湖区天堂软件园浙江省杭州市西湖区天堂软件园"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivNavi"
+            android:layout_width="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/icon_daohang" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

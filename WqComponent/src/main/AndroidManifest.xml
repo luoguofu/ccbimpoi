@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.weqia.wq"
+    android:versionCode="552"
+    android:versionName="5.5.1">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21"
+        tools:overrideLibrary="com.uuzuche.lib_zxing,com.yjing.imageeditlibrary" />
+
+
+    <!-- 聊天听筒模式需要蓝牙操作权限 -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 创建桌面快捷方式,无富媒体消息则不需要 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SET_TIME_ZONE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 保存富媒体消息需要,无富媒体消息则不需要 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- xg permission -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <!-- xg permission end -->
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:persistent="true"
+        android:theme="@style/AppTheme">
+
+        <service
+            android:name="com.spinytech.macore.router.WideRouterConnectService"
+            android:process="com.spiny.ma.widerouter" />
+
+        <!-- 提醒service -->
+        <!-- 发送service -->
+        <service android:name="com.weqia.wq.component.AttachService" />
+        <service android:name="com.weqia.wq.component.ModeFileService" />
+
+        <!-- 监听项 -->
+        <!-- 网络变化 -->
+        <receiver android:name="com.weqia.wq.component.NetChangeBroadCast">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.weqia.wq.component.utils.locate.LocationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+      <activity
+            android:name="com.weqia.wq.component.utils.locate.LocationSerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.weqia.wq.component.view.picture.PicturePagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.weqia.wq.component.imageselect.ImageBrowseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.weqia.wq.component.imageselect.ImageListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.weqia.wq.component.imageselect.ClipImageActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.weqia.wq.component.modules.ShowInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.weqia.wq.component.modules.SimpleInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.weqia.wq.component.file.ZipFileContentListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".component.imageselect.file.FmActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".component.file.FileScanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.file.FileWebViewActivity"
+            android:screenOrientation="portrait" />
+       <activity
+            android:name=".component.utils.html.WebViewActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+                android:name=".component.video.VideoRecoderActivity"
+                android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".component.video.VideoPlayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.modules.AttachActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.weqia.wq.component.activity.ModifySingleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.weqia.wq.component.activity.SharedModifySettingActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- *******************************bimcloud END***************************** -->
+
+        <!-- *******************************第三方配置开始（除權限外）***************************** -->
+        <!-- 百度地图 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="@string/baidu_map_key" />
+
+        <!-- umemshare -->
+        <!-- ###################注册SDK使用的Activity###################### -->
+
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105780888" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+
+        <!-- *******************************第三方配置结束（除權限外）***************************** -->
+
+    </application>
+
+</manifest>

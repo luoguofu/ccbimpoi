@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_interval">10dp</dimen>
+    <dimen name="half_interval">4dp</dimen>
+    <dimen name="double_interval">20dp</dimen>
+    <dimen name="dlg_default_padding">20dp</dimen>
+    
+    <!-- list -->
+    <dimen name="default_list_text_size">16sp</dimen>
+    <dimen name="default_plain_text_size">16sp</dimen>
+    <dimen name="default_button_text_size">16sp</dimen>
+    
+     <!-- dialog textsize -->
+    <dimen name="default_dialog_title_size">16sp</dimen>
+    <dimen name="default_dialog_text_size">16sp</dimen>
+
+    <!-- pulltorefresh -->
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    
+</resources>

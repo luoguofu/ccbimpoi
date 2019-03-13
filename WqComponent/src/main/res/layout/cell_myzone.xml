@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llDate"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="-7dp"
+            android:layout_toLeftOf="@+id/rlRight"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11月"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/bg_setting_color"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llLik"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_links_cell"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/linksIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon" />
+
+                    <TextView
+                        android:id="@+id/linksTitle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:layout_toRightOf="@+id/linksIcon"
+                        android:maxLines="2"
+                        android:minHeight="20dp"
+                        android:text="11111111111111"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/default_zone_list_bg"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivImg"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginRight="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon" />
+
+
+                    <TextView
+                        android:id="@+id/tvText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="4"
+                        android:text=""
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

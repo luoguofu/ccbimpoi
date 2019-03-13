@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:background="@color/black"
+                android:layout_height="fill_parent">
+
+    <include
+        android:id="@+id/topTitle"
+        layout="@layout/view_reused_topbanner"/>
+
+    <Chronometer
+        android:id="@+id/timeChronometer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topTitle"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/ivCameraChange"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/timeChronometer"
+        android:src="@drawable/camera_change"
+        />
+
+
+    <FrameLayout
+        android:layout_width="240dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/ivCameraChange"
+        android:layout_height="320dp">
+
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/ivPlay"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:src="@drawable/video_recorder_play_btn"/>
+
+
+    </FrameLayout>
+
+
+    <com.weqia.utils.view.CommonImageView
+        android:id="@+id/ivOperate"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/video_recorder_start_btn"/>
+
+</RelativeLayout>

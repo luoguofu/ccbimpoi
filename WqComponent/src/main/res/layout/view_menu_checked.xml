@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rlBg"
+        style="@style/dlg_check_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <CheckBox
+            android:id="@+id/cbChecked"
+            style="@style/mCheckbox"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:checked="false" />
+
+        <TextView
+            android:id="@+id/tv_dlg_title"
+            style="@style/dialog_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/cbChecked" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_dlg_dv"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:scaleType="fitXY"
+        android:src="@drawable/dlg_xi" />
+
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:background="@drawable/util_shape_dialog_bg"
+			  android:orientation="vertical"
+			  android:minWidth="280dip"
+	>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:layout_marginTop="15dp"
+				  android:layout_marginLeft="15dp"
+		>
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="应用更新中..."
+			android:textColor="@color/black_font"
+			android:textSize="16sp"
+			/>
+	</LinearLayout>
+	<ProgressBar
+		android:layout_margin="15dp"
+		android:id="@+id/dialog_progress_bar"
+		android:gravity="center"
+		style="@android:style/Widget.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="10dp"
+		android:max="100"
+		android:progressDrawable="@drawable/progress_bar_horizontal"
+		android:progress="0"
+		/>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="horizontal"
+				  android:layout_marginLeft="15dp"
+				  android:layout_marginRight= "15dp"
+				  android:layout_marginBottom="15dp"
+		>
+		<TextView
+			android:id="@+id/tv_progress"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="0%"
+			android:textColor="@color/black_font"
+			/>
+		<TextView
+			android:id="@+id/tv_file_size"
+			android:gravity="right"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="0MB/0MB"
+			android:textColor="@color/black_font"
+			/>
+	</LinearLayout>
+
+</LinearLayout>

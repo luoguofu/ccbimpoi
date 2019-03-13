@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fefefe"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#c1c1c1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_interval"
+        android:layout_marginRight="5dp"
+        android:gravity="bottom"
+        android:minHeight="50dp"
+        android:orientation="horizontal"
+        android:paddingBottom="9dp" >
+
+        <ImageView
+            android:id="@+id/ibVoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:src="@drawable/selector_voice_icon" />
+
+        <!-- 录制语音动弹 -->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_interval"
+            android:layout_weight="1"
+            android:minHeight="32dp"
+            android:paddingTop="9dp" >
+
+            <EditText
+                android:id="@+id/etInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/util_selector_et"
+                android:hint="@null"
+                android:inputType="textCapSentences|textAutoCorrect|textMultiLine|textShortMessage"
+                android:maxLength="2000"
+                android:maxLines="4"
+                android:minHeight="32dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="40dp"
+                android:singleLine="false"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnRecorder"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@drawable/record_bg"
+                android:text="按住  说话"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/ibFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/etInput"
+                android:layout_alignParentRight="true"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="TODO"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@drawable/sel_btn_biaoqing" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:minHeight="32dp"
+            android:minWidth="42dp" >
+
+            <TextView
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/stoke_small_bg"
+                android:text="发送"
+                android:textColor="@color/white"
+                android:textSize="14.0sp"
+
+                 />
+
+            <ImageView
+                android:id="@+id/ibAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:background="@null"
+                android:contentDescription="TODO"
+                android:src="@drawable/btn_talk_add" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#c1c1c1" />
+
+    <LinearLayout
+        android:id="@+id/llHide"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include
+            android:id="@+id/ll_media_content"
+            android:visibility="visible"
+            layout="@layout/view_talk_grid" />
+
+        <com.weqia.wq.component.view.face.ExpressionGridView
+            android:id="@+id/gvTalk"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/talk_oth_height_new"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#383838</color>
+    <color name="grey">#ff888888</color>
+    <color name="translucent_black">#77000000</color>
+    <color name="tx_bra">#f5f5f5</color>
+    <color name="grey_task">#999999</color>
+
+    <!-- list -->
+    <color name="default_plain_text_color">#383838</color>
+    <color name="default_button_text_color">#000000</color>
+    <color name="default_list_bg_pressed">#d6edf9</color>
+    <color name="list_item_select_text_color">#44adff</color>
+	<color name="list_itel_location_time">#fc802e</color>
+    
+    <color name="underline_color">#576b95</color>
+
+    <!--dlg_color-->
+    <color name="dialog_bar_color">#1a5da2</color>
+    <color name="dialog_bar_color_grey">#d7d7d7</color>
+    <color name="dialog_positive_color">#576b95</color>
+    <color name="dialog_nature_color">#576b95</color>
+    <color name="dialog_negative_color">#576b95</color>
+    <color name="dialog_bar_time_color">@android:color/black</color>
+
+
+        <!-- viewpager -->
+    <color name="viewpager_line_color">#0093dd</color>
+    <color name="viewpager_line_selected_color">#0093dd</color>
+    <color name="viewpager_text_color">#6c7072</color>
+    <color name="viewpager_text_selected_color">#383838</color>
+    <color name="viewpager_divider_color">#96969663</color>
+    <color name="talk_img_txt">#737373</color>
+
+</resources>

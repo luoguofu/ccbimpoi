@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/topbanner"
+        layout="@layout/view_reused_topbanner" />
+
+    <include layout="@layout/view_reused_calender_change_month" />
+
+    <include layout="@layout/view_reused_calender" />
+
+    <com.weqia.utils.view.timepicker.TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_interval" />
+
+</LinearLayout>

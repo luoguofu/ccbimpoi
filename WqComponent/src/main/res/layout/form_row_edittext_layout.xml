@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TableRow
+        android:id="@+id/tablerow_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_tr_middle"
+        android:paddingLeft="@dimen/default_new_interval"
+        android:paddingRight="@dimen/default_new_interval"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#383838"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:id="@+id/tv_form_name"/>
+
+        <!--<EditText
+            android:id="@+id/form_row_content"
+            android:layout_weight="1"
+            android:minLines="5"
+            android:text="时代峻峰还是看时代峰峻可视对讲法律上是的福克斯的积分了会计师克里斯多夫结束堆积发两块时代峻峰施蒂利克福建省考了的积分了斯柯达冯老师发的撒"
+            style="@style/setting_item_input" />-->
+        <EditText
+            android:id="@+id/ed_form_content"
+            android:maxLines="5"
+            android:layout_weight="1"
+            android:text=""
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:textColor="@color/new_cs_project_right"
+            android:textColorHint="@color/right_text_color"
+            android:gravity="left"
+            android:background="@android:color/transparent"
+            android:maxWidth="260dp"
+            android:minWidth="160dp"
+            android:textSize="15sp"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
+            android:visibility="visible"
+             />
+        <TextView
+            android:id="@+id/tv_form_select"
+            style="@style/form_item_input"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:drawableRight="@drawable/sel_arrow_right"
+            android:drawablePadding="10dp"
+            android:visibility="gone"
+            android:textSize="15sp"/>
+
+    </TableRow>
+    <include layout="@layout/view_setting_line_second" />
+
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/view_setting_line_full" />
+
+    <GridView
+        android:id="@+id/calendar_days_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="2dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" />
+
+    <ViewSwitcher
+        android:id="@+id/calendar_switcher"
+        android:layout_width="fill_parent"
+        android:layout_height="255dip"
+        android:background="@color/white" >
+
+        <GridView
+            android:id="@+id/calendar_grid"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:horizontalSpacing="2dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp" />
+    </ViewSwitcher>
+
+</LinearLayout>

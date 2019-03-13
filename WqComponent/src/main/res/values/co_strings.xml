@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<string name="sina_key">1369026827</string>-->
+    <!--<string name="sina_key_secret">23d0b02073da6bb9a422bb198acfd0fa</string>-->
+    <string name="weixin_key">********</string>
+    <string name="weixin_key_secret">*******</string>
+    <string name="qq_id">*******</string>
+    <string name="qq_key">*******</string>
+    <string name="baidu_map_key">*******</string>
+    <string name="umeng_key">*******</string>
+
+    <string name="co_root_path">CCBIM</string>
+    <string name="co_zz_path">CCBIM</string>
+    <!--Bim360模型文集那点击下载按钮，下载的路径-->
+    <string name="bim_down_path">download</string>
+
+    <string name="umeng_channel">bim360</string>
+    <string name="home_url">121.199.31.7</string>
+
+    <string name="co_co_wq_str">企业ID</string>
+    <string name="co_wq_str">通行证帐号</string>
+    <string name="text_weqia_title">通行证帐号：</string>
+    <string name="login_out_left">你的BIM360帐号已于</string>
+    <string name="login_out_right">在其他地方登录，请注意帐号安全。</string>
+
+    <string name="weqia_str">品茗CCBIM</string>
+
+    <string name="co_n_want_guide">0</string>
+    <string name="co_n_want_friend">0</string>
+    <string name="co_n_want_weqia_good">0</string>
+    <string name="co_n_want_invite">0</string>
+    <string name="co_n_want_register">0</string>
+    <string name="co_n_want_call_voice">0</string>
+
+</resources>

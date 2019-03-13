@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include
+        android:id="@+id/ll_small"
+        layout="@layout/view_reused_time_cell" />
+
+    <include
+        android:id="@+id/llComment"
+        layout="@layout/view_reused_zan_cell" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llComment"
+        android:paddingBottom="@dimen/default_interval"
+        android:layout_marginTop="-6dp">
+
+        <TextView
+            android:id="@+id/v_resend_big"
+            style="@style/send_error_big"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ll_bg"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/llZanCell"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="@dimen/default_new_interval"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/ivZan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/icon_yizan" />
+
+                <TextView
+                    android:id="@+id/tvZanContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/ivZan"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingBottom="3dp"
+                    android:textColor="@color/main_color_dark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/zanDiv"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/tvZanContent"
+                    android:background="#d9d9d9" />
+            </RelativeLayout>
+
+            <com.weqia.wq.component.view.ListListView
+                android:id="@+id/lvlv_reply"
+                style="@style/common_lv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="10dp"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@null"
+                android:groupIndicator="@null" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="task_list_cell_iv">#b3b3b3</color>
+    <color name="section_bg">#88383838</color>
+
+    <color name="main_color_dark">#5a8b7f</color>
+    <color name="main_color">#00b589</color>
+    <color name="main_color_sel">#00a87e</color>
+    <color name="sel_color">#d7f5ed</color>
+
+    <color name="state_late">#fc6e42</color>
+
+    <color name="blue_font">@color/main_color</color>
+    <color name="black_font">#383838</color>
+    <color name="grey_font">#ff888888</color>
+
+    <color name="wq_title_bg">#fafafa</color>
+    <color name="wq_title_bg_sel">#ebebeb</color>
+
+    <color name="bg_topright_btn">@color/main_color</color>
+    <color name="bg_topright_btn_sel">@color/main_color</color>
+    <color name="bg_setting_color">@color/bg_color</color>
+    <color name="default_list_bg_pressed">#e0e0e0</color>
+    <color name="bg_color">#f0f5f4</color>
+    <color name="bg_color_new">#f0f5f4</color>
+    <color name="title_text">#383838</color>
+
+    <color name="half_alpha_black">#7f000000</color>
+
+    <color name="cal_1">#000000</color>
+    <color name="cal_2">#999999</color>
+    <color name="cal_3">@color/main_color</color>
+    <color name="hb_click">#fd9931</color>
+    <color name="qr_code_groung">#f5f5f5</color>
+
+    <color name="setting_div">#e8e8e8</color>
+
+    <color name="talk_me_link_color">#0af7c0</color>
+
+    <color name="newui_blue">@color/main_color</color>
+
+    <color name="blue">@color/main_color</color>
+    <color name="kq_blue">@color/main_color</color>
+    <color name="wq_tab_text">#999999</color>
+
+    <color name="most_new_blue">@color/main_color</color>
+    <color name="grey_sel">@color/main_color_sel</color>
+
+    <color name="line_grey">#e1e1e1</color>
+
+    <color name="gray_color">#888888</color>
+
+    <color name="bg_color_2">#fafafa</color>
+    <color name="new_cs_project_right">#737373</color>
+
+    <color name="blue_login">@color/main_color</color>
+    <color name="divider_line">#d5d5d5</color>
+    <color name="right_text_color">#ffb5b5b6</color>
+    <color name="work_black">#b2b2b2</color>
+
+    <color name="search_text_color">#595959</color>
+    <color name="gray">#ababab</color>
+
+    <color name="bg_links">#ececec</color>
+    <color name="bg_links_sel">#cccccc</color>
+
+    <color name="delete_text">#ff6817</color>
+
+    <color name="loc_blue">@color/main_color_dark</color>
+    <color name="dlg_bg_white">#f0f1f5</color>
+</resources>

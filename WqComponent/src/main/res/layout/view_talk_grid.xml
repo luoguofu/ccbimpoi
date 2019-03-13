@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/talk_oth_height_new"
+    android:orientation="vertical">
+
+    <GridView
+        android:id="@+id/app_panel_grid"
+        style="@style/common_gv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/talk_oth_height"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@null"
+        android:listSelector="@drawable/grid_bg"
+        android:numColumns="4"
+        android:layout_marginTop="24dp"
+        android:scrollbars="none" />
+
+</LinearLayout>

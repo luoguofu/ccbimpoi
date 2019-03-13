@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_list_divider" />
+
+    <RelativeLayout
+        style="@style/cell_list_item_small"
+        android:descendantFocusability="blocksDescendants">
+
+        <FrameLayout
+            android:id="@+id/rlRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <CheckBox
+                android:id="@+id/mCheckBox"
+                style="@style/mCheckbox"
+                android:layout_marginRight="15dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvRight"
+                style="@style/bt_add_style"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="取消关注"
+                android:visibility="gone" />
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center|right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="240dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/rlRight"
+            android:gravity="center_vertical"
+            android:minWidth="60dp"
+            android:orientation="horizontal">
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/default_iv_small_height"
+                android:layout_height="@dimen/default_iv_small_height"
+                android:layout_marginRight="12dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvTitleRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:text=""
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        style="@style/setting_title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:layout_toLeftOf="@+id/tvTitleRight"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvContent"
+                    style="@style/setting_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/grey"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

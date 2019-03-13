@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="str_sdcard_empty">手机存储剩余空间不够，请释放部分空间或插入SD卡。</string>
+
+    <!-- dialog -->
+    <string name="util_dialog_cancel" translatable="false">取消</string>
+    <string name="util_dialog_complete" translatable="false">完成</string>
+
+    <!-- pulltorefresh -->
+    <string name="pull_to_loadmore">加载更多…</string>
+    <string name="util_hint_search" translatable="false">搜索</string>
+</resources>

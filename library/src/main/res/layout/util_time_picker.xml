@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:clickable="false"
+    android:focusable="false" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:minHeight="80dp" >
+
+        <com.weqia.utils.view.timepicker.NumberPicker
+            android:id="@+id/time_day"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:visibility="gone" />
+
+        <com.weqia.utils.view.timepicker.NumberPicker
+            android:id="@+id/time_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text=":"
+            android:textColor="#339ee2"
+            android:textSize="20.0sp" />
+
+        <com.weqia.utils.view.timepicker.NumberPicker
+            android:id="@+id/time_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp" />
+
+        <TextSwitcher
+            android:id="@+id/time_switcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inAnimation="@anim/util_slide_from_right_slow"
+            android:outAnimation="@anim/util_slide_to_left_slow" >
+
+            <TextView
+                android:id="@+id/time_am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:text="上午"
+                android:textColor="#339ee2"
+                android:textSize="28.0sp" />
+
+            <TextView
+                android:id="@+id/time_pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:text="下午"
+                android:textColor="#339ee2"
+                android:textSize="28.0sp" />
+        </TextSwitcher>
+    </LinearLayout>
+
+</RelativeLayout>

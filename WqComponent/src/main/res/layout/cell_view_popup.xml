@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/default_weqia_list_bg"
+        android:orientation="horizontal">
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:gravity="left|center"
+            android:singleLine="true"
+            android:textColor="#383938"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/dv_popup"
+        layout="@layout/view_setting_line_full" />
+
+</LinearLayout>

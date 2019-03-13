@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_small_push"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+
+    <com.weqia.utils.view.CommonImageView
+        android:id="@+id/iv_reused_icon"
+        android:layout_width="@dimen/default_iv_small_height"
+        android:layout_height="@dimen/default_iv_small_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/people"/>
+
+    <TextView
+        android:id="@+id/tv_reused_new_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tab_unread_small_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="visible"/>
+
+</RelativeLayout>

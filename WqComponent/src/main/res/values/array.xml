@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="end_time_array">
+        <item name="end_no_limit">无截止</item>
+        <item name="end_today">当天</item>
+        <item name="end_one_day">一天</item>
+        <item name="end_two_day">两天</item>
+        <item name="end_three_day">三天</item>
+        <item name="end_one_week">一周</item>
+        <item name="end_two_week">两周</item>
+        <item name="end_one_month">一个月</item>
+        <item name="end_two_month">两个月</item>
+    </string-array>
+
+    <string-array name="punch_notifi_time" translatable="false">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+    </string-array>
+
+
+    <array name="can_open_format">
+        <!--<item>dwg</item>-->
+        <!--<item>hsf</item>-->
+        <item>pbim</item>
+        <!--<item>pmlod</item>-->
+        <item>rvt</item>
+        <item>skp</item>
+        <item>720z</item>
+        <item>ifc</item>
+        <item>nwc</item>
+        <item>nwd</item>
+        <item>pmlink</item>
+        <item>rte</item>
+        <item>rfa</item>
+        <!--<item>rar</item>-->
+        <!--<item>autozip</item>-->
+        <!--<item>zip</item>-->
+    </array>
+    <array name="cad_format">
+        <item>dwg</item>
+        <item>hsf</item>
+    </array>
+
+
+    <array name="not_show_path">
+        <item>/mnt/asec</item>
+        <item>/mnt/obb</item>
+        <item>/mnt/user</item>
+    </array>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tool="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:descendantFocusability="blocksDescendants"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_progress"
+        style="@style/cell_list_item"
+        android:orientation="horizontal">
+
+        <com.weqia.wq.component.view.PushCountView
+            android:id="@+id/v_push_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dip"/>
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/people"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/llWeboCell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="12dip"
+            android:minHeight="30dip"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_reused_tile_conten_cell"/>
+
+            <include layout="@layout/view_reused_link_cell"/>
+
+            <include layout="@layout/cell_task_voice"/>
+
+            <include layout="@layout/view_reused_media_cell"/>
+
+            <FrameLayout
+                android:id="@+id/lay_shikou"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/im_shikou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:src="@drawable/icon_biaoji_shikou"/>
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/tv_loc"
+                style="@style/loc_style"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvAt"
+                style="@style/common_tv_webo_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:singleLine="false"
+                android:text="提到了: "
+                android:visibility="gone"/>
+
+            <include layout="@layout/view_reused_sjz"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_system_pro"
+        style="@style/system_progress_ui"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/divLine"
+        layout="@layout/view_list_divider"/>
+
+</LinearLayout>

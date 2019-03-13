@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:background="@android:color/transparent"
+             android:layout_height="match_parent">
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.weqia.utils.bitmap.big.XImageView
+                android:id="@+id/xImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/background_dark"
+                app:doubleType="fitImageMinViewMax"
+                app:initType="fitViewMinImageMin"/>
+
+        <com.weqia.wq.component.view.GifView
+                android:id="@+id/gifView"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/background_dark"/>
+
+
+    </FrameLayout>
+
+    <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_pre_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"/>
+
+    <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            style="@style/mProgressBarStyleBig"
+            android:layout_gravity="center"
+            android:indeterminate="false"/>
+
+</FrameLayout>

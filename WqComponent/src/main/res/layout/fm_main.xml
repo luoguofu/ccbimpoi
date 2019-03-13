@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    android:paddingBottom="5dp">
+
+
+    <include layout="@layout/view_reused_topbanner" />
+
+
+    <TextView
+        android:id="@+id/currPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:gravity="center|left"
+        android:minHeight="30dp"
+        android:text="111"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/mListView"
+        style="@style/common_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/currPath"></ListView>
+
+</LinearLayout>

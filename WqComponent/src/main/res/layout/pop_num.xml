@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weqia.wq.component.view.ssq.WheelView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/wl_num"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:itemNumber="3"
+    app:lineHeight="1dp"
+    app:maskHight="32dp"
+    app:noEmpty="true"
+    app:normalTextColor="#777"
+    app:normalTextSize="20sp"
+    app:selectedTextColor="#ff000000"
+    app:selectedTextSize="20sp"
+    app:unitHight="50dp" />

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dlg_default_padding">
+
+    <EditText
+        android:id="@+id/et_Input"
+        style="@style/common_et"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/dlg_default_padding"
+        android:layout_marginRight="@dimen/dlg_default_padding"
+        android:layout_marginTop="@dimen/dlg_default_padding"
+        android:background="@drawable/util_et_focused"
+        android:maxLength="30"
+        android:singleLine="false"/>
+
+</RelativeLayout>

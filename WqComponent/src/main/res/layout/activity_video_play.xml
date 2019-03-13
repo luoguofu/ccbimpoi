@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:background="@color/black"
+                android:layout_height="fill_parent">
+
+    <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+            android:id="@+id/rl_play_control"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal">
+
+        <com.weqia.utils.view.CommonImageView
+                android:id="@+id/ivPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@drawable/btn_bofang"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="1111"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_interval"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+
+        <TextView
+                android:id="@+id/tvTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/default_interval"
+                android:gravity="center"
+                android:text="轻触退出"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+            android:id="@+id/fr_prew"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+        <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_prew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon"
+                android:visibility="gone"/>
+
+        <com.weqia.utils.view.RoundProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                app:roundColor="#19ffffff"
+                app:roundProgressColor="#19ffffff"
+                app:roundStyle="FILL"
+                app:roundTextSize="18sp"
+                app:roundWidth="2px"
+                app:textIsDisplayable="true"/>
+
+        <TextView
+                android:id="@+id/tv_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/music_contrlbar"
+                android:gravity="center"
+                android:paddingLeft="@dimen/default_interval"
+                android:paddingRight="@dimen/default_interval"
+                android:text="加载中... "
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

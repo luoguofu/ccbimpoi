@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_color"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/null_view_tv_show"
+        style="@style/time_show_ui_old"
+        android:layout_margin="40dp"
+        android:text="这里啥也没有耶...."
+        android:visibility="visible" />
+
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_userinfo_gender">性别</string>
+    <string name="setting_punchlocation_time">位置上报时间</string>
+    <string name="review_report_result">复核结论</string>
+    <string name="lose_network_hint">请检查您的网络是否为开启状态</string>
+
+    <string name="discuss_title">会议主题</string>
+    <string name="discuss_content">备忘录</string>
+    <string name="str_phone">联系电话</string>
+    <string name="title_project_target">项目目标</string>
+    <string name="task_describe">任务描述</string>
+    <string name="tv_project_name">项目名称</string>
+    <string name="tv_group_name">分组名称</string>
+    <string name="task_publish_no_title">任务描述不能为空</string>
+    <string name="title_progress_new">发布新进展</string>
+
+    <string name="str_not_download">未下载</string>
+    <string name="current_month_placeholder">January 1970</string>
+    <string name="previous_month_placeholder">&lt;</string>
+    <string name="next_month_placeholder">&gt;</string>
+
+    <string name="max_task_progress_count">1000</string>
+    <string name="max_project_progress_count">300</string>
+
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="dialog_notice">提示</string>
+    <string name="dialog_quit_tip">退出后不会删除任何历史记录，下次登录依然可以使用本帐号</string>
+    <string name="dialog_button_photo">拍照</string>
+    <string name="dialog_button_picker">从相册选择</string>
+    <string name="dialog_button_phone">打电话</string>
+    <string name="dialog_button_sms">发短信</string>
+    <string name="login_out_leave">您从当前企业退出或离职。</string>
+
+    <string name="tv_more">全文</string>
+    <string name="tv_close">收起</string>
+
+    <string-array name="days_array">
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>日</item>
+    </string-array>
+
+    <string name="button_logout">退出登录</string>
+
+    <string name="title_button_save">保存</string>
+    <string name="title_button_sure">确定</string>
+
+    <string name="title_modify_prefix">更改</string>
+    <string name="remind_login_content">请先注册登录再进行操作</string>
+</resources>

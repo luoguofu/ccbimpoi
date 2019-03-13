@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_color"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@color/wq_title_bg">
+
+        <ImageButton
+            android:id="@+id/iv_search_back"
+            style="@style/topbanner_button"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/sel_title_search_bg"
+            android:gravity="center"
+            android:singleLine="true"
+            android:src="@drawable/title_search_back"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/iv_div"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_search_back"
+            android:src="@drawable/title_divider"/>
+
+        <Button
+            android:id="@+id/btnSearch"
+            style="@style/bt_add_style"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="@dimen/default_new_interval"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:minHeight="40dp"
+            android:minWidth="55dp"
+            android:padding="3dp"
+            android:text="搜索"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_new_interval"
+            android:layout_marginRight="@dimen/default_new_interval"
+            android:layout_toLeftOf="@+id/btnSearch"
+            android:layout_toRightOf="@+id/iv_div"
+            android:background="@drawable/util_et_focused">
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/search_bar_btn_iv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:duplicateParentState="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/icon_guanb"/>
+
+            <EditText
+                android:id="@+id/et_search"
+                style="@style/common_et"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
+                android:layout_toLeftOf="@+id/search_bar_btn_iv_clear"
+                android:background="@null"
+                android:digits="0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^*()_-:"
+                android:hint="搜索"
+                android:minHeight="35dp"
+                android:paddingRight="30dp"
+                android:textColor="@color/black"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.weqia.utils.view.CommonImageView
+        android:id="@+id/v_dv"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        android:src="@drawable/dv_line"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color">
+
+        <com.weqia.utils.view.pullrefresh.PullToRefreshListView
+            android:id="@+id/pl_search_result"
+            style="@style/common_lv"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+        <LinearLayout
+            android:id="@+id/ll_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/bg_color"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="68dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_txl"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="通讯录"
+                        android:textColor="@color/search_text_color"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_ltjl"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="聊天记录"
+                        android:textColor="@color/search_text_color"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_wdpy"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="我的朋友"
+                        android:textColor="@color/search_text_color"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

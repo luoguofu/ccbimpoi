@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+//    compileSdkVersion compileSdk
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
+    compileOptions.encoding = "UTF-8";
+
+    defaultConfig {
+        applicationId "com.example.ccbim.ccbimpoi"
+//        minSdkVersion minSdk
+//        targetSdkVersion targetSdk
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName poiVersion
+
+        multiDexEnabled true
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "f7aOxVAnMH92cpctrQTS54",
+                GETUI_APP_KEY   : "CllJvxjCsHAOoLRHgmgkP2",
+                GETUI_APP_SECRET: "xAOH7KANEAAQxKP3l6xJ38",
+                qqappid: "1106195631"
+        ]
+    }
+
+    buildTypes {
+        release {
+            // For the purposes of the sample, allow testing of a proguarded release build
+            // using the debug key
+            signingConfig signingConfigs.debug
+
+            postprocessing {
+                removeUnusedCode true
+                removeUnusedResources true
+                obfuscate true
+                optimizeCode true
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/commons-codec-1.10.jar')
+    implementation project(path: ':poi', configuration: 'compile')
+    implementation project(':proguard')
+    api project(':WqComponent')
+    api project(':library')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    implementation 'com.android.support:multidex:1.0.3'
+//    implementation "com.android.support:design:$supportLibVersion"
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "com.google.android.gms:play-services-tasks:12.0.1"
+
+    implementation 'pub.devrel:easypermissions:1.2.0'
+}

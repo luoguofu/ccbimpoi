@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include layout="@layout/view_reused_topbanner" />
+
+        <GridView
+            android:id="@+id/images_gv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/spacing_medium"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:padding="@dimen/padding_small"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/spacing_medium" >
+        </GridView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_banner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="#cc000000" >
+
+        <TextView
+            android:id="@+id/tv_catelog"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/abc_spinner_ab_default_holo_dark"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/default_interval"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_perview"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/default_interval"
+            android:paddingRight="@dimen/default_interval"
+            android:text="预览"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>

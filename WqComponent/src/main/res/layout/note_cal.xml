@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/topbanner"
+        layout="@layout/view_reused_topbanner" />
+
+    <RelativeLayout
+        android:id="@+id/calendar_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white" >
+
+        <TextView
+            android:id="@+id/previous_month"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/previous_month_placeholder" />
+
+        <TextView
+            android:id="@+id/next_month"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/next_month"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/next_month_placeholder" />
+
+        <TextView
+            android:id="@+id/current_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/next_month"
+            android:layout_toRightOf="@id/previous_month"
+            android:gravity="center"
+            android:text="@string/current_month_placeholder"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/calendar_days_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="25dip"
+        android:horizontalSpacing="2dp"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" />
+
+    <ViewSwitcher
+        android:id="@+id/calendar_switcher"
+        android:layout_width="fill_parent"
+        android:layout_height="250dip"
+        android:background="#f8f8f8" >
+
+        <GridView
+            android:id="@+id/calendar_grid"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:horizontalSpacing="2dp"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp" />
+    </ViewSwitcher>
+
+
+
+</LinearLayout>

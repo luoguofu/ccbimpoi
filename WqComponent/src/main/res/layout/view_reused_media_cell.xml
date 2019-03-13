@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_attach_all"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <GridView
+            android:id="@+id/gvPicture"
+            style="@style/gv_pic"
+            android:layout_marginTop="6dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/pic_number"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/tx_bra"
+            android:gravity="center"
+            android:textColor="@color/grey_task"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlAttach"
+        android:layout_width="47dip"
+        android:layout_height="41dip"
+        android:layout_marginTop="6dp"
+        android:visibility="visible">
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/ivAttach"
+            style="@style/iv_attach"
+            android:layout_width="46dip"
+            android:layout_height="40dip"
+            android:layout_gravity="left"
+            android:clickable="true" />
+
+        <LinearLayout
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_attach_count"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvAttachCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

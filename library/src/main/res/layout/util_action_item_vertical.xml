@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/util_action_item_btn"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center|left"
+    android:minHeight="35dp"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center|left"
+            android:maxLength="10"
+            
+            android:singleLine="true"
+            android:text="12"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="5dip"
+            android:src="@color/grey" />
+
+    </LinearLayout>
+
+</LinearLayout>

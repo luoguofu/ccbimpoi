@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <FrameLayout
+        android:id="@+id/ll_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:cropToPadding="true"
+            android:padding="5dp"
+            android:scaleType="centerCrop" />
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_video_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/video_play_small"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/default_interval"
+            android:layout_marginRight="@dimen/default_interval"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="  思思思21"
+            android:textSize="10sp"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <com.weqia.utils.view.CommonImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_icon"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/red_small_delete" />
+
+</RelativeLayout>

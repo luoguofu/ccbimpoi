@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/rlBanner"
+             android:layout_width="fill_parent"
+             android:layout_height="50dip"
+             android:background="@color/white">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:tabBackground="@color/main_color"
+        app:tabGravity="center"
+        app:tabIndicatorColor="@color/bg_color"
+        app:tabIndicatorHeight="@dimen/dp_2"
+        app:tabMinWidth="@dimen/dp_80"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/gray_color"/>
+
+    <!--标题栏-左边标题布局-->
+    <LinearLayout
+        android:id="@+id/rlTitle"
+        style="@style/topbanner_middle"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/topbanner_button_left"
+            style="@style/topbanner_button"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/sel_title_bg"
+            android:src="@drawable/title_back"
+            android:visibility="visible"/>
+
+        <FrameLayout
+            android:id="@+id/fl_left_header"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:visibility="gone">
+
+            <com.weqia.wq.component.view.CircularImage
+                android:id="@+id/iv_left_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/people"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="right|top"
+                android:background="@drawable/tab_unread_cycle_small_bg"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/topbanner_middle_icon"
+            style="@style/title_bt_style"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/topbanner_text_title"
+            style="@style/topbanner_title"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/topbanner_button_left"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:text="品茗CCBIM"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/im_index"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="@dimen/dp_2"
+            android:layout_marginRight="@dimen/dp_4"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_xiangxia"
+            android:tint="@color/black"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+
+    <!--标题栏-右边布局-->
+    <LinearLayout
+        android:id="@+id/flRight"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="right"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/dp_8">
+
+        <ProgressBar
+            android:id="@+id/pbTitle"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:indeterminateOnly="true"
+            android:paddingRight="6dp"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/topbanner_iv_ser"
+            style="@style/topbanner_button"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sel_title_bg"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/topbanner_search"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tvRight"
+            style="@style/topbanner_title"
+            android:ellipsize="end"
+            android:maxLength="5"
+            android:paddingLeft="@dimen/dp_7"
+            android:paddingRight="@dimen/dp_7"
+            android:singleLine="true"
+            android:text="确定"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/topbanner_button_right"
+            style="@style/topbanner_button"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sel_title_bg"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/title_btn_add"
+            android:visibility="gone"/>
+
+        <com.weqia.wq.component.view.CircularImage
+            android:id="@+id/ivRightWeboAt"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/people"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/topbanner_button_string_right"
+            style="@style/topbanner_title"
+            android:layout_marginLeft="@dimen/dp_3"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLength="5"
+            android:paddingLeft="@dimen/dp_7"
+            android:paddingRight="@dimen/dp_7"
+            android:singleLine="true"
+            android:text="确定"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <!--标题栏-底部边线布局-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:background="#e6e6e6"/>
+</FrameLayout>

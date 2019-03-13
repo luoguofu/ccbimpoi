@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/face_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible" >
+
+    <com.weqia.utils.view.jazzyviewpager.JazzyViewPager
+        android:id="@+id/face_pager"
+        app:style="cubeout"
+        android:layout_width="fill_parent"
+        android:layout_height="210dp"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:flipInterval="30"
+        android:paddingTop="15dip"
+        android:persistentDrawingCache="animation" />
+
+    <com.weqia.utils.view.jazzyviewpager.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" />
+
+
+
+</LinearLayout>

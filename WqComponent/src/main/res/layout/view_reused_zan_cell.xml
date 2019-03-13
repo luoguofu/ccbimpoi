@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:showIn="@layout/view_reused_sjz" >
+
+    <TextView
+        android:id="@+id/webo_item_tv_reply_cnt"
+        style="@style/common_tv_webo_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:drawableRight="@drawable/btn_zanandpinlun"
+        android:paddingBottom="@dimen/default_interval"
+        android:paddingTop="@dimen/default_interval" />
+
+    <LinearLayout
+        android:id="@+id/llZan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/webo_item_tv_reply_cnt"
+        android:background="@drawable/stoke_zan_bg"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/btnZan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_zan_bg"
+            android:drawableLeft="@drawable/btn_zan"
+            android:paddingBottom="8dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="8dp"
+            android:text="  赞"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/title_divider_black" />
+
+        <Button
+            android:id="@+id/btnComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_zan_bg"
+            android:drawableLeft="@drawable/btn_pinlun"
+            android:paddingBottom="8dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="8dp"
+            android:text=" 评论"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

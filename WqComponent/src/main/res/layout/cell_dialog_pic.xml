@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:minHeight="81dp"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp" >
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/iv_catelog_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tv_catelog_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="所有图片"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/ib_catelog_select"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/default_interval"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:focusable="false"
+            android:src="@drawable/sel_catelog_select" />
+    </LinearLayout>
+
+    <com.weqia.utils.view.CommonImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/dv_line" />
+
+</LinearLayout>

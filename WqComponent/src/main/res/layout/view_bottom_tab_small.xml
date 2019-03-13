@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_tabwidget_height"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/ll_menu_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/bottom_tab_view_tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/tab_unread_small_bg"
+            android:duplicateParentState="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="6dip"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/bottom_tab_view_tv_big_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/tab_unread_bg"
+            android:gravity="center"
+            android:text="99"
+            android:textColor="@color/white"
+            android:textSize="10.0dip"
+            android:visibility="gone"/>
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/bottom_tab_view_rb_icon"
+            style="@style/tab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:layout_marginTop="5dp"
+            android:paddingRight="20dp"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/bottom_tab_view_tv_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:textColor="@color/menu_text_color"
+        android:textSize="11.0sp"
+        android:text="工作"
+        android:minWidth="32dp"/>
+
+</LinearLayout>

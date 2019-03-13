@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="double_interval">20dp</dimen>
+    <dimen name="default_new_interval">12dp</dimen>
+    <dimen name="set_new_interval">22dp</dimen>
+    <dimen name="half_half_interval">3dp</dimen>
+
+    <dimen name="forth_interval">40dp</dimen>
+    <dimen name="list_height">64dp</dimen>
+    <dimen name="list_minHeight">54dip</dimen>
+    <dimen name="tab_minHeight">48dip</dimen>
+    <dimen name="cell_icon_max_height">90dp</dimen>
+
+    <!--  -->
+    <dimen name="default_iv_detail_height">54dp</dimen>
+    <dimen name="default_iv_detail_width">54dp</dimen>
+    <dimen name="default_ivcode_height">36dp</dimen>
+    <dimen name="default_ivcode_width">36dp</dimen>
+    <dimen name="padding_iv_height">60dp</dimen>
+    <dimen name="padding_iv_width">60dp</dimen>
+    <dimen name="default_iv_small_height">36dp</dimen>
+    <dimen name="default_iv_small_width">36dp</dimen>
+    <dimen name="default_iv_width">44dp</dimen>
+    <dimen name="default_talk_icon_width">40dp</dimen>
+    <dimen name="default_small_icon_width">32dp</dimen>
+
+    <!-- topbanner -->
+    <dimen name="text_size_topbanner_title">20sp</dimen>
+    <dimen name="text_title_margin">60dp</dimen>
+
+    <dimen name="talk_loc_width">115dp</dimen>
+    <dimen name="talk_oth_height">268dp</dimen>
+    <dimen name="talk_oth_height_new">220dp</dimen>
+
+    <!-- 固定宽高比例 -->
+    <dimen name="home_list_left_picture_width">20dp</dimen>
+    <dimen name="home_list_left_picture_height">20dp</dimen>
+    <dimen name="bottom_tabwidget_height">54dp</dimen>
+    <dimen name="home_list_push_rl_width">50dp</dimen>
+    <dimen name="home_list_push_rl_heigth">50dp</dimen>
+    <dimen name="work_top_head_width">44dp</dimen>
+    <dimen name="work_top_head_height">44dp</dimen>
+
+    <!-- spacing -->
+    <dimen name="spacing_small">3dip</dimen>
+    <dimen name="spacing_medium">2dip</dimen>
+    <dimen name="spacing_large">8dip</dimen>
+
+    <!-- padding -->
+    <dimen name="padding_small">2dip</dimen>
+    <dimen name="padding_medium">5dip</dimen>
+    <dimen name="padding_large">8dip</dimen>
+    <dimen name="padding_xlarger">10dip</dimen>
+    <dimen name="dp_180">180dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="default_interval">12dp</dimen>
+    <dimen name="half_interval">4dp</dimen>
+
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_56">56dp</dimen>
+    <dimen name="dp_28">28dp</dimen>
+    <dimen name="dp_120">120dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_38">38dp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="dp_90">90dp</dimen>
+    <dimen name="dp_55">55dp</dimen>
+
+</resources>

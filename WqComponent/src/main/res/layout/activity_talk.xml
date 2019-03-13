@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color">
+
+
+    <ImageView
+        android:id="@+id/ivChatBg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@null"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/chatting_lv_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_reused_topbanner" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/llChat"
+                layout="@layout/view_chatting_footer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/llChat">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <com.weqia.utils.view.pullrefresh.PullToRefreshListView
+                        android:id="@+id/plTalk"
+                        style="@style/common_lv"
+                        android:listSelector="#00000000"
+                        android:stackFromBottom="false" />
+
+                    <LinearLayout
+                        android:id="@+id/llRecordStatus"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <include
+                            layout="@layout/view_voice_record_window"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:id="@+id/tvVoiceTimeLeft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="30dip"
+                            android:background="@drawable/voice_rcd_hint_bg"
+                            android:gravity="center"
+                            android:padding="10.0dip"
+                            android:text="录音时间还剩%d秒"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/double_interval"
+                    android:gravity="right">
+
+                    <TextView
+                        android:id="@+id/tv_new_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/new_count_common"
+                        android:drawableLeft="@drawable/new_count_arror"
+                        android:drawablePadding="@dimen/half_interval"
+                        android:gravity="center"
+                        android:textColor="@color/main_color"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</FrameLayout>

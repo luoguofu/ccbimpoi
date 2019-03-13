@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ContentDescription" severity="ignore" />
+    <issue id="DefaultLocale" severity="ignore" />
+    <issue id="Deprecated" severity="ignore" />
+    <issue id="DisableBaselineAlignment" severity="ignore" />
+    <issue id="DuplicateIds" severity="ignore" />
+    <issue id="ExportedContentProvider" severity="ignore" />
+    <issue id="ExportedReceiver" severity="ignore" />
+    <issue id="ExportedService" severity="ignore" />
+    <issue id="HardcodedText" severity="ignore" />
+    <issue id="IconDuplicates" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
+    <issue id="InefficientWeight" severity="ignore" />
+    <issue id="InflateParams" severity="ignore" />
+    <issue id="MissingTranslation" severity="ignore" />
+    <issue id="MockLocation" severity="ignore" />
+    <issue id="NestedScrolling" severity="ignore" />
+    <issue id="NestedWeights" severity="ignore" />
+    <issue id="ObsoleteLayoutParam" severity="ignore" />
+    <issue id="OldTargetApi" severity="ignore" />
+    <issue id="RtlHardcoded" severity="ignore" />
+    <issue id="RtlSymmetry" severity="ignore" />
+    <issue id="ScrollViewSize" severity="ignore" />
+    <issue id="SetJavaScriptEnabled">
+        <ignore path="src/com/weqia/wq1/modules/assist/webview/WebViewActivity.java" />
+    </issue>
+    <issue id="SmallSp" severity="ignore" />
+    <issue id="SpUsage" severity="ignore" />
+    <issue id="TextFields" severity="ignore" />
+    <issue id="TypographyDashes" severity="ignore" />
+    <issue id="TypographyEllipsis" severity="ignore" />
+    <issue id="UnusedAttribute" severity="ignore" />
+    <issue id="UseCompoundDrawables" severity="ignore" />
+    <issue id="UselessParent" severity="ignore" />
+</lint>

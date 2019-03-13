@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/crm_div" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+
+        <EditText
+            android:id="@+id/search_bar_btn_et_input"
+            style="@style/common_search_et"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/util_et_focused"
+            android:drawablePadding="@dimen/default_interval"
+            android:hint="搜索"
+            android:paddingLeft="@dimen/default_new_interval"
+            android:paddingTop="5dp" />
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/search_bar_btn_iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_new_interval"
+            android:duplicateParentState="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/default_interval"
+            android:src="@drawable/icon_guanb"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View style="@style/crm_div" />
+
+</LinearLayout>

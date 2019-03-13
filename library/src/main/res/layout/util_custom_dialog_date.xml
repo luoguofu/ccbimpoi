@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/view_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:padding="15dp"
+            android:text="@string/util_dialog_cancel"
+            android:textColor="@color/dialog_negative_color"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:padding="15dp"
+            android:text="@string/util_dialog_complete"
+            android:textColor="@color/dialog_positive_color"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_dlg_date_title"
+            style="@style/tv_common_plain_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toLeftOf="@+id/submit"
+            android:layout_toRightOf="@+id/cancel"
+            android:gravity="center_horizontal"
+            android:text="上班时间"
+            android:textColor="@color/dialog_bar_time_color" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#ebebeb" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="230dip"
+        android:paddingTop="@dimen/default_interval"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.weqia.utils.dialog.date.WheelView
+            android:id="@+id/year"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.5" />
+
+        <com.weqia.utils.dialog.date.WheelView
+            android:id="@+id/month"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.5" />
+
+        <com.weqia.utils.dialog.date.WheelView
+            android:id="@+id/day"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.5" />
+
+        <com.weqia.utils.dialog.date.WheelView
+            android:id="@+id/hour"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <com.weqia.utils.dialog.date.WheelView
+            android:id="@+id/mins"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

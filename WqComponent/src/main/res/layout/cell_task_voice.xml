@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/llVoiceView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_real_content"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dip"
+            android:background="@drawable/taskvoice_bg"
+            android:clickable="true"
+            android:minHeight="36.0dip"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/left_chatfrom_voice_playing_f3"
+                android:visibility="visible"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_interval"
+            android:layout_toRightOf="@+id/rl_real_content"
+            android:enabled="false"
+            android:text="3&apos;&apos;"/>
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/ivUnRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_interval"
+            android:layout_marginRight="@dimen/default_interval"
+            android:layout_toRightOf="@+id/tvSecond"
+            android:src="@drawable/unread_dot_small"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</RelativeLayout>

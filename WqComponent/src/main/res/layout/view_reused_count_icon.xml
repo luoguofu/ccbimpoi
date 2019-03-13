@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_push"
+    android:layout_width="@dimen/home_list_push_rl_width"
+    android:layout_height="@dimen/home_list_push_rl_width">
+
+    <com.weqia.utils.view.CommonImageView
+        android:id="@+id/iv_reused_icon"
+        android:layout_width="@dimen/default_iv_width"
+        android:layout_height="@dimen/default_iv_width"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@color/main_color" />
+
+    <TextView
+        android:id="@+id/tv_reused_new_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tab_unread_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="10.0dp" />
+
+</RelativeLayout>

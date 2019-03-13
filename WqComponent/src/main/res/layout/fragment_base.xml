@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_setting_color">
+
+    <LinearLayout
+        android:id="@+id/headerView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/headerView">
+
+        <com.weqia.utils.view.pullrefresh.PullToRefreshListView
+            android:id="@+id/plListView"
+            style="@style/common_lv"
+            android:layout_below="@+id/headerView" />
+
+        <com.weqia.utils.view.CommonImageView
+            android:id="@+id/ivAddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundImage">
+        <!--true代表左上角不要绘制成弧形-->
+        <attr name="cornerTopLeft" format="boolean" />
+        <!--代表右上角不要绘制成弧形-->
+        <attr name="cornerTopRight" format="boolean" />
+        <!--代表左下角不要绘制成弧形-->
+        <attr name="cornerBottomLeft" format="boolean" />
+        <!--代表右下角不要绘制成弧形-->
+        <attr name="cornerBottomRight" format="boolean" />
+        <!--绘制弧形的大小，默认为10)-->
+        <attr name="borderRadius" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="FormRow">
+        <attr name="rowName" format="string"/>
+        <attr name="rowContent" format="string"/>
+    </declare-styleable>
+</resources>

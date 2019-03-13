@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://dl.bintray.com/zouyuhan/maven'
+        }
+    }
+
+    ext {
+//        compileSdk = 27
+//        targetSdk = 27
+//        minSdk = 16
+        compileSdk = 26
+        targetSdk = 21
+        minSdk = 14
+
+        kotlinVersion = '1.2.31'
+        supportLibVersion = '27.1.1'
+        poiVersion = '3.17'
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()
+        maven { url "https://jitpack.io" }
+        maven { url "http://47.97.21.18:8081/nexus/content/repositories/thirdparty/"}
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
+        maven {
+            url 'https://dl.bintray.com/zouyuhan/maven'
+        }
+    }
+
+    tasks.whenTaskAdded { task ->
+        if (task.name.contains("publish") && task.name.contains("PublicationToMavenLocal")) {
+            task.dependsOn 'assemble'
+        }
+    }
+}

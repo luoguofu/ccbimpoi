@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+    <include
+        android:id="@+id/top_layout"
+        layout="@layout/view_reused_topbanner" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <com.weqia.wq.component.view.picture.HackyViewPager
+                android:id="@+id/vpPicture"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <LinearLayout
+                android:id="@+id/llDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/pbProgress"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:indeterminateOnly="true" />
+
+                <TextView
+                    android:id="@+id/tvProgress"
+                    android:visibility="gone"
+                    android:textColor="@color/grey"
+                    android:textSize="18dp"
+                    android:text="50%"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:minHeight="100dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_change_pic_from_phone"
+                style="@style/head_picture_change_bottomview"
+                android:text="从手机相册选择"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/bg_color"/>
+
+            <TextView
+                android:id="@+id/tv_save_pic_to_phone"
+                style="@style/head_picture_change_bottomview"
+                android:text="保存到手机"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

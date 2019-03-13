@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/llRead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etRead"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@null"
+                    android:hint="通告！"
+                    android:maxLength="100"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="18.0dip" />
+
+
+                <TextView
+                    style="@style/crm_div"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="top|left"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLength="5000"
+                android:minHeight="130dp"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="18.0dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:background="@null"
+                android:gravity="right">
+
+                <TextView
+                    android:id="@+id/tv_content_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/half_interval"
+                    android:text="@string/max_project_progress_count"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_media_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linksCell"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_links_cell"
+                    android:paddingBottom="4dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/linksIcon"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon" />
+
+                    <TextView
+                        android:id="@+id/linksTitle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@+id/linksIcon"
+                        android:maxLines="2"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/half_interval"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/ll_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.weqia.utils.view.CommonImageView
+                    android:id="@+id/iv_open"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="center_vertical"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center"
+                    android:src="@drawable/wb_open" />
+
+                <TextView
+                    android:id="@+id/tv_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="公开"
+                    android:textColor="@color/grey" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="工作分享  >"
+                android:textColor="@color/grey"
+                android:visibility="gone" />
+
+            <com.weqia.wq.component.view.DrawableCenterTextView
+                android:id="@+id/tv_loc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/default_interval"
+                android:layout_marginRight="@dimen/default_interval"
+                android:singleLine="true"
+                android:text=""
+                android:maxLength="12"
+                android:ellipsize="end"
+                android:textColor="@color/main_color_dark"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:background="@drawable/bottombar_bg"
+            android:gravity="center">
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_voice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_voice" />
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_webo_photo" />
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_vedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_webo_vedio" />
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_webo_topic"
+                android:visibility="gone" />
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_webo_to" />
+
+            <com.weqia.utils.view.CommonImageView
+                android:id="@+id/iv_add_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:src="@drawable/selector_btn_webo_face" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center">
+
+                <com.weqia.utils.view.CommonImageView
+                    android:id="@+id/iv_add_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/wb_more" />
+
+                <com.weqia.utils.view.CommonImageView
+                    android:id="@+id/iv_add_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/selector_btn_duyixia_wenjian"
+                    android:visibility="gone" />
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llHide"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/talk_oth_height"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/llVoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/ll_media_more_content"
+            layout="@layout/view_talk_grid"
+            android:visibility="gone" />
+
+        <com.weqia.wq.component.view.face.ExpressionGridView
+            android:id="@+id/gv_add_face"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

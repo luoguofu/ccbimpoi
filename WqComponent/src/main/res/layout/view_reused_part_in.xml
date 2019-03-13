@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/ll_partall"
+        style="@style/setting_table_row_single"
+        android:layout_marginTop="0.5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_part_in_tile"
+            style="@style/cell_lv_item_tv_title"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingBottom="8dp"
+            android:textSize="15sp"
+            android:paddingTop="7dp"/>
+
+        <TextView
+            android:id="@+id/tv_part_in_count"
+            style="@style/work_item_detail"
+            android:layout_alignBaseline="@+id/tv_part_in_tile"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/arrow_right"
+            android:singleLine="false"/>
+
+        <LinearLayout
+            android:id="@+id/ll_part_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_part_in_tile"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"/>
+    </RelativeLayout>
+
+</merge>

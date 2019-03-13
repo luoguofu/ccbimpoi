@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageButton
+        android:id="@+id/increment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip" />
+
+    <view
+        android:id="@+id/numberpicker_input"
+        style="?attr/numberPickerInputTextStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.weqia.utils.view.timepicker.NumberPicker$CustomEditText"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/decrement"
+        style="?attr/numberPickerDownButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip" />
+
+</merge>
