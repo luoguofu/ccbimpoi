@@ -1,4 +1,4 @@
-package com.example.ccbim.ccbimpoi;
+package com.example.ccbim.ccbimpoi.util;
 
 import android.app.Activity;
 import android.os.Environment;

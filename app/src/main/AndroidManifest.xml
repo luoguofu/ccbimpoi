@@ -25,6 +25,13 @@
             android:name=".MainNewActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FormListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SingleFormActivity"
+            android:screenOrientation="portrait"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
