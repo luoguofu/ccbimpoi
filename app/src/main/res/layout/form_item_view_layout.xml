@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="3dp">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical" >&lt;!&ndash;内层的最外部需要是linearlayout ,如果不是会报错，比如说是realativelayout，因为其没有omeasure方法&ndash;&gt;-->
+    <!---->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#FFD8D8D8"/>
+
+    <TextView
+        android:id="@+id/child_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#FFD8D8D8"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content">
+
+        <com.example.ccbim.ccbimpoi.widget.ChildListView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.example.ccbim.ccbimpoi.widget.ChildListView>
+    </LinearLayout>
+
+</LinearLayout>
