@@ -1,17 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+
+project.ext.appsettings = [
+        'packageName': 'com.example.ccbim.ccbimpoi',
+        'appName'    : 'app',
+        'keyfile'    : "BIM360.jks",
+        'keyalias'   : "Bim360KeyStore",
+        'keycert'    : "pinmingBim360",
+]
 android {
 //    compileSdkVersion compileSdk
     compileSdkVersion 27
     buildToolsVersion '26.0.2'
+    flavorDimensions "versionCode"
     compileOptions.encoding = "UTF-8";
 
     defaultConfig {
         applicationId "com.example.ccbim.ccbimpoi"
 //        minSdkVersion minSdk
 //        targetSdkVersion targetSdk
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName poiVersion
@@ -24,6 +33,26 @@ android {
                 qqappid: "1106195631"
         ]
     }
+    productFlavors {
+        ccbim_poi {}
+    }
+/*    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [CHANNEL_NAME: name]
+    }*/
+
+    signingConfigs {
+        release {
+            storeFile file("${project.ext.appsettings['keyfile']}")
+            storePassword project.ext.appsettings['keycert']
+            keyAlias project.ext.appsettings['keyalias']
+            keyPassword project.ext.appsettings['keycert']
+            v2SigningEnabled false
+        }
+        debug {
+            storeFile file("debug.keystore")
+        }
+    }
+
 
     buildTypes {
         release {
@@ -52,8 +81,7 @@ dependencies {
     implementation project(path: ':poi', configuration: 'compile')
     implementation project(':proguard')
     api project(':WqComponent')
-    api project(':library')
-
+//    api project(':library')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     implementation 'com.android.support:multidex:1.0.3'

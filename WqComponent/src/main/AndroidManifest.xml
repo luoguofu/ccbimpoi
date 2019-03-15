@@ -161,7 +161,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent1105780888" />
+                <!--<data android:scheme="tencent1105780888" />-->
+                <data android:scheme="tencent${qqappid}" />
             </intent-filter>
         </activity>
         <activity

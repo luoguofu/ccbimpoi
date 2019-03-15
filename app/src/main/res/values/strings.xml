@@ -6,4 +6,11 @@
     <string name="rectification">生成整改</string>
     <string name="sample">示例要求</string>
     <string name="form_list">表单列表</string>
+    <string name="weixin_key">wxdd545717bfb449a1</string>
+    <string name="weixin_key_secret">7d3cdeb949708ab09884e383e7b148f4</string>
+    <string name="qq_id">1106195631</string>
+    <string name="qq_key">wszcqtC7NEXNpgHC</string>
+
+    <string name="baidu_map_key">uiG0WWGn4EHVISq5NGRKMxpSDjX107cf</string>
+    <string name="umeng_key">5c89fbc461f564c1310004b2</string>
 </resources>
