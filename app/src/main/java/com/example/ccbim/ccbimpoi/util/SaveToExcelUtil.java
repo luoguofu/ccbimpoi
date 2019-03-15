@@ -51,11 +51,11 @@ public class SaveToExcelUtil {
                 row1.createCell(0).setCellValue("姓名");
                 row1.createCell(1).setCellValue("性别");
                 row1.createCell(2).setCellValue("年龄");
-                row2.createCell(2).setCellValue("小明");
-                row2.createCell(2).setCellValue("男");
+                row2.createCell(0).setCellValue("小明");
+                row2.createCell(1).setCellValue("男");
                 row2.createCell(2).setCellValue("21");
-                row3.createCell(2).setCellValue("小红");
-                row3.createCell(2).setCellValue("女");
+                row3.createCell(0).setCellValue("小红");
+                row3.createCell(1).setCellValue("女");
                 row3.createCell(2).setCellValue("18");
 
                 // 从内存中写入文件中

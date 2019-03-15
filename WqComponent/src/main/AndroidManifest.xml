@@ -151,7 +151,7 @@
         <!-- umemshare -->
         <!-- ###################注册SDK使用的Activity###################### -->
 
-        <activity
+<!--        <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
@@ -161,7 +161,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!--<data android:scheme="tencent1105780888" />-->
+                &lt;!&ndash;<data android:scheme="tencent1105780888" />&ndash;&gt;
                 <data android:scheme="tencent${qqappid}" />
             </intent-filter>
         </activity>
@@ -174,7 +174,7 @@
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.UMDefault" />
+            android:theme="@style/Theme.UMDefault" />-->
 
         <!-- *******************************第三方配置结束（除權限外）***************************** -->
 

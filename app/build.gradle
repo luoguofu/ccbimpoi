@@ -11,7 +11,7 @@ project.ext.appsettings = [
 ]
 android {
 //    compileSdkVersion compileSdk
-    compileSdkVersion 27
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     flavorDimensions "versionCode"
     compileOptions.encoding = "UTF-8";
@@ -77,19 +77,32 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/poi-all.jar')
+//    implementation files('libs/poi-excelant-4.0.1.jar')
     implementation files('libs/commons-codec-1.10.jar')
-    implementation project(path: ':poi', configuration: 'compile')
-    implementation project(':proguard')
+//    implementation project(path: ':poi', configuration: 'compile')
+//    implementation project(':proguard')
     api project(':WqComponent')
 //    api project(':library')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     implementation 'com.android.support:multidex:1.0.3'
 //    implementation "com.android.support:design:$supportLibVersion"
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation "com.google.android.gms:play-services-tasks:12.0.1"
+//    implementation 'com.android.support:design:27.1.1'
+//    implementation 'com.android.support:appcompat-v7:27.1.1'
+//    implementation "com.google.android.gms:play-services-tasks:12.0.1"
 
-    implementation 'pub.devrel:easypermissions:1.2.0'
+//    implementation 'pub.devrel:easypermissions:1.2.0'
 }
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.1.0'
+            }
+        }
+    }
+}
+
