@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ccbim.ccbimpoi.util.Excel_reader;
+
 import com.example.ccbim.ccbimpoi.util.SaveToExcelUtil;
 
 import java.io.File;
@@ -54,12 +54,12 @@ public class MainNewActivity extends Activity implements View.OnClickListener {
                 SaveToExcelUtil util = new SaveToExcelUtil(this, getExcelDir() + File.separator + "demo.xls");
                 break;
             case R.id.bt_read_excel:
-                Excel_reader test= new Excel_reader();
+/*                Excel_reader test= new Excel_reader();
                 ArrayList<ArrayList<String>> arr= null;  //后面的参数代表需要输出哪些列，参数个数可以任意
                 try {
-/*                    arr = test.xlsx_reader(Environment.getExternalStorageDirectory()
+*//*                    arr = test.xlsx_reader(Environment.getExternalStorageDirectory()
                             .toString() + File.separator + "Excel"
-                            + File.separator + "Person" + File.separator + "123456.xlsx", 0, 1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15);*/
+                            + File.separator + "Person" + File.separator + "123456.xlsx", 0, 1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15);*//*
                     arr = test.xlsx_reader(getResources().getAssets().open("123456.xlsx") , 0, 1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -73,7 +73,7 @@ public class MainNewActivity extends Activity implements View.OnClickListener {
 //                    System.out.println("");
                     Log.e("TAG", " ");
                 }
-                break;
+                break;*/
         }
     }
 }

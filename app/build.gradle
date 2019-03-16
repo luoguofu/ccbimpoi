@@ -77,7 +77,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('libs/poi-all.jar')
+    api files('libs/poi-3.10.jar')
+    api files('libs/poi-ooxml-3.10.jar')
+    api files('libs/poi-ooxml-schemas-3.10.jar')
 //    implementation files('libs/poi-excelant-4.0.1.jar')
     implementation files('libs/commons-codec-1.10.jar')
 //    implementation project(path: ':poi', configuration: 'compile')

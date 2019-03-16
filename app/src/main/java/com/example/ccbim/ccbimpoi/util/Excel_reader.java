@@ -1,3 +1,4 @@
+/*
 package com.example.ccbim.ccbimpoi.util;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -10,12 +11,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+*/
 /**
  * Created by lgf on 2019/3/13.
- */
+ *//*
+
 
 public class Excel_reader {
-    //*************xlsx文件读取函数************************
+    /*/
+/*************xlsx文件读取函数************************
     //excel_name为文件名，arg为需要查询的列号
     //返回二维字符串数组
     @SuppressWarnings({ "resource", "unused" })
@@ -115,3 +119,4 @@ public class Excel_reader {
 
 
 }
+*/

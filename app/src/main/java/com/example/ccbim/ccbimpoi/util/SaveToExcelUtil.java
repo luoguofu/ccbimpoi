@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.os.Environment;
 import android.widget.Toast;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
 import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,7 +62,17 @@ public class SaveToExcelUtil {
                 row3.createCell(0).setCellValue("小红");
                 row3.createCell(1).setCellValue("女");
                 row3.createCell(2).setCellValue("18");
+                CellRangeAddress region = new CellRangeAddress(3, 4, 0, 3);
+                ws.addMergedRegion(region);
+                Row row4 = ws.createRow(3);
+                HSSFCellStyle style = wwb.createCellStyle();
+//                HSSFCellStyle hssfCellStyle = new HSSFCellStyle();
 
+                style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+                style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+                Cell cell4_1 = row4.createCell(0);
+                cell4_1.setCellValue("合并单元格");
+                cell4_1.setCellStyle(style);
                 // 从内存中写入文件中
 //                wwb.write();
 //                wwb.close();
