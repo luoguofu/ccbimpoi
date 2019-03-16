@@ -1,2 +1,5 @@
-include ':app', ':poi', ':proguard' ,":WqComponent"
+include ':app'
+//include ':poi'
+//include ':proguard'
+include ":WqComponent"
 include ":library"
