@@ -9,6 +9,10 @@
         android:layout_width="0dp"
         android:layout_weight="1.5"
         android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#FFD8D8D8"/>
 
     <TextView
         android:id="@+id/child_item_status"
@@ -16,7 +20,10 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:gravity="center"/>
-
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#FFD8D8D8"/>
     <Button
         android:id="@+id/child_item_btn"
         android:layout_width="0dp"
@@ -25,6 +32,7 @@
         android:background="@drawable/bg_btn_blue"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:text="填写"
         android:gravity="center"/>
 
 </LinearLayout>

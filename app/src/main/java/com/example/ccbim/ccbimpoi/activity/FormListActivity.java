@@ -45,8 +45,6 @@ public class FormListActivity extends AppCompatActivity {
 //        m=new OrderFormModel("wsf", "望京西街融科橄榄城西区", 12.3f, 2, 3, "2013-11-7 12:33", shops, 4f);
 
         formListItemAdapter = new FormListItemAdapter(this,shops);
-
-//        adapter_2=new order_cplt_adapter(order_form_act.this, m.getShop_ordered().get(0).getList_ordered());
         mListItem.setAdapter(formListItemAdapter);
 
 

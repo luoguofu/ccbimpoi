@@ -15,24 +15,29 @@
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".MainNewActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".activity.HomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.FormListActivity"
-            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainNewActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activity.FormListActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".activity.SingleFormActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ProjectSettingActivity"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

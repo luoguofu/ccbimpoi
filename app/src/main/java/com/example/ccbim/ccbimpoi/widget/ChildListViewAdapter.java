@@ -1,6 +1,7 @@
 package com.example.ccbim.ccbimpoi.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.activity.SingleFormActivity;
 import com.example.ccbim.ccbimpoi.data.ChildItemBean;
 import java.util.List;
 
@@ -59,6 +61,9 @@ public class ChildListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "点击!!!"+childItemBean.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,SingleFormActivity.class);
+                mContext.startActivity(intent);
+
             }
         });
         return convertView;

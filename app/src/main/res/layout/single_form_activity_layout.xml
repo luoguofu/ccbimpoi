@@ -1,74 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/acceptance_level" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="7">
 
-            <Button
-                android:id="@+id/text_qualified"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:text="@string/qualified" />
-
-            <Button
-                android:id="@+id/text_not_involve"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:text="@string/not_involve" />
-
-            <Button
-                android:id="@+id/text_rectification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/acceptance_level"
+                android:padding="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:text="@string/rectification" />
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="left"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/text_qualified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="8dp"
+                    android:text="@string/qualified" />
+
+                <Button
+                    android:id="@+id/text_not_involve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/not_involve" />
+
+                <Button
+                    android:id="@+id/text_rectification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:background="@color/colorPrimary"
+                    android:padding="8dp"
+                    android:text="@string/rectification" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="记录点什么..."
+                android:padding="5dp"
+                android:textSize="14sp"/>
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/picture_grid_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 
-        <com.weqia.wq.component.view.picture.PictureGridView
-            android:id="@+id/picture_grid_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@android:color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -82,6 +112,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="8dp"
+                android:background="@color/colorPrimary"
                 android:text="@string/sample" />
 
             <Button
@@ -108,5 +139,5 @@
         </LinearLayout>
 
 
-    </LinearLayout>
-</ScrollView>
+    <!--</LinearLayout>-->
+</LinearLayout>

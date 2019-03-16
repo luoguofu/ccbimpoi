@@ -6,4 +6,9 @@
     <string name="rectification">生成整改</string>
     <string name="sample">示例要求</string>
     <string name="form_list">表单列表</string>
+    <string name="problem">问题描述：</string>
+    <string name="rectifivation_problem">整改要求：</string>
+    <string name="company">公司名称</string>
+    <string name="project_name">项目名称</string>
+    <string name="project_setting">设置</string>
 </resources>
