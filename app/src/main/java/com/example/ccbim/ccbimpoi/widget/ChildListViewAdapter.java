@@ -43,7 +43,7 @@ public class ChildListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh=null;
-        ChildItemBean childItemBean=data.get(position);
+        final ChildItemBean childItemBean=data.get(position);
         if(convertView==null){
             convertView=LayoutInflater.from(mContext).inflate(R.layout.child_form_item_layout, null);
             vh=new ViewHolder();
