@@ -47,6 +47,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#FFD8D8D8"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/common_recyclerview"
         android:layout_width="match_parent"
@@ -76,6 +81,7 @@
             android:text="未完成" />
 
         <ImageButton
+            android:id="@+id/img_add_form"
             android:src="@mipmap/ic_launcher"
             android:layout_width="30dp"
             android:layout_height="30dp"
