@@ -52,21 +52,29 @@
         android:layout_height="5dp"
         android:background="#FFD8D8D8"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/common_recyclerview"
+
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:horizontalSpacing="10dp"
-        android:numColumns="1"
-        android:padding="5dp" />
+        android:id="@+id/swipeRefreshLayout">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/common_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:horizontalSpacing="10dp"
+            android:numColumns="1"
+            android:padding="5dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center_vertical"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <Button
@@ -78,6 +86,10 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/bg_btn_blue_color"
+            android:textColor="@color/white"
             android:text="未完成" />
 
         <ImageButton
@@ -91,13 +103,17 @@
             android:id="@+id/text_work_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
             android:maxLines="1"
             android:padding="8dp"
-            android:text="已完成" />
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_btn_blue_color"
+            android:textColor="@color/white"
+            android:text="已完成"
+            />
 
     </LinearLayout>
 

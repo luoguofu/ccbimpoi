@@ -29,10 +29,11 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="36sp"
-        android:background="@drawable/bg_btn_blue"
+        android:background="@drawable/bg_btn_blue_color"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="填写"
+        android:textColor="@color/white"
         android:gravity="center"/>
 
 </LinearLayout>

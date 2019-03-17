@@ -1,12 +1,18 @@
 package com.example.ccbim.ccbimpoi.data;
 
+import com.weqia.utils.annotation.sqlite.Id;
+import com.weqia.utils.annotation.sqlite.Table;
+import com.weqia.wq.data.BaseData;
+
 import java.util.ArrayList;
 
 /**
  * Created by lgf on 2019/3/14.
  */
-
-public class ProjectCheckData {
+@Table(name = "project_check_data")
+public class ProjectCheckData extends BaseData{
+    @Id
+    private int id;
     private ArrayList<CellData> tabHead;      //表格的头部
     private ArrayList<CellData> tabBody;      //表格的body，验收的项目
     private ArrayList<CellData> tabFoot;       //表格的底部
@@ -14,6 +20,7 @@ public class ProjectCheckData {
     private String colWidth;       //列宽
     private String headRows;         //头部的行
     private String footRows;         //底部的行
+    private String checkPartName;     //验收部位名称
 //    private ArrayList<CellData> tabPic;         //表格的附图样表
 
 
@@ -71,5 +78,21 @@ public class ProjectCheckData {
 
     public void setFootRows(String footRows) {
         this.footRows = footRows;
+    }
+
+    public String getCheckPartName() {
+        return checkPartName;
+    }
+
+    public void setCheckPartName(String checkPartName) {
+        this.checkPartName = checkPartName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

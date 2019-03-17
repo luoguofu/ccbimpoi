@@ -1,12 +1,14 @@
 package com.example.ccbim.ccbimpoi.data;
 
+import com.weqia.wq.data.BaseData;
+
 import java.util.ArrayList;
 
 /**
  * Created by lgf on 2019/3/14.
  */
 
-public class CellData {
+public class CellData extends BaseData {
     private ArrayList<CheckDetailData> subCellList;
     private String cellName;          //单元格名称
     private String cellSelected;          //单元格选中与否
