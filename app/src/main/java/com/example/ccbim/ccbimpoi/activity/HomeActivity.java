@@ -21,6 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.data.FormItemDataBean;
+import com.example.ccbim.ccbimpoi.data.FormListItemBean;
+import com.example.ccbim.ccbimpoi.widget.RecycleViewAdapter;
+import com.weqia.component.rcmode.recyclerView.LuRecyclerViewAdapter;
 import com.weqia.utils.datastorage.db.DbUtil;
 import com.weqia.wq.data.base.NotifyData;
 import com.weqia.wq.data.global.WeqiaApplication;
@@ -37,6 +41,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Button mTextWork;
     private Button mTextWorkDone;
     private ImageButton mImgAddForm;
+    private List<FormListItemBean> formItemDataBeansList;
+    private RecycleViewAdapter mCommonAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +66,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mCommonRecyclerview.setOnClickListener(this);
         mImgAddForm = (ImageButton) findViewById(R.id.img_add_form);
         mImgAddForm.setOnClickListener(this);
+        formItemDataBeansList = new ArrayList<>();
+        formItemDataBeansList.add(new FormListItemBean("防水","防水",1));
+        formItemDataBeansList.add(new FormListItemBean("防水","防水",1));
+        formItemDataBeansList.add(new FormListItemBean("防水","防水",1));
+        formItemDataBeansList.add(new FormListItemBean("防水","防水",1));
+        mCommonAdapter=new RecycleViewAdapter(formItemDataBeansList);
+        mCommonRecyclerview.setAdapter(mCommonAdapter);
+//        mCommonAdapter.setmOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                enterSecond(formItemDataBeansList.get(position));
+//            }
+//
+//            @Override
+//            public boolean onItemLongClick(View view, int position) {
+//                return false;
+//            }
     }
 
     @Override
@@ -115,7 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         listDialog.show();
     }
 
-    private void showAddAddressDialog(String name) {
+    private void showAddAddressDialog(final String name) {
         AlertDialog.Builder customizeDialog =
                 new AlertDialog.Builder(this);
         final View dialogView = LayoutInflater.from(this).inflate(R.layout.add_form_dialog_layout, null);
@@ -127,11 +150,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         EditText edit_text =
                                 (EditText) dialogView.findViewById(R.id.edit_text);
-/*                        DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
-                        NotifyData data = new NotifyData();
-                        data.setTitle("好好范德萨");
-                        dbUtil.save(data);
-                        ArrayList<NotifyData> list= (ArrayList<NotifyData>) dbUtil.findAll(NotifyData.class);*/
+                        formItemDataBeansList.add(formItemDataBeansList.size(),new FormListItemBean(name,edit_text.getText().toString().trim(),0));
+                        mCommonRecyclerview.notify();
                         Toast.makeText(HomeActivity.this,
                                 edit_text.getText().toString(),
                                 Toast.LENGTH_SHORT).show();
@@ -145,6 +165,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
         customizeDialog.show();
     }
+
+
 
 
 

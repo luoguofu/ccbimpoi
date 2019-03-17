@@ -13,7 +13,7 @@ import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.FormListItemBean;
 import java.util.List;
 
-class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
     List<FormListItemBean> moduleItems;
     private OnItemClickListener mOnItemClickListener;
 
@@ -30,7 +30,7 @@ class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-//        viewHolder.title.setText(moduleItems.get(i).getTitle());
+        viewHolder.title.setText(moduleItems.get(i).getName());
 //        if(!TextUtils.isEmpty(moduleItems.get(i).getDrawableName())) {
 //            int id = viewHolder.imageView.getResources().getIdentifier(moduleItems.get(i).getDrawableName(), "drawable", viewHolder.imageView.getContext().getPackageName());
 //            if(id>0)
@@ -54,7 +54,7 @@ class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHol
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    interface OnItemClickListener {
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
 
         boolean onItemLongClick(View view, int position);
@@ -71,8 +71,8 @@ class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHol
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title);
-            imageView = itemView.findViewById(R.id.icon);
+            title = itemView.findViewById(R.id.text_name);
+//            imageView = itemView.findViewById(R.id.icon);
         }
     }
 }
