@@ -85,6 +85,28 @@ public abstract class WeqiaApplication extends UtilApplication {
     public static WeqiaApplication getInstance() {
         return instance;
     }
+    public static WeqiaApplication getInstance(Context context) {
+        if (instance == null) {
+            instance = new WeqiaApplication() {
+                @Override
+                public void initializeAllProcessRouter() {
+
+                }
+
+                @Override
+                protected void initializeLogic() {
+
+                }
+
+                @Override
+                public boolean needMultipleProcess() {
+                    return false;
+                }
+            };
+        }
+        ctx = context.getApplicationContext();
+        return instance;
+    }
 
     public List<Activity> getActivities() {
         return activities;

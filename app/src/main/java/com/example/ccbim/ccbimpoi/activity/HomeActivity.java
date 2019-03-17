@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.R;
+import com.weqia.utils.datastorage.db.DbUtil;
+import com.weqia.wq.data.base.NotifyData;
+import com.weqia.wq.data.global.WeqiaApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +127,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         EditText edit_text =
                                 (EditText) dialogView.findViewById(R.id.edit_text);
-
+/*                        DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                        NotifyData data = new NotifyData();
+                        data.setTitle("好好范德萨");
+                        dbUtil.save(data);
+                        ArrayList<NotifyData> list= (ArrayList<NotifyData>) dbUtil.findAll(NotifyData.class);*/
                         Toast.makeText(HomeActivity.this,
                                 edit_text.getText().toString(),
                                 Toast.LENGTH_SHORT).show();
