@@ -64,7 +64,7 @@ public class WelcomeActivity extends FragmentActivity {
                 public void run() {
                     toApp();
                 }
-            }, 300);
+            }, 2000);
 //        }
     }
 

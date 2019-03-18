@@ -26,7 +26,7 @@ public class FormItemView extends LinearLayout {
         super(context);
         mContext=context;
         formItemDataBeans=formItemDataBeanList;
-        adapter=new ChildListViewAdapter(mContext, formItemDataBeanList.getChildItemBeanList());
+//        adapter=new ChildListViewAdapter(mContext, formItemDataBeanList.getChildItemBeanList());
         initView();
     }
     private void initView() {

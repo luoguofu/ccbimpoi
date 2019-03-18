@@ -49,10 +49,37 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="3dp"
         android:background="#FFD8D8D8"/>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_complete"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:id="@+id/tv_check_excel"
+            android:text="验收表"
+            android:gravity="center"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/tv_rectify_excel"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="整改单"/>
+        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#FFD8D8D8"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -80,13 +107,13 @@
         <Button
             android:id="@+id/text_work"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
             android:maxLines="1"
             android:padding="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/bg_btn_blue_color"
             android:textColor="@color/white"
@@ -94,16 +121,17 @@
 
         <ImageButton
             android:id="@+id/img_add_form"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="5dp"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@mipmap/icon_excel_add"
+            />
 
         <Button
             android:id="@+id/text_work_done"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"

@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.activity.FormListActivity;
+import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.FormItemDataBean;
 import java.util.List;
 
 public class FormListItemAdapter extends BaseAdapter {
 
-    public Context mContext;
-    public List<FormItemDataBean> data;
+    public FormListActivity mContext;
+    public List<CellData> data;
 
-    public FormListItemAdapter(Context context, List<FormItemDataBean> lists){
+    public FormListItemAdapter(FormListActivity context, List<CellData> lists){
         mContext = context;
         data = lists;
     }
@@ -38,7 +40,7 @@ public class FormListItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder=null;
-        FormItemDataBean formItemDataBean = data.get(position);
+        CellData formItemDataBean = data.get(position);
         if(convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.form_item_view_layout, null);
             viewHolder = new ViewHolder();
@@ -48,8 +50,8 @@ public class FormListItemAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.child_item_title.setText(formItemDataBean.getTitle());
-        ChildListViewAdapter adapter=new ChildListViewAdapter(mContext, formItemDataBean.getChildItemBeanList());
+        viewHolder.child_item_title.setText(formItemDataBean.getCellName());
+        ChildListViewAdapter adapter = new ChildListViewAdapter(mContext, formItemDataBean.getSubCellList(), position);
         viewHolder.childListView.setAdapter(adapter);
         return convertView;
     }

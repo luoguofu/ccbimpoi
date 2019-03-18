@@ -67,6 +67,9 @@
         <activity android:name=".activity.ProjectSettingActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name=".activity.PictureShowActivity"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name=".wxapi.WXEntryActivity"

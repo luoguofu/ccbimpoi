@@ -83,6 +83,24 @@ public abstract class WeqiaApplication extends UtilApplication {
     private UpdateUtil updateUtil;
 
     public static WeqiaApplication getInstance() {
+        if (instance == null) {
+            instance = new WeqiaApplication() {
+                @Override
+                public void initializeAllProcessRouter() {
+
+                }
+
+                @Override
+                protected void initializeLogic() {
+
+                }
+
+                @Override
+                public boolean needMultipleProcess() {
+                    return false;
+                }
+            };
+        }
         return instance;
     }
     public static WeqiaApplication getInstance(Context context) {

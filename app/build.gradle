@@ -77,6 +77,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    annotationProcessor 'cn.pinming.library:compile:1.0.2'
     api files('libs/poi-3.10.jar')
     api files('libs/poi-ooxml-3.10.jar')
     api files('libs/poi-ooxml-schemas-3.10.jar')
@@ -89,6 +90,7 @@ dependencies {
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:appcompat-v7:25.1.1'
 //    implementation "com.android.support:design:$supportLibVersion"
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
 //    implementation 'com.android.support:design:27.1.1'
@@ -97,13 +99,13 @@ dependencies {
 
 //    implementation 'pub.devrel:easypermissions:1.2.0'
 }
-configurations.all {
+/*configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'com.android.support') {
             if (!requested.name.startsWith("multidex")) {
-                details.useVersion '27.1.0'
+                details.useVersion '26.0.2'
             }
         }
     }
-}
+}*/

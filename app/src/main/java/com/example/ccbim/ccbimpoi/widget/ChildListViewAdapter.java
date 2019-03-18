@@ -11,18 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.activity.FormListActivity;
 import com.example.ccbim.ccbimpoi.activity.SingleFormActivity;
+import com.example.ccbim.ccbimpoi.data.CellData;
+import com.example.ccbim.ccbimpoi.data.CheckDetailData;
 import com.example.ccbim.ccbimpoi.data.ChildItemBean;
+import com.example.ccbim.ccbimpoi.util.ConstantUtil;
+
 import java.util.List;
 
 public class ChildListViewAdapter extends BaseAdapter {
 
-    private Context mContext;
-    private List<ChildItemBean> data;
+    private FormListActivity mContext;
+    private List<CheckDetailData> data;
+    private int parentPos;
 
-    public ChildListViewAdapter(Context context, List<ChildItemBean> lists) {
+    public ChildListViewAdapter(FormListActivity context, List<CheckDetailData> lists,int parentPos) {
         mContext=context;
         data=lists;
+        this.parentPos = parentPos;
     }
 
     @Override
@@ -41,9 +48,9 @@ public class ChildListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         ViewHolder vh=null;
-        final ChildItemBean childItemBean=data.get(position);
+        final CheckDetailData childItemBean=data.get(position);
         if(convertView==null){
             convertView=LayoutInflater.from(mContext).inflate(R.layout.child_form_item_layout, null);
             vh=new ViewHolder();
@@ -54,14 +61,25 @@ public class ChildListViewAdapter extends BaseAdapter {
         }else{
             vh=(ViewHolder)convertView.getTag();
         }
-        vh.child_item_title.setText(childItemBean.getTitle());
-        vh.child_item_status.setText(childItemBean.getStatus()+"");
+        vh.child_item_title.setText(childItemBean.getCheckName().getCellName());
+        if (childItemBean.getStatus() == 0) {
+            vh.child_item_status.setText("");
+        }else if (childItemBean.getStatus() == 1) {
+            vh.child_item_status.setText("√");
+        }else if (childItemBean.getStatus() == 2) {
+            vh.child_item_status.setText("X");
+        }
+
         vh.child_item_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "点击!!!"+childItemBean.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "点击!!!" + childItemBean.getCheckName().getCellName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext,SingleFormActivity.class);
+                intent.putExtra("parentPos", parentPos);
+                intent.putExtra("childPos", position);
+                intent.putExtra(ConstantUtil.PROJECTEXTRA, mContext.getProjectCheckData());
+                intent.putExtra("childData", childItemBean);
                 mContext.startActivity(intent);
 
             }

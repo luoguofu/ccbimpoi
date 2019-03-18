@@ -8,7 +8,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:orientation="vertical">-->
-
+        <include layout="@layout/view_reused_topbanner" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -21,13 +21,16 @@
                 android:text="@string/acceptance_level"
                 android:padding="5dp"
                 android:layout_marginLeft="5dp"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
             <EditText
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:gravity="left"/>
+                android:gravity="left"
+                android:background="@drawable/bg_edit"
+                android:layout_margin="5dp"
+                android:enabled="false"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,52 +42,90 @@
                 <Button
                     android:id="@+id/text_qualified"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
                     android:layout_margin="5dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/bg_btn_blue_color"
+                    android:textColor="@color/white"
                     android:padding="8dp"
                     android:text="@string/qualified" />
 
                 <Button
                     android:id="@+id/text_not_involve"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:layout_margin="5dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/bg_btn_blue_color"
+                    android:textColor="@color/white"
                     android:text="@string/not_involve" />
 
                 <Button
                     android:id="@+id/text_rectification"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/bg_btn_red_color"
+                    android:textColor="@color/white"
                     android:padding="8dp"
                     android:text="@string/rectification" />
 
             </LinearLayout>
 
-            <EditText
+<!--            <EditText
                 android:id="@+id/edit_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="记录点什么..."
                 android:padding="5dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_record"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_12"
+                    android:background="@null"
+                    android:gravity="top|left"
+                    android:hint="记录点什么..."
+                    android:maxLength="5000"
+                    android:maxLines="10"
+                    android:minHeight="50dp"
+                    android:singleLine="false"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/gray_color"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/llPicture"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
 
 
             <!--<LinearLayout-->
@@ -105,14 +146,16 @@
 
             <Button
                 android:id="@+id/text_sample"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:gravity="center"
                 android:maxLines="1"
-                android:padding="8dp"
-                android:background="@color/colorPrimary"
+                android:padding="5dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_btn_blue_color"
+                android:textColor="@color/white"
                 android:text="@string/sample" />
 
             <Button
@@ -125,7 +168,7 @@
                 android:padding="8dp"
                 android:visibility="invisible"/>
 
-            <ImageButton
+<!--            <ImageButton
                 android:id="@+id/text_take_picture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,7 +177,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:maxLines="1"
-                android:padding="8dp"/>
+                android:padding="8dp"/>-->
 
         </LinearLayout>
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CellData extends BaseData {
     private ArrayList<CheckDetailData> subCellList;
     private String cellName;          //单元格名称
-    private String cellSelected;          //单元格选中与否
+    private boolean cellSelected = false;          //单元格选中与否
     private String cellWidth;          //单元格宽
     private String cellHeight;         //单元格高
     private String cellColor;           //单元格填充颜色
@@ -58,11 +58,11 @@ public class CellData extends BaseData {
         this.cellName = cellName;
     }
 
-    public String getCellSelected() {
+    public boolean isCellSelected() {
         return cellSelected;
     }
 
-    public void setCellSelected(String cellSelected) {
+    public void setCellSelected(boolean cellSelected) {
         this.cellSelected = cellSelected;
     }
 

@@ -1,6 +1,7 @@
 package com.weqia.wq.component.utils.bitmap;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
@@ -57,7 +58,7 @@ public class WqImageDownloader extends BaseImageDownloader {
     }
 
     public WqImageDownloader(WeqiaApplication context, int connectTimeout, int readTimeout) {
-        super(context, connectTimeout, readTimeout);
+        super(context.ctx, connectTimeout, readTimeout);
         this.ctx = context;
     }
 

@@ -55,6 +55,9 @@ public abstract class UtilApplication extends MaApplication {
     }
 
     public BitmapUtil getBitmapUtil() {
+        if (bitmapUtil == null) {
+            bitmapUtil = BitmapUtil.getInstance();
+        }
         return bitmapUtil;
     }
 

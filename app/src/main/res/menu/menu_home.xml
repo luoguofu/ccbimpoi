@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/topbanner_search"
+        android:title="搜索"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/action_export"
+        android:title="导出"
+        app:showAsAction="always|collapseActionView"
+        />
+
+
+</menu>

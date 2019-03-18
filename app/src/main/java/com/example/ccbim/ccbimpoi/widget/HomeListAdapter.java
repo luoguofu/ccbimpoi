@@ -1,6 +1,7 @@
 package com.example.ccbim.ccbimpoi.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,12 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.activity.FormListActivity;
+import com.example.ccbim.ccbimpoi.activity.HomeActivity;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 
 import java.util.List;
+
+import static com.example.ccbim.ccbimpoi.util.ConstantUtil.PROJECTEXTRA;
 
 /**
  * Created by Administrator on 2019/3/17/017.
@@ -21,14 +27,14 @@ import java.util.List;
 
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     private List<ProjectCheckData> projectCheckDataList;
-    private Context mContext;
+    private HomeActivity mContext;
 
     /**
      * 构造方法
      *
      * @param projectCheckDataList 数据源
      */
-    public HomeListAdapter(Context context, List<ProjectCheckData> projectCheckDataList) {
+    public HomeListAdapter(HomeActivity context, List<ProjectCheckData> projectCheckDataList) {
         this.mContext = context;
         this.projectCheckDataList = projectCheckDataList;
     }
@@ -42,10 +48,28 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ProjectCheckData projectCheckData = projectCheckDataList.get(position);
-        holder.excelNameTv.setText(projectCheckData.getCheckPartName());
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final ProjectCheckData projectCheckData = projectCheckDataList.get(position);
+        holder.excelNameTv.setText(projectCheckData.getCheckPartName() + "部位防水表单");
+        holder.selectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mContext.getSelectProjectData().add(projectCheckData);
+                } else {
+                    mContext.getSelectProjectData().remove(projectCheckData);
+                }
+            }
+        });
 
+        holder.editBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FormListActivity.class);
+                intent.putExtra(PROJECTEXTRA, projectCheckDataList.get(position));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
+import com.example.ccbim.ccbimpoi.data.PicBean;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
@@ -35,6 +36,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import static com.example.ccbim.ccbimpoi.MainNewActivity.getExcelDir;
 
 /**
  * Created by lgf on 2019/2/28.
@@ -134,13 +138,13 @@ public class SaveToExcelUtil {
 
 
                 try {
-/*                    HSSFPatriarch patriarch = ws.createDrawingPatriarch();
+                    HSSFPatriarch patriarch = ws.createDrawingPatriarch();
                     //anchor主要用于设置图片的属性
-                    HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 255, 255,(short) 5, 5, (short) 11, 12);
+                    HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 255, 255,(short) 5, 2, (short) 11, 12);
 //                    anchor.setAnchorType(ClientAnchor.AnchorType.DONT_MOVE_AND_RESIZE);
                     //插入图片
                     byte[] asd = readStream(Environment.getExternalStorageDirectory() + File.separator + "qwe.jpg");
-                    patriarch.createPicture(anchor, wwb.addPicture(asd, HSSFWorkbook.PICTURE_TYPE_JPEG));*/
+                    patriarch.createPicture(anchor, wwb.addPicture(asd, HSSFWorkbook.PICTURE_TYPE_JPEG));
 
 
                     FileOutputStream fos = new FileOutputStream(file);
@@ -179,6 +183,40 @@ public class SaveToExcelUtil {
                     hs.setColumnWidth(i, Integer.parseInt(col) * 256 * 2);
                 }
             }
+            //封装附图
+            ArrayList<PicBean> picBeans = new ArrayList<>();
+            for (CellData cellData : projectCheckData.getTabBody()) {
+                for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
+                    if (StrUtil.notEmptyOrNull(checkDetailData.getPicPathsStr())) {
+                        PicBean picBean = new PicBean();
+                        picBean.setCheckPath(checkDetailData.getCheckPath());
+                        String paths = checkDetailData.getPicPathsStr();
+                        List<String> list = Arrays.asList(paths.split(","));
+                        picBean.setCheckPic(list);
+                        picBeans.add(picBean);
+                    }
+                }
+            }
+
+/*            boolean isSingle = true;
+            int singleFistRow = 3;
+            int singleLastRow = 8;
+            int notSingleFistRow = 3;
+            int notSingleLastRow = 8;
+            for (int i = 0; i < picBeans.size(); i++) {
+                if (isSingle) {
+                    insertPic(hs, hwb, getExcelDir() + File.separator + projectCheckData.getCheckPartName() + "部位防水表单.xls", 9, singleFistRow, 12, singleLastRow);
+                    singleFistRow = singleFistRow + 5;
+                    singleLastRow = singleLastRow + 5;
+                } else {
+                    insertPic(hs, hwb, getExcelDir() + File.separator + projectCheckData.getCheckPartName() + "部位防水表单.xls", 13, notSingleFistRow, 16, notSingleLastRow);
+                    notSingleFistRow = notSingleFistRow + 5;
+                    notSingleFistRow = notSingleFistRow + 5;
+                }
+            }*/
+
+
+
             if (StrUtil.listNotNull(projectCheckData.getTabHead())) {
                 ArrayList<String> rows = new ArrayList(Arrays.asList(projectCheckData.getHeadRows().split(",")));
                 for (String rowStr : rows) {
@@ -226,6 +264,30 @@ public class SaveToExcelUtil {
                     }
                 }
             }
+
+            boolean isSingle = true;
+            int singleFistRow = 3;
+            int singleLastRow = 8;
+            int notSingleFistRow = 3;
+            int notSingleLastRow = 8;
+            for (int i = 0; i < picBeans.size(); i++) {
+                if (isSingle) {
+                    for (String path : picBeans.get(i).getCheckPic()) {
+                        insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow);
+                        singleFistRow = singleFistRow + 5;
+                        singleLastRow = singleLastRow + 5;
+                    }
+
+                } else {
+                    for (String path : picBeans.get(i).getCheckPic()) {
+                        insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow);
+                        notSingleFistRow = notSingleFistRow + 5;
+                        notSingleFistRow = notSingleFistRow + 5;
+                    }
+
+                }
+                isSingle = !isSingle;
+            }
             File file = new File(excelPath);
             if (file.exists()) {
                 deleteExcel(excelPath);
@@ -234,7 +296,7 @@ public class SaveToExcelUtil {
                 FileOutputStream fos = new FileOutputStream(file);
                 hwb.write(fos);
                 fos.close();
-                Toast.makeText(activity,"导出成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity,"导出成功，请在 文件管理器/Excel/ExcelFile中查看", Toast.LENGTH_LONG).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -244,6 +306,21 @@ public class SaveToExcelUtil {
         } else {
             L.toastLong("数据为空");
         }
+    }
+
+    public static void insertPic(HSSFSheet hs, HSSFWorkbook hwb, String path, int fistCol, int fistRow, int LastCol, int LastRow) {
+        HSSFPatriarch patriarch = hs.createDrawingPatriarch();
+        //anchor主要用于设置图片的属性
+        HSSFClientAnchor anchor = new HSSFClientAnchor(0, 50, 150, 150, (short) fistCol, fistRow, (short) LastCol, LastRow);
+//                    anchor.setAnchorType(ClientAnchor.AnchorType.DONT_MOVE_AND_RESIZE);
+        //插入图片
+        byte[] asd = new byte[0];
+        try {
+            asd = readStream(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        patriarch.createPicture(anchor, hwb.addPicture(asd, HSSFWorkbook.PICTURE_TYPE_JPEG));
     }
 
     /**

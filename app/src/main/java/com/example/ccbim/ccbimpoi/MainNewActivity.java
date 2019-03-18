@@ -50,6 +50,22 @@ public class MainNewActivity extends Activity implements View.OnClickListener {
             return dir.toString();
         }
     }
+    public static String getPoiExcelDir() {
+        // SD卡指定文件夹
+        String sdcardPath = Environment.getExternalStorageDirectory()
+                .toString();
+        File dir = new File(sdcardPath + File.separator + "Excel"
+                + File.separator + "ExcelFile");
+
+        if (dir.exists()) {
+            return dir.toString();
+
+        } else {
+            dir.mkdirs();
+            Log.e("TAG", "保存路径不存在,");
+            return dir.toString();
+        }
+    }
 
 
     @Override
