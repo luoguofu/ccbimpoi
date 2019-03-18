@@ -125,8 +125,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.common_recyclerview:
                 break;
             case R.id.img_add_form:
-                startActivity(new Intent(this, FormListActivity.class));
-//                showAddFormDialog();
+//                startActivity(new Intent(this, FormListActivity.class));
+                showAddFormDialog();
                 break;
         }
     }
@@ -150,13 +150,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 showAddAddressDialog(items[which]);
             }
         });
-/*        listDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        listDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 showAddAddressDialog(items[which]);
                 dialog.dismiss();
             }
-        });*/
+        });
         listDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -195,6 +195,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             data.getTabHead().add(new CellData(edit_text.getText().toString(), "6", "6", "6", "7"));
                             DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
                             dbUtil.save(data);
+                            listData.add(data);
+                            homeListAdapter.notifyDataSetChanged();
                         } else {
                             L.toastShort("部位不能为空");
                         }
