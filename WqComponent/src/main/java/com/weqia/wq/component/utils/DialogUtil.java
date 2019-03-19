@@ -7,9 +7,13 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -346,6 +350,86 @@ public class DialogUtil {
                 llChange.addView(cellView);
             }
         }
+        builder.setContentView(view);
+        return builder.create();
+    }
+    /**
+     * 列表项dialog
+     */
+    public static Dialog initListDialog(final Context ctx, String title, final ArrayList<String> items,
+                                        final OnClickListener listener) {
+//        LinearLayout llChange = null;
+        SharedCommonDialog.Builder builder = new SharedCommonDialog.Builder(ctx);
+       if (StrUtil.notEmptyOrNull(title)) {
+            builder.setTitle(title);
+            builder.showBar(true);
+            builder.setTitleAttr(true, null);
+        }
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        View view = inflater.inflate(R.layout.common_listview, null);
+/*        if (view != null) {
+            llChange = (LinearLayout) view.findViewById(R.id.ll_work_change);
+        }*/
+        ListView listView = view.findViewById(R.id.lv_common);
+
+        BaseAdapter adapter=new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return items.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return items.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if(convertView==null){
+                    convertView=LayoutInflater.from(ctx).inflate(R.layout.common_list_item, null);
+                    TextView tvStr = convertView.findViewById(R.id.tv_content);
+                    tvStr.setText(items.get(position));
+                }else{
+
+                }
+                convertView.setTag(items.get(position));
+                convertView.setOnClickListener(listener);
+                return convertView;
+            }
+        };
+        listView.setAdapter(adapter);
+/*        if (items != null) {
+            for (int i = 0; i < items.length; i++) {
+                View cellView = LayoutInflater.from(ctx).inflate(R.layout.view_reused_dialigtext, null);
+                TextView textView = (TextView) cellView.findViewById(R.id.tv_dlg_title); // new
+                textView.setText(items[i]);
+                textView.setTag(i);
+                textView.setTag(-1, items[i]);
+                textView.setOnClickListener(listener);
+                if (i == items.length - 1) {
+                    View dvLine = cellView.findViewById(R.id.iv_dlg_dv);
+                    ViewUtils.hideView(dvLine);
+                }
+                llChange.addView(cellView);
+            }
+        }*/
+/*        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                listener;
+            }
+        });*/
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         builder.setContentView(view);
         return builder.create();
     }

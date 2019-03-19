@@ -79,7 +79,7 @@ public class FormListActivity extends AppCompatActivity {
         completeStatus = true;
         for (CellData cellData : projectCheckData.getTabBody()) {
             for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
-                if (checkDetailData.getStatus() != 1) {
+                if (checkDetailData.getStatus() != 1 && checkDetailData.getStatus() != 2) {
                     completeStatus = false;
                 }
             }
@@ -94,6 +94,7 @@ public class FormListActivity extends AppCompatActivity {
         projectCheckData.setTabFootStr(projectCheckData.getTabFoot().toString());
         DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
         dbUtil.save(projectCheckData,true);
+        EventBus.getDefault().post(new RefreshEvent("projectCheckDataRefresh"));
     }
 
     @Override

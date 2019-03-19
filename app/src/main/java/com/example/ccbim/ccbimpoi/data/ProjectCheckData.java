@@ -25,6 +25,7 @@ public class ProjectCheckData extends BaseData{
     private String footRows;         //底部的行
     private String checkPartName;     //验收部位名称
     private int completeStatus = 0;         //0表示未完成，1表示已完成
+    private String excelName;           //表格名称
 //    private ArrayList<CellData> tabPic;         //表格的附图样表
 
 
@@ -130,5 +131,13 @@ public class ProjectCheckData extends BaseData{
 
     public void setCompleteStatus(int completeStatus) {
         this.completeStatus = completeStatus;
+    }
+
+    public String getExcelName() {
+        return excelName;
+    }
+
+    public void setExcelName(String excelName) {
+        this.excelName = excelName;
     }
 }

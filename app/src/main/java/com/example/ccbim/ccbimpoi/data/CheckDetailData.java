@@ -20,7 +20,7 @@ public class CheckDetailData extends BaseData {
     private String problemDemand;       //整改要求
     private ArrayList<String> picPaths;           //附件
     private String picPathsStr;           //附件
-    private int status = 0;              //默认是不显示，1是√符合要求，2是X  需要整改
+    private int status = 0;              //默认是不显示，1是√符合要求,2是不涉及√ ，3是X  需要整改
     private String checkPath;         //验收路径 如： 结构闭水-排水管洞周围处理
 
     public CellData getCheckName() {

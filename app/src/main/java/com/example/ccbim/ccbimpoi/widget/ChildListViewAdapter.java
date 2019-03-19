@@ -64,9 +64,9 @@ public class ChildListViewAdapter extends BaseAdapter {
         vh.child_item_title.setText(childItemBean.getCheckName().getCellName());
         if (childItemBean.getStatus() == 0) {
             vh.child_item_status.setText("");
-        }else if (childItemBean.getStatus() == 1) {
+        }else if (childItemBean.getStatus() == 1||childItemBean.getStatus() == 2) {
             vh.child_item_status.setText("√");
-        }else if (childItemBean.getStatus() == 2) {
+        }else if (childItemBean.getStatus() == 3) {
             vh.child_item_status.setText("X");
         }
 
@@ -74,7 +74,7 @@ public class ChildListViewAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "点击!!!" + childItemBean.getCheckName().getCellName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "点击!!!" + childItemBean.getCheckName().getCellName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext,SingleFormActivity.class);
                 intent.putExtra("parentPos", parentPos);
                 intent.putExtra("childPos", position);

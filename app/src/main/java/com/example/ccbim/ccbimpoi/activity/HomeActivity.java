@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +39,14 @@ import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
 import com.weqia.utils.datastorage.db.DbUtil;
 import com.weqia.wq.component.activity.SharedDetailTitleActivity;
+import com.weqia.wq.component.utils.DialogUtil;
 import com.weqia.wq.data.base.NotifyData;
+import com.weqia.wq.data.eventbus.RefreshEvent;
 import com.weqia.wq.data.global.WeqiaApplication;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -64,12 +71,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isComplete = false;
     private boolean isRectify = false;
     private ArrayList<ProjectCheckData> selectProjectData = new ArrayList<>();
+    private Dialog dialog = null;
+    private LinearLayout mCompleteLl;
+    private TextView mCheckExcelTv, mRectifyExcelTv;
 //    private ArrayList
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_layout);
+        EventBus.getDefault().register(this);
         initView();
     }
 
@@ -77,6 +88,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mFrameLayout = (FrameLayout) findViewById(R.id.frame_layout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mCompleteLl = (LinearLayout) findViewById(R.id.ll_complete);
+        mCheckExcelTv = (TextView) findViewById(R.id.tv_check_excel);
+        mRectifyExcelTv = (TextView) findViewById(R.id.tv_rectify_excel);
+        mCheckExcelTv.setOnClickListener(this);
+        mRectifyExcelTv.setOnClickListener(this);
         mTextBefore = (TextView) findViewById(R.id.text_before);
         mTextBefore.setOnClickListener(this);
         mTextLast = (TextView) findViewById(R.id.text_last);
@@ -118,9 +134,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (isComplete) {
             mTextWork.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
             mTextWorkDone.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
+            mCompleteLl.setVisibility(View.VISIBLE);
+            if (isRectify) {
+                mRectifyExcelTv.setTextColor(this.getResources().getColor(R.color.colorblue));
+                mCheckExcelTv.setTextColor(this.getResources().getColor(R.color.black_font));
+            } else {
+                mRectifyExcelTv.setTextColor(this.getResources().getColor(R.color.black_font));
+                mCheckExcelTv.setTextColor(this.getResources().getColor(R.color.colorblue));
+            }
         } else {
             mTextWorkDone.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
             mTextWork.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
+            mCompleteLl.setVisibility(View.GONE);
         }
     }
 
@@ -130,7 +155,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (!isComplete) {
             list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 0", "id");
         } else {
-            list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 1", "id");
+            if (isRectify) {
+                list = new ArrayList<>();
+            } else {
+                list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 1", "id");
+            }
+
         }
 
         listData.clear();
@@ -161,13 +191,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     projectCheckData.setTabHead(tabHead);
                     ArrayList<CellData> tabFoot = (ArrayList<CellData>) JSON.parseArray(projectCheckData.getTabFootStr(), CellData.class);
                     projectCheckData.setTabFoot(tabFoot);
-                    SaveToExcelUtil.exportEccel(this, getPoiExcelDir() + File.separator + projectCheckData.getCheckPartName() + "部位防水表单.xls", projectCheckData);
+                    SaveToExcelUtil.exportEccel(this, getPoiExcelDir() + File.separator + projectCheckData.getCheckPartName() + projectCheckData.getExcelName() + ".xls", projectCheckData);
                 }
 
 //                SaveToExcelUtil util = new SaveToExcelUtil(this, getExcelDir() + File.separator + "demo.xls");
                 break;
         }
         return true;
+    }
+    // 添加成功 刷新界面
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(final RefreshEvent event) {
+        String key = event.key;
+        if ("projectCheckDataRefresh".equals(key)) {
+            initData();
+        }
     }
 
     @Override
@@ -197,6 +235,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(new Intent(this, FormListActivity.class));
                 showAddFormDialog();
                 break;
+            case R.id.tv_check_excel:
+                isRectify = false;
+                btnStatus();
+                initData();
+                break;
+            case R.id.tv_rectify_excel:
+                isRectify = true;
+                btnStatus();
+                initData();
+                break;
         }
     }
 
@@ -207,38 +255,38 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             excelList.add(excelEnum.getStrName());
         }
         final String[] items = excelList.toArray(new String[excelList.size()]);
-        AlertDialog.Builder listDialog =
+/*        AlertDialog.Builder listDialog =
                 new AlertDialog.Builder(this);
         listDialog.setTitle("");
         listDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(HomeActivity.this,
-                        "你点击了" + items[which],
-                        Toast.LENGTH_SHORT).show();
                 showAddAddressDialog(items[which]);
             }
         });
-/*        listDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+*//*        listDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 showAddAddressDialog(items[which]);
                 dialog.dismiss();
             }
-        });*/
+        });*//*
         listDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-/*        listDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        listDialog.show();*/
+
+        dialog=DialogUtil.initListDialog(this, "表单选择", excelList, new View.OnClickListener() {
             @Override
-            public void onCancel(DialogInterface dialog) {
+            public void onClick(View v) {
                 dialog.dismiss();
+                showAddAddressDialog((String) v.getTag());
             }
-        });*/
-        listDialog.show();
+        });
+        dialog.show();
     }
 
     private void showAddAddressDialog(String name) {
@@ -253,11 +301,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         EditText edit_text =
                                 (EditText) dialogView.findViewById(R.id.edit_text);
-/*                        DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
-                        NotifyData data = new NotifyData();
-                        data.setTitle("好好范德萨");
-                        dbUtil.save(data);
-                        ArrayList<NotifyData> list= (ArrayList<NotifyData>) dbUtil.findAll(NotifyData.class);*/
                         if (StrUtil.notEmptyOrNull(edit_text.getText().toString())) {
                             ProjectCheckData data = JSON.parseObject(ExcelEnum.TOILETCHECKEXCEL.getValue(), ProjectCheckData.class);
                             data.setCheckPartName(edit_text.getText().toString());
@@ -279,9 +322,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             L.toastShort("部位不能为空");
                         }
-                        Toast.makeText(HomeActivity.this,
-                                edit_text.getText().toString(),
-                                Toast.LENGTH_SHORT).show();
+
                     }
                 });
         customizeDialog.setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -308,5 +349,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setSelectProjectData(ArrayList<ProjectCheckData> selectProjectData) {
         this.selectProjectData = selectProjectData;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -50,7 +50,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ProjectCheckData projectCheckData = projectCheckDataList.get(position);
-        holder.excelNameTv.setText(projectCheckData.getCheckPartName() + "部位防水表单");
+        holder.excelNameTv.setText(projectCheckData.getCheckPartName() + projectCheckData.getExcelName());
         holder.selectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

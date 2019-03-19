@@ -23,6 +23,7 @@ import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.example.ccbim.ccbimpoi.util.ConstantUtil;
+import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
 import com.weqia.utils.dialog.SharedCommonDialog;
 import com.weqia.wq.component.SelectArrUtil;
@@ -76,6 +77,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
     private EditText mEditRecord;
     private PictureGridView pictrueView;
     private LinearLayout llPicture;
+    private int status = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
         projectCheckData = (ProjectCheckData) getIntent().getSerializableExtra(ConstantUtil.PROJECTEXTRA);
 //        checkDetailData = (CheckDetailData) getIntent().getSerializableExtra("childData");
         checkDetailData = projectCheckData.getTabBody().get(parentPos).getSubCellList().get(childPos);
+        status = checkDetailData.getStatus();
         if (checkDetailData != null) {
             checkDetailData.setCheckPath(projectCheckData.getTabBody().get(parentPos).getCellName() + "-" + checkDetailData.getCheckName().getCellName());
         }
@@ -101,7 +104,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
         mEditText.setText(checkDetailData.getCheckStandard().getCellName());
         isPass = checkDetailData.getCheckPass().isCellSelected();
         isNOtInvolve = checkDetailData.getCheckInvolve().isCellSelected();
-        if (isPass) {
+/*        if (isPass) {
             mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
         } else {
             mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
@@ -110,13 +113,44 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
             mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
         } else {
             mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+        }*/
+        if (StrUtil.notEmptyOrNull(checkDetailData.getRemind())) {
+            mEditRecord.setText(checkDetailData.getRemind());
         }
+        initStatus();
         if (StrUtil.notEmptyOrNull(checkDetailData.getPicPathsStr())) {
 //            String paths = checkDetailData.getPicPathsStr().substring(1, checkDetailData.getPicPathsStr().length() - 1);
             String paths = checkDetailData.getPicPathsStr();
             List<String> list = Arrays.asList(paths.split(","));
             pictrueView.getAddedPaths().addAll(list);
             pictrueView.refresh();
+        }
+    }
+
+    @SuppressLint("NewApi")
+    private void initStatus() {
+        switch (status) {
+            case 0:
+                mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_normal));
+                break;
+            case 1:
+                mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
+                mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_normal));
+                break;
+            case 2:
+                mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
+                mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_normal));
+                break;
+            case 3:
+                mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
+                mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_pressed));
+                break;
+
         }
     }
 
@@ -174,26 +208,32 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
             default:
                 break;
             case R.id.text_qualified:
-                isPass = !isPass;
+/*                isPass = !isPass;
                 if (isPass) {
                     mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
                 } else {
                     mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 }
-                checkDetailData.getCheckPass().setCellSelected(isPass);
+                checkDetailData.getCheckPass().setCellSelected(isPass);*/
+                status = 1;
+                initStatus();
                 break;
             case R.id.text_not_involve:
-                isNOtInvolve = !isNOtInvolve;
+/*                isNOtInvolve = !isNOtInvolve;
                 if (isNOtInvolve) {
                     mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
                 } else {
                     mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 }
-                checkDetailData.getCheckInvolve().setCellSelected(isNOtInvolve);
+                checkDetailData.getCheckInvolve().setCellSelected(isNOtInvolve);*/
+                status = 2;
+                initStatus();
                 break;
             case R.id.text_rectification:
 //                showRectificationDialog(v);
-                checkDetailData.setProblemDemand("需要整改");
+//                checkDetailData.setProblemDemand("需要整改");
+                status = 3;
+                initStatus();
                 Intent zgIntent = new Intent(this, PictureShowActivity.class);
                 zgIntent.putExtra("assetsName", "zhenggai.png");
                 startActivity(zgIntent);
@@ -202,13 +242,16 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
 //                Bitmap bitmap = getImageFromAssetsFile(this, "fengjinbaohu");
 //                ImageView imageView = new ImageView(this);
 //                imageView.setImageBitmap(bitmap);
-                Intent intent = new Intent(this, PictureShowActivity.class);
-                intent.putExtra("assetsName", "fengjinbaohu.jpg");
-                startActivity(intent);
+                if (StrUtil.notEmptyOrNull(checkDetailData.getSamplePic())) {
+                    Intent intent = new Intent(this, PictureShowActivity.class);
+                    intent.putExtra("assetsName", checkDetailData.getSamplePic());
+                    startActivity(intent);
+                } else {
+                    L.toastShort("暂无示例图片");
+                }
                 break;
             case R.id.topbanner_button_left:
                 back();
-//                projectCheckData.getTabBody().get(parentPos).getSubCellList(). = checkDetailData;
                 break;
 //            case R.id.text_take_picture:
 //                break;
@@ -289,6 +332,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
     }
 
     private void back() {
+        checkDetailData.setRemind(mEditRecord.getText().toString());
         if (StrUtil.listNotNull(pictrueView.getAddedPaths())) {
             ArrayList<String> list = pictrueView.getAddedPaths();
             StringBuffer buffer = new StringBuffer();
@@ -303,7 +347,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
             checkDetailData.setPicPathsStr(buffer.toString());
         }
 //        checkDetailData.setPicPathsStr(pictrueView.getAddedPaths().toString());
-        if (StrUtil.notEmptyOrNull(checkDetailData.getProblemDemand())) {
+/*        if (StrUtil.notEmptyOrNull(checkDetailData.getProblemDemand())) {
             checkDetailData.setStatus(2);
         }else {
             if (checkDetailData.getCheckPass().isCellSelected() || checkDetailData.getCheckInvolve().isCellSelected()) {
@@ -311,17 +355,23 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
             } else {
                 checkDetailData.setStatus(0);
             }
-        }
-        if (checkDetailData.getCheckPass().isCellSelected()) {
+        }*/
+        checkDetailData.setStatus(status);
+        if (checkDetailData.getStatus() == 1) {
             checkDetailData.getCheckPass().setCellName("☑");
+            checkDetailData.getCheckInvolve().setCellName("口");
+        } else if (checkDetailData.getStatus() == 2) {
+            checkDetailData.getCheckPass().setCellName("口");
+            checkDetailData.getCheckInvolve().setCellName("☑");
         } else {
             checkDetailData.getCheckPass().setCellName("口");
+            checkDetailData.getCheckInvolve().setCellName("口");
         }
-        if (checkDetailData.getCheckInvolve().isCellSelected()) {
+/*        if (checkDetailData.getCheckInvolve().isCellSelected()) {
             checkDetailData.getCheckInvolve().setCellName("☑");
         } else {
             checkDetailData.getCheckInvolve().setCellName("口");
-        }
+        }*/
         pictrueView.getAddedPaths().clear();
         SelectArrUtil.getInstance().clearImage();
         EventBus.getDefault().post(new RefreshEvent("projectdata",projectCheckData));
