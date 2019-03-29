@@ -2,6 +2,7 @@ package com.example.ccbim.ccbimpoi.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import com.example.ccbim.ccbimpoi.activity.FormListActivity;
 import com.example.ccbim.ccbimpoi.activity.HomeActivity;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 
+import java.io.File;
 import java.util.List;
 
+import static com.example.ccbim.ccbimpoi.MainNewActivity.getPoiExcelDir;
 import static com.example.ccbim.ccbimpoi.util.ConstantUtil.PROJECTEXTRA;
 
 /**
@@ -70,6 +73,22 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 mContext.startActivity(intent);
             }
         });
+        holder.excelNameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getExcelFileIntent(new File(getPoiExcelDir() + File.separator + projectCheckData.getCheckPartName() + projectCheckData.getExcelName() + ".xls"));
+                mContext.startActivity(intent);
+            }
+        });
+    }
+    //android获取一个用于打开Excel文件的intent
+    public static Intent getExcelFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/vnd.ms-excel");
+        return intent;
     }
 
     @Override
