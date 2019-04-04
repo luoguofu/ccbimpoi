@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tool="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="38dp"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_path_title"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxEms="10"
+        android:singleLine="true"
+        android:textColor="@color/file_path_color"
+        android:textSize="15sp"
+        tool:text="根目录"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:src="@mipmap/nav_arrow"/>
+</LinearLayout>

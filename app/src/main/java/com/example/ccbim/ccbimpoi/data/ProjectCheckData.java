@@ -5,6 +5,7 @@ import com.weqia.utils.annotation.sqlite.Table;
 import com.weqia.wq.data.BaseData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lgf on 2019/3/14.
@@ -13,6 +14,12 @@ import java.util.ArrayList;
 public class ProjectCheckData extends BaseData{
     @Id
     private int id;
+    private int level;
+    private List<ProjectCheckData> childDatas;
+    private String childDatasStr;
+    private ProjectCheckData parentData;
+    private int parentId = -1;
+    private int fileType = 1;                 //1为文件，2为文件夹
     private ArrayList<CellData> tabHead;      //表格的头部
     private ArrayList<CellData> tabBody;      //表格的body，验收的项目
     private ArrayList<CellData> tabFoot;       //表格的底部
@@ -26,6 +33,7 @@ public class ProjectCheckData extends BaseData{
     private String checkPartName;     //验收部位名称
     private int completeStatus = 0;         //0表示未完成，1表示已完成
     private String excelName;           //表格名称
+    private String excelFullName;        //表格全名
 //    private ArrayList<CellData> tabPic;         //表格的附图样表
 
 
@@ -139,5 +147,61 @@ public class ProjectCheckData extends BaseData{
 
     public void setExcelName(String excelName) {
         this.excelName = excelName;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public List<ProjectCheckData> getChildDatas() {
+        return childDatas;
+    }
+
+    public void setChildDatas(List<ProjectCheckData> childDatas) {
+        this.childDatas = childDatas;
+    }
+
+    public String getChildDatasStr() {
+        return childDatasStr;
+    }
+
+    public void setChildDatasStr(String childDatasStr) {
+        this.childDatasStr = childDatasStr;
+    }
+
+    public ProjectCheckData getParentData() {
+        return parentData;
+    }
+
+    public void setParentData(ProjectCheckData parentData) {
+        this.parentData = parentData;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public int getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(int fileType) {
+        this.fileType = fileType;
+    }
+
+    public String getExcelFullName() {
+        return excelFullName;
+    }
+
+    public void setExcelFullName(String excelFullName) {
+        this.excelFullName = excelFullName;
     }
 }

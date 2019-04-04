@@ -36,4 +36,26 @@ public enum  ExcelEnum {
     public String getStrName() {
         return strName;
     }
+
+
+    public enum ProjectFileType {
+        FILE(1, "文件"), //
+        DIR(2, "文件夹"), //
+        ;
+        private String strName;
+        private int value;
+
+        ProjectFileType(int value, String strName) {
+            this.value = value;
+            this.strName = strName;
+        }
+
+        public String strName() {
+            return strName;
+        }
+
+        public int value() {
+            return value;
+        }
+    }
 }

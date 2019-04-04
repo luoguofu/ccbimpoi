@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,9 @@ import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
+import com.example.ccbim.ccbimpoi.util.BaseUtil;
 import com.example.ccbim.ccbimpoi.util.ConstantUtil;
+import com.umeng.socialize.utils.CommonUtil;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
 import com.weqia.utils.dialog.SharedCommonDialog;
@@ -129,6 +132,8 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
 
     @SuppressLint("NewApi")
     private void initStatus() {
+        Drawable drawable = getResources().getDrawable(R.drawable.btn_pitchon);
+        drawable.setBounds(0, 0, BaseUtil.dpToPx(getResources(), 20), BaseUtil.dpToPx(getResources(), 15));
         switch (status) {
             case 0:
                 mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
@@ -139,16 +144,25 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
                 mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
                 mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_normal));
+                mTextQualified.setCompoundDrawables(null, null, drawable, null);
+                mTextNotInvolve.setCompoundDrawables(null, null, null, null);
+                mTextRectification.setCompoundDrawables(null, null, null, null);
                 break;
             case 2:
                 mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_pressed));
                 mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_normal));
+                mTextNotInvolve.setCompoundDrawables(null, null, drawable, null);
+                mTextQualified.setCompoundDrawables(null, null, null, null);
+                mTextRectification.setCompoundDrawables(null, null, null, null);
                 break;
             case 3:
                 mTextQualified.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 mTextNotInvolve.setBackground(getResources().getDrawable(R.drawable.bg_btn_blue_normal));
                 mTextRectification.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_pressed));
+                mTextRectification.setCompoundDrawables(null, null, drawable, null);
+                mTextQualified.setCompoundDrawables(null, null, null, null);
+                mTextNotInvolve.setCompoundDrawables(null, null, null, null);
                 break;
 
         }
@@ -228,6 +242,7 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
                 checkDetailData.getCheckInvolve().setCellSelected(isNOtInvolve);*/
                 status = 2;
                 initStatus();
+                back();
                 break;
             case R.id.text_rectification:
 //                showRectificationDialog(v);

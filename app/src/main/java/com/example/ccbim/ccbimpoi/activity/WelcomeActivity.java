@@ -101,6 +101,7 @@ public class WelcomeActivity extends FragmentActivity {
 //            RouterUtil.routerActionSync(WelcomeActivity.this, "pvmain", "actomain");
 //        }
         startActivity(new Intent(this, HomeActivity.class));
+        finish();
 
     }
 

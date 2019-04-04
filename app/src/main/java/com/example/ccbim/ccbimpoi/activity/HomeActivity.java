@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -32,6 +33,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.ExcelEnum;
+import com.example.ccbim.ccbimpoi.data.NavigHandler;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.example.ccbim.ccbimpoi.util.SaveToExcelUtil;
 import com.example.ccbim.ccbimpoi.widget.HomeListAdapter;
@@ -69,11 +71,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<ProjectCheckData> listData = new ArrayList<>();
     private boolean isComplete = false;
-    private boolean isRectify = false;
+    private boolean isRectify = false;              //是否是整改单
     private ArrayList<ProjectCheckData> selectProjectData = new ArrayList<>();
     private Dialog dialog = null;
     private LinearLayout mCompleteLl;
     private TextView mCheckExcelTv, mRectifyExcelTv;
+    private int level = 0;
+    private int parentId = -1;
+    private NavigHandler navHandler;
+    private LinearLayout headerView;
 //    private ArrayList
 
     @Override
@@ -82,12 +88,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.home_activity_layout);
         EventBus.getDefault().register(this);
         initView();
+        ProjectCheckData root = new ProjectCheckData();
+        root.setExcelFullName("根目录");
+        getNavHandler().addNavData(root);
     }
 
     @SuppressLint("NewApi")
     private void initView() {
         mFrameLayout = (FrameLayout) findViewById(R.id.frame_layout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        headerView = (LinearLayout) findViewById(R.id.ll_headerView);
         mCompleteLl = (LinearLayout) findViewById(R.id.ll_complete);
         mCheckExcelTv = (TextView) findViewById(R.id.tv_check_excel);
         mRectifyExcelTv = (TextView) findViewById(R.id.tv_rectify_excel);
@@ -149,16 +159,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void initData() {
+    public void initData() {
         DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
         ArrayList<ProjectCheckData> list = new ArrayList<>();
         if (!isComplete) {
-            list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 0", "id");
+            list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 0 and parentId = " + parentId, "id");
         } else {
             if (isRectify) {
                 list = new ArrayList<>();
             } else {
-                list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 1", "id");
+                list = (ArrayList<ProjectCheckData>) dbUtil.findAllByWhereN(ProjectCheckData.class, "completeStatus = 1 and parentId = " + parentId, "id");
             }
 
         }
@@ -191,7 +201,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     projectCheckData.setTabHead(tabHead);
                     ArrayList<CellData> tabFoot = (ArrayList<CellData>) JSON.parseArray(projectCheckData.getTabFootStr(), CellData.class);
                     projectCheckData.setTabFoot(tabFoot);
-                    SaveToExcelUtil.exportEccel(this, getPoiExcelDir() + File.separator + projectCheckData.getCheckPartName() + projectCheckData.getExcelName() + ".xls", projectCheckData);
+                    SaveToExcelUtil.exportEccel(this, getPoiExcelDir() + File.separator + projectCheckData.getExcelFullName() + ".xls", projectCheckData);
                 }
 
 //                SaveToExcelUtil util = new SaveToExcelUtil(this, getExcelDir() + File.separator + "demo.xls");
@@ -199,6 +209,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
         return true;
     }
+
+    public void exportExcel(ProjectCheckData projectCheckData) {
+        ArrayList<CellData> tabBody = (ArrayList<CellData>) JSON.parseArray(projectCheckData.getTabBodyStr(), CellData.class);
+        projectCheckData.setTabBody(tabBody);
+        ArrayList<CellData> tabHead = (ArrayList<CellData>) JSON.parseArray(projectCheckData.getTabHeadStr(), CellData.class);
+        projectCheckData.setTabHead(tabHead);
+        ArrayList<CellData> tabFoot = (ArrayList<CellData>) JSON.parseArray(projectCheckData.getTabFootStr(), CellData.class);
+        projectCheckData.setTabFoot(tabFoot);
+        SaveToExcelUtil.exportEccel(this, getPoiExcelDir() + File.separator + projectCheckData.getExcelFullName() + ".xls", projectCheckData);
+        Intent intent = getExcelFileIntent(new File(getPoiExcelDir() + File.separator + projectCheckData.getExcelFullName() + ".xls"));
+        startActivity(intent);
+    }
+
+    //android获取一个用于打开Excel文件的intent
+    public static Intent getExcelFileIntent(File file) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(file);
+        intent.setDataAndType(uri, "application/vnd.ms-excel");
+        return intent;
+    }
+
     // 添加成功 刷新界面
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final RefreshEvent event) {
@@ -251,6 +284,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void showAddFormDialog() {
 //        final String[] items = {"防水检查1", "防水检查2", "防水检查3", "防水检查4"};
         ArrayList<String> excelList = new ArrayList<>();
+        excelList.add("新建文件夹");
         for (ExcelEnum excelEnum : ExcelEnum.values()) {
             excelList.add(excelEnum.getStrName());
         }
@@ -283,9 +317,39 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                showAddAddressDialog((String) v.getTag());
+                String name = (String) v.getTag();
+                if ("新建文件夹".endsWith(name)) {
+                    showAddDirDialog();
+                } else {
+                    showAddAddressDialog(name);
+                }
+
             }
         });
+        dialog.show();
+    }
+
+    private void showAddDirDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_creat_dir, null);
+        final EditText dirEt = view.findViewById(R.id.et_dir_name);
+        Dialog dialog = DialogUtil.initCommonDialog(this, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (StrUtil.notEmptyOrNull(dirEt.getText().toString())) {
+                    ProjectCheckData data = new ProjectCheckData();
+                    data.setExcelFullName(dirEt.getText().toString());
+                    data.setLevel(level + 1);
+                    data.setParentId(parentId);
+                    data.setFileType(2);
+                    DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                    dbUtil.save(data);
+                    initData();
+                } else {
+                    L.toastShort("文件夹名称不能为空");
+                }
+                dialogInterface.dismiss();
+            }
+        }, view, "");
         dialog.show();
     }
 
@@ -304,10 +368,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         if (StrUtil.notEmptyOrNull(edit_text.getText().toString())) {
                             ProjectCheckData data = JSON.parseObject(ExcelEnum.TOILETCHECKEXCEL.getValue(), ProjectCheckData.class);
                             data.setCheckPartName(edit_text.getText().toString());
+                            data.setExcelFullName(data.getCheckPartName() + data.getExcelName());
                             data.getTabHead().add(new CellData(edit_text.getText().toString(), "6", "6", "6", "7"));
                             data.setTabHeadStr(data.getTabHead().toString());
                             data.setTabBodyStr(data.getTabBody().toString());
                             data.setTabFootStr(data.getTabFoot().toString());
+                            data.setLevel(level + 1);
+                            data.setParentId(parentId);
                             DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
                             dbUtil.save(data);
                             initData();
@@ -335,6 +402,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         customizeDialog.show();
     }
 
+
+    public NavigHandler getNavHandler() {
+        if (navHandler == null) {
+            navHandler = new NavigHandler(this, headerView) {
+                @Override
+                public void loadData(int currentId) {
+                    parentId = currentId;
+                    initData();
+                }
+            };
+        }
+        return navHandler;
+    }
+
     public ArrayList<ProjectCheckData> getListData() {
         return listData;
     }
@@ -349,6 +430,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setSelectProjectData(ArrayList<ProjectCheckData> selectProjectData) {
         this.selectProjectData = selectProjectData;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     @Override

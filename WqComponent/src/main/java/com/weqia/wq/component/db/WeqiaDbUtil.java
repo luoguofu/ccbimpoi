@@ -19,7 +19,7 @@ import java.util.List;
 
 public class WeqiaDbUtil extends DbUtil {
 
-    private static int wdbVersion = 453;// 数据库版本
+    private static int wdbVersion = 455;// 数据库版本
 
     public static int getDbVersion() {
         return wdbVersion;

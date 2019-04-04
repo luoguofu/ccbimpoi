@@ -1,6 +1,8 @@
 package com.example.ccbim.ccbimpoi.widget;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -11,12 +13,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.activity.FormListActivity;
 import com.example.ccbim.ccbimpoi.activity.HomeActivity;
+import com.example.ccbim.ccbimpoi.data.ExcelEnum;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
+import com.weqia.utils.ViewUtils;
+import com.weqia.utils.datastorage.db.DbUtil;
+import com.weqia.wq.component.db.WeqiaDbUtil;
+import com.weqia.wq.component.utils.DialogUtil;
+import com.weqia.wq.data.global.WeqiaApplication;
 
 import java.io.File;
 import java.util.List;
@@ -31,6 +40,7 @@ import static com.example.ccbim.ccbimpoi.util.ConstantUtil.PROJECTEXTRA;
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     private List<ProjectCheckData> projectCheckDataList;
     private HomeActivity mContext;
+    private Dialog dialog;
 
     /**
      * 构造方法
@@ -53,7 +63,25 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ProjectCheckData projectCheckData = projectCheckDataList.get(position);
-        holder.excelNameTv.setText(projectCheckData.getCheckPartName() + projectCheckData.getExcelName());
+        if (projectCheckData.getFileType() == ExcelEnum.ProjectFileType.FILE.value()) {
+            ViewUtils.showViews(holder.selectBox, holder.editBt);
+            ViewUtils.hideView(holder.DirIv);
+        } else {
+            ViewUtils.hideViews(holder.selectBox, holder.editBt);
+            ViewUtils.showView(holder.DirIv);
+            holder.excelNameTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mContext.getNavHandler().addNavData(projectCheckData);
+                    mContext.setLevel(projectCheckData.getLevel());
+//                    DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+//                    List<ProjectCheckData> list = dbUtil.findAllByWhereN(ProjectCheckData.class, "parentId = " + projectCheckData.getId(), "id");
+                    mContext.setParentId(projectCheckData.getId());
+                    mContext.initData();
+                }
+            });
+        }
+        holder.excelNameTv.setText(projectCheckData.getExcelFullName());
         holder.selectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -73,11 +101,40 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 mContext.startActivity(intent);
             }
         });
-        holder.excelNameTv.setOnClickListener(new View.OnClickListener() {
+        holder.excelNameTv.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = getExcelFileIntent(new File(getPoiExcelDir() + File.separator + projectCheckData.getCheckPartName() + projectCheckData.getExcelName() + ".xls"));
-                mContext.startActivity(intent);
+            public boolean onLongClick(View view) {
+                dialog= DialogUtil.initLongClickDialog(mContext, null, new String[]{"删除", "导出"}, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        switch ((Integer) view.getTag()) {
+                            case 0:
+                                Dialog confirmDialof = DialogUtil.initCommonDialog(mContext, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int i) {
+                                        switch (i) {
+                                            case -2:
+                                                 break;
+                                            case -1:
+                                                DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                                                dbUtil.deleteById(ProjectCheckData.class, projectCheckData.getId());
+                                                break;
+
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                }, "确定要删除吗？");
+                                confirmDialof.show();
+                                break;
+                            case 1:
+                                mContext.exportExcel(projectCheckData);
+                                break;
+                        }
+                    }
+                });
+                dialog.show();
+                return false;
             }
         });
     }
@@ -103,12 +160,14 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         CheckBox selectBox;
         TextView excelNameTv;
         Button editBt;
+        ImageView DirIv;
 
         public ViewHolder(View view) {
             super(view);
             selectBox = view.findViewById(R.id.box_select_excel);
             excelNameTv = view.findViewById(R.id.tv_excel_name);
             editBt = view.findViewById(R.id.bt_edit);
+            DirIv=view.findViewById(R.id.iv_dir);
 
         }
     }

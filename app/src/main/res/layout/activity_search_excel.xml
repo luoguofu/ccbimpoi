@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvReset"
+            style="@style/btn_color"
+            android:layout_weight="1"
+            android:background="@color/saixuan_chongzhi"
+            android:text="重置"
+            android:textColor="@color/main_color" />
+
+        <TextView
+            android:id="@+id/tvSure"
+            style="@style/btn_color"
+            android:layout_weight="1"
+            android:text="确定" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sv_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom"
+        android:orientation="vertical">
+        <!--特殊固定筛选布局样式 需要的时候显示  不需要的时候隐藏  默认是隐藏的-->
+        <LinearLayout
+            android:id="@+id/filter_layout_four"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="13dp"
+                android:text="日期"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tr_bottom"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_begin_time"
+                        style="@style/tag_info"
+                        android:layout_marginLeft="@dimen/dp_0"
+                        android:layout_marginRight="@dimen/dp_0"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="开始时间" />
+
+                    <ImageView
+                        android:id="@+id/iv_begin_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_begin_time"
+                        android:layout_alignRight="@+id/tv_begin_time"
+                        android:background="@mipmap/icon_guanbi"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="至"
+                    android:textColor="@color/black" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_over_time"
+                        style="@style/tag_info"
+                        android:layout_marginLeft="@dimen/dp_0"
+                        android:layout_marginRight="@dimen/dp_0"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="结束时间" />
+
+                    <ImageView
+                        android:id="@+id/iv_over_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_over_time"
+                        android:layout_alignRight="@+id/tv_over_time"
+                        android:background="@mipmap/icon_guanbi"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="表单类型："
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_select_excel"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            ></Spinner>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关键词："
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_search_key"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_edit"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorblue">#FF60BBEF</color>
+    <color name="file_path_color">#9a9a9a</color>
+    <color name="saixuan_chongzhi">#f2f5f4</color>
+    <color name="btn_color_bg_clor">@color/main_color</color>
 </resources>
