@@ -142,29 +142,36 @@ public class BatchAddActivity extends BaseActivity {
                     if (StrUtil.listNotNull(floorist)) {
                         excelParentData = floorist.get(0);
                     }
-                    if (isNumeric(etExcelNum.getText().toString())) {
-                        if (excelParentData != null) {
-                            for (int i = 1; i <= Integer.parseInt(etExcelNum.getText().toString()); i++) {
-                                ProjectCheckData data = JSON.parseObject(ExcelEnum.nameOf(selectExcelName).getValue(), ProjectCheckData.class);
-                                data.setCheckPartName(etBuildingNum.getText().toString() + SPLITEXCEL + etFloorNum.getText().toString() + "F" + SPLITEXCEL + i);
-                                data.setExcelFullName(data.getCheckPartName() + data.getExcelName());
-                                if (StrUtil.notEmptyOrNull(companyName)) {
-                                    data.getTabHead().get(4).setCellName(companyName);
+                    if (isNumeric(etFloorNum.getText().toString())) {
+                        if (isNumeric(etExcelNum.getText().toString())) {
+                            if (excelParentData != null) {
+                                for (int j = 1; j <= Integer.parseInt(etFloorNum.getText().toString()); j++) {
+                                    for (int i = 1; i <= Integer.parseInt(etExcelNum.getText().toString()); i++) {
+                                        ProjectCheckData data = JSON.parseObject(ExcelEnum.nameOf(selectExcelName).getValue(), ProjectCheckData.class);
+                                        data.setCheckPartName(etBuildingNum.getText().toString() + SPLITEXCEL + j + "F" + SPLITEXCEL + i);
+                                        data.setExcelFullName(data.getCheckPartName() + data.getExcelName());
+                                        if (StrUtil.notEmptyOrNull(companyName)) {
+                                            data.getTabHead().get(4).setCellName(companyName);
+                                        }
+                                        if (StrUtil.notEmptyOrNull(projectName)) {
+                                            data.getTabHead().get(10).setCellName(projectName);
+                                        }
+                                        data.getTabHead().add(new CellData(data.getCheckPartName(), "6", "6", "6", "7"));
+                                        data.setTabHeadStr(data.getTabHead().toString());
+                                        data.setTabBodyStr(data.getTabBody().toString());
+                                        data.setTabFootStr(data.getTabFoot().toString());
+                                        data.setLevel(3);
+                                        data.setParentId(excelParentData.getId());
+                                        dbUtil.save(data);
+                                    }
                                 }
-                                if (StrUtil.notEmptyOrNull(projectName)) {
-                                    data.getTabHead().get(10).setCellName(projectName);
-                                }
-                                data.getTabHead().add(new CellData(data.getCheckPartName(), "6", "6", "6", "7"));
-                                data.setTabHeadStr(data.getTabHead().toString());
-                                data.setTabBodyStr(data.getTabBody().toString());
-                                data.setTabFootStr(data.getTabFoot().toString());
-                                data.setLevel(3);
-                                data.setParentId(excelParentData.getId());
-                                dbUtil.save(data);
+
                             }
+                        } else {
+                            L.toastShort("单层数量请输入数字！");
                         }
                     } else {
-                        L.toastShort("单层数量请输入数字！");
+                        L.toastShort("层数请输入数字！");
                     }
                 }
                 EventBus.getDefault().post(new RefreshEvent("projectCheckDataRefresh"));

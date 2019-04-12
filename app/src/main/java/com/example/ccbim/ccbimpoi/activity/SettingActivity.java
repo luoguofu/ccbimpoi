@@ -42,6 +42,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_add_batch:
+                back();
                 startActivity(new Intent(this, BatchAddActivity.class));
                 break;
             case R.id.tv_exported_excel:
