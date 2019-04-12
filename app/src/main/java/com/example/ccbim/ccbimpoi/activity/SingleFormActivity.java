@@ -1,39 +1,39 @@
 package com.example.ccbim.ccbimpoi.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
+import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
+import com.example.ccbim.ccbimpoi.data.ExcelEnum;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.example.ccbim.ccbimpoi.util.BaseUtil;
 import com.example.ccbim.ccbimpoi.util.ConstantUtil;
-import com.umeng.socialize.utils.CommonUtil;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
+import com.weqia.utils.datastorage.db.DbUtil;
 import com.weqia.utils.dialog.SharedCommonDialog;
 import com.weqia.wq.component.SelectArrUtil;
 import com.weqia.wq.component.activity.SharedDetailTitleActivity;
-import com.weqia.wq.component.utils.DialogUtil;
 import com.weqia.wq.component.view.picture.PictureGridView;
 import com.weqia.wq.data.eventbus.RefreshEvent;
+import com.weqia.wq.data.global.WeqiaApplication;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.example.ccbim.ccbimpoi.activity.BatchAddActivity.SPLITEXCEL;
 import static com.weqia.wq.component.imageselect.SelectMediaUtils.REQ_GET_PIC;
 
 public class SingleFormActivity extends SharedDetailTitleActivity implements View.OnClickListener {
@@ -54,6 +55,9 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
     private CheckDetailData checkDetailData;
     private boolean isPass = true;
     private boolean isNOtInvolve = false;
+    private CellData parentCellData;
+    private String companyName;
+    private String projectName;
 
     /**
      * qualified
@@ -92,10 +96,14 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
         projectCheckData = (ProjectCheckData) getIntent().getSerializableExtra(ConstantUtil.PROJECTEXTRA);
 //        checkDetailData = (CheckDetailData) getIntent().getSerializableExtra("childData");
         checkDetailData = projectCheckData.getTabBody().get(parentPos).getSubCellList().get(childPos);
+        parentCellData = projectCheckData.getTabBody().get(parentPos);
         status = checkDetailData.getStatus();
         if (checkDetailData != null) {
             checkDetailData.setCheckPath(projectCheckData.getTabBody().get(parentPos).getCellName() + "-" + checkDetailData.getCheckName().getCellName());
         }
+        SharedPreferences sharedPreferences= getSharedPreferences("setting", Context.MODE_PRIVATE);
+        companyName = sharedPreferences.getString("companyName", "");
+        projectName = sharedPreferences.getString("projectName", "");
         sharedTitleView.initTopBanner(checkDetailData.getCheckName().getCellName());
         initView();
         iniData();
@@ -245,13 +253,13 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
                 back();
                 break;
             case R.id.text_rectification:
-//                showRectificationDialog(v);
+                showRectificationDialog(v);
 //                checkDetailData.setProblemDemand("需要整改");
                 status = 3;
                 initStatus();
-                Intent zgIntent = new Intent(this, PictureShowActivity.class);
-                zgIntent.putExtra("assetsName", "zhenggai.png");
-                startActivity(zgIntent);
+//                Intent zgIntent = new Intent(this, PictureShowActivity.class);
+//                zgIntent.putExtra("assetsName", "zhenggai.png");
+//                startActivity(zgIntent);
                 break;
             case R.id.text_sample:
 //                Bitmap bitmap = getImageFromAssetsFile(this, "fengjinbaohu");
@@ -288,7 +296,133 @@ public class SingleFormActivity extends SharedDetailTitleActivity implements Vie
                         checkDetailData.setProblemInfo(problem.getText().toString());
                         checkDetailData.setProblemDemand(rectifivation.getText().toString());
                         dialog.dismiss();
-
+/*                        ProjectCheckData data = new ProjectCheckData();
+                        data.setExcelType(2);
+                        data.setExcelFullName("整改单");
+                        ArrayList<CellData> tabHead = new ArrayList<>();
+                        CellData nameCell = new CellData("质量整改通知单","0", "0", "0", "7");
+                        nameCell.setFontBlodWeight((short) 800);
+                        tabHead.add(nameCell);
+//                        tabHead.add(new CellData("质量整改通知单","0", "0", "0", "7"));
+                        tabHead.add(new CellData("项目名称","1", "1", "0", "0"));
+                        tabHead.add(new CellData("","1", "1", "1", "3"));
+                        tabHead.add(new CellData("项目编码","1", "1", "4", "4"));
+                        tabHead.add(new CellData("","1", "1", "5", "7"));
+                        tabHead.add(new CellData("检查部位","2", "2", "0", "0"));
+                        tabHead.add(new CellData("", "2", "2", "1", "2"));
+//                        tabHead.add(new CellData(projectCheckData.getCheckPartName(), "2", "2", "1", "2"));
+                        tabHead.add(new CellData("检查日期","2", "2", "3", "3"));
+                        tabHead.add(new CellData("","2", "2", "4", "4"));
+                        tabHead.add(new CellData("分包单位","2", "2", "5", "5"));
+                        tabHead.add(new CellData("","2", "2", "6", "7"));
+                        tabHead.add(new CellData("整改内容","3", "3", "0", "3"));
+                        tabHead.add(new CellData("整改要求（应根据整改内容逐项表述）","3", "3", "4", "7"));
+                        data.setTabHead(tabHead);
+                        ArrayList<CellData> tabFoot = new ArrayList<>();
+//                        tabFoot.add(new CellData(StrUtil.notEmptyOrNull(problem.getText().toString()) ? problem.getText().toString() : "", "4", "6", "0", "3"));
+//                        tabFoot.add(new CellData(StrUtil.notEmptyOrNull(rectifivation.getText().toString()) ? rectifivation.getText().toString() : "", "4", "6", "4", "7"));
+                        tabFoot.add(new CellData("", "4", "6", "0", "3"));
+                        tabFoot.add(new CellData("", "4", "6", "4", "7"));
+                        tabFoot.add(new CellData("签发人","7", "7", "0", "1"));
+                        tabFoot.add(new CellData("","7", "7", "2", "7"));
+                        tabFoot.add(new CellData("复查情况","8", "20", "0", "1"));
+                        CellData contentCell=new CellData("                     （应根据整改内容逐项表述）\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "  复查人：（质量总监、质量工程师）\n" +
+                                "\n" +
+                                "                                              年     月     日" +
+                                "\n" ,"8", "20", "2", "7");
+                        contentCell.setCellLayout(2);
+                        tabFoot.add(contentCell);
+                        *//*tabFoot.add(new CellData("              （应根据整改内容逐项表述）\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "复查人：（质量总监、质量工程师）\n" +
+                                "                                              年     月     日","8", "20", "2", "7"));*//*
+                        CellData fileCell = new CellData("附图", "22", "22", "0", "7");
+                        fileCell.setCellColor("ffff00");
+                        tabFoot.add(fileCell);
+                        data.setTabFoot(tabFoot);*/
+                        ProjectCheckData data = JSON.parseObject(ExcelEnum.RectifyEnum.RECTIFYEXCEL.getValue(), ProjectCheckData.class);
+                        data.setExcelFullName(projectCheckData.getCheckPartName() + SPLITEXCEL + parentCellData.getCellName() + SPLITEXCEL + checkDetailData.getCheckName().getCellName() + "质量整改单");
+                        if (StrUtil.notEmptyOrNull(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("projectName", ""))) {
+                            data.getTabHead().get(2).setCellName(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("projectName", ""));
+                        }
+                        data.getTabHead().get(6).setCellName(projectCheckData.getCheckPartName());
+                        data.getTabFoot().get(0).setCellName(StrUtil.notEmptyOrNull(problem.getText().toString()) ? problem.getText().toString() : "");
+                        data.getTabFoot().get(1).setCellName(StrUtil.notEmptyOrNull(rectifivation.getText().toString()) ? rectifivation.getText().toString() : "");
+                        data.setTabHeadStr(data.getTabHead().toString());
+                        data.setTabFootStr(data.getTabFoot().toString());
+                        if (StrUtil.listNotNull(pictrueView.getAddedPaths())) {
+                            ArrayList<String> list = pictrueView.getAddedPaths();
+                            StringBuffer buffer = new StringBuffer();
+                            for (String str : list) {
+                                str = SelectArrUtil.getDecodePath(str);
+                                if (buffer.length() == 0) {
+                                    buffer.append(str);
+                                } else {
+                                    buffer.append("," + str);
+                                }
+                            }
+                            data.setTabPicStr(buffer.toString());
+                        }
+                        DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                        dbUtil.save(data);
+                        L.toastShort("生成整改单成功！");
+//                        SaveToExcelUtil.exportRectifyEccel(SingleFormActivity.this,getPoiExcelDir() + File.separator + data.getExcelFullName() + ".xls",data);
                     }
                 })
                 .setNegativeButton(getString(com.weqia.wq.R.string.dialog_cancel), new DialogInterface.OnClickListener() {

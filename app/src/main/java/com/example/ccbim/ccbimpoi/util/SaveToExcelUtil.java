@@ -10,7 +10,6 @@ import com.example.ccbim.ccbimpoi.data.PicBean;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
-import com.weqia.utils.annotation.sqlite.Id;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -18,18 +17,13 @@ import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFPatriarch;
-import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFCellUtil;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.hssf.util.Region;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 
@@ -42,8 +36,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.example.ccbim.ccbimpoi.MainNewActivity.getExcelDir;
 
 /**
  * Created by lgf on 2019/2/28.
@@ -226,9 +218,9 @@ public class SaveToExcelUtil {
                     for (String path : picBeans.get(i).getCheckPic()) {
                         if (count == 0) {
                             filePic.add(new CellData(picBeans.get(i).getCheckPath(), singleFistRow + "", singleFistRow + "", "9", "12"));
-                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow,250);
+                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow, 0, 250);
                         } else {
-                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow,0);
+                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow, 0, 0);
                         }
                         singleFistRow = singleLastRow + 1;
                         singleLastRow = singleLastRow + 5;
@@ -239,9 +231,9 @@ public class SaveToExcelUtil {
                     for (String path : picBeans.get(i).getCheckPic()) {
                         if (count == 0) {
                             filePic.add(new CellData(picBeans.get(i).getCheckPath(), notSingleFistRow + "", notSingleFistRow + "", "13", "16"));
-                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 250);
+                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 0, 250);
                         } else {
-                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow,0);
+                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 0, 0);
                         }
                         notSingleFistRow = notSingleLastRow + 1;
                         notSingleLastRow = notSingleLastRow + 5;
@@ -410,11 +402,96 @@ public class SaveToExcelUtil {
         }
     }
 
+    public static void exportRectifyEccel(Activity activity, String excelPath, ProjectCheckData projectCheckData) {
+        HSSFWorkbook hwb = null;
+        HSSFSheet hs = null;
+        hwb = new HSSFWorkbook();
+        hs = hwb.createSheet("sheet1");
+        hs.setDefaultRowHeightInPoints(30);
+        hs.setDefaultColumnWidth(256 * 6);
+        for (int i = 0; i < 8; i++) {
+            hs.setColumnWidth(i, 256 * 11);
+        }
+        for (int i = 0; i < 50; i++) {
+            Row row = hs.getRow(i);
+            if (row == null) {
+                row = hs.createRow(i);
+            }
+            row.setHeightInPoints(30);
+        }
+        if (projectCheckData != null) {
+            if (StrUtil.listNotNull(projectCheckData.getTabHead())) {
+                for (CellData cellData : projectCheckData.getTabHead()) {
+                    Row row = hs.getRow(Integer.parseInt(cellData.getFirtRow()));
+                    if (row == null) {
+                        row = hs.createRow(Integer.parseInt(cellData.getFirtRow()));
+                    }
+//                    row.setHeightInPoints(30);
+                    setCell(row, hwb, cellData, hs);
+//                    row.setHeightInPoints(13);
+//                    for (CellData cellData : projectCheckData.getTabHead()) {
+//                        setCell(row, hwb, cellData, hs);
+//                    }
+//                    for (CellData picdata : filePic) {
+//                        setCell(row, hwb, picdata, hs);
+//                    }
+                }
+            }
+            if (StrUtil.listNotNull(projectCheckData.getTabFoot())) {
+                for (CellData cellData : projectCheckData.getTabFoot()) {
+                    Row row = hs.getRow(Integer.parseInt(cellData.getFirtRow()));
+                    if (row == null) {
+                        row = hs.createRow(Integer.parseInt(cellData.getFirtRow()));
+                    }
+//                    row.setHeightInPoints(30);
+                    setCell(row, hwb, cellData, hs);
+                }
+            }
+            if (StrUtil.notEmptyOrNull(projectCheckData.getTabPicStr())) {
+                String paths = projectCheckData.getTabPicStr();
+                List<String> list = Arrays.asList(paths.split(","));
+                if (StrUtil.listNotNull(list)) {
+                    int beginRow = 23;
+                    boolean bSingle = true;                       //用来判断是第一排还是第二排图片
+                    for (int i = 0; i < list.size(); i++) {
+                        if (bSingle) {
+                            insertPic(hs, hwb, list.get(i), 0, beginRow, 3, beginRow + 4,5, 5);
+                        } else {
+                            insertPic(hs, hwb, list.get(i), 4, beginRow, 7, beginRow + 4,5, 5);
+                        }
+                        bSingle = !bSingle;
+                        if (bSingle) {
+                            beginRow += 5;
+                        }
+                    }
+
+                }
+
+            }
+            File file = new File(excelPath);
+            if (file.exists()) {
+                deleteExcel(excelPath);
+            }
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                hwb.write(fos);
+                fos.close();
+                Toast.makeText(activity,"导出成功，请在 文件管理器/Excel/ExcelFile中查看", Toast.LENGTH_LONG).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            L.toastLong("数据为空");
+        }
+    }
+
     //当它需要添加附图文字的时候需要加上偏移量
-    public static void insertPic(HSSFSheet hs, HSSFWorkbook hwb, String path, int fistCol, int fistRow, int LastCol, int LastRow, int y) {
+    public static void insertPic(HSSFSheet hs, HSSFWorkbook hwb, String path, int fistCol, int fistRow, int LastCol, int LastRow, int x, int y) {
         HSSFPatriarch patriarch = hs.createDrawingPatriarch();
         //anchor主要用于设置图片的属性
-        HSSFClientAnchor anchor = new HSSFClientAnchor(0, y, 1023, 255, (short) fistCol, fistRow, (short) LastCol, LastRow);
+        HSSFClientAnchor anchor = new HSSFClientAnchor(x, y, 1023, 255, (short) fistCol, fistRow, (short) LastCol, LastRow);
 //                    anchor.setAnchorType(ClientAnchor.AnchorType.DONT_MOVE_AND_RESIZE);
         //插入图片
         byte[] asd = new byte[0];
@@ -515,7 +592,7 @@ public class SaveToExcelUtil {
             }
 
             hssfCellStyle.setWrapText(true);
-            setFontAndBorder(hssfCellStyle, "宋体", (short) 9, wb);
+            setFontAndBorder(hssfCellStyle, "宋体", cellData.getFontBlodWeight(), (short) 9, wb);
             cell.setCellStyle(hssfCellStyle);
         }
 
@@ -603,11 +680,14 @@ public class SaveToExcelUtil {
      * @param style 大小
      * @return
      */
-    public static HSSFCellStyle setFontAndBorder(HSSFCellStyle style, String fontName, short size, HSSFWorkbook wb) {
+    public static HSSFCellStyle setFontAndBorder(HSSFCellStyle style, String fontName, short fontBlodWeight, short size, HSSFWorkbook wb) {
         HSSFFont font = wb.createFont();
         font.setFontHeightInPoints(size);
         font.setFontName(fontName);
 //        font.setBold(true);
+        if (fontBlodWeight != 400) {
+            font.setBoldweight(fontBlodWeight);
+        }
         style.setFont(font);
 //        style.setBorderBottom(CellStyle.BORDER_THIN); //下边框
 //        style.setBorderLeft(CellStyle.BORDER_THIN);//左边框

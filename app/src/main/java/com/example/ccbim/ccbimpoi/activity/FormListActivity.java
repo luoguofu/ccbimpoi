@@ -3,7 +3,6 @@ package com.example.ccbim.ccbimpoi.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -12,8 +11,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
-import com.example.ccbim.ccbimpoi.data.ChildItemBean;
-import com.example.ccbim.ccbimpoi.data.FormItemDataBean;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.example.ccbim.ccbimpoi.util.ConstantUtil;
 import com.example.ccbim.ccbimpoi.widget.FormListItemAdapter;
@@ -26,9 +23,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class FormListActivity extends AppCompatActivity {
+public class FormListActivity extends BaseActivity {
 
     private ListView mListItem;
     private FormListItemAdapter formListItemAdapter;

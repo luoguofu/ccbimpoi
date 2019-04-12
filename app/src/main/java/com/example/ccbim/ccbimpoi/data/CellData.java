@@ -24,6 +24,8 @@ public class CellData extends BaseData {
     private int cellLayout = 1;                   //单元格的布局（居中等，默认是居中）
     private String fontName;                       //字体名称
     private short fontSize;                       //字体大小
+    private short fontBlodWeight = 400;                //字体粗细,默认是400
+    private String cellPicStr;                     //表格图片
 
     public CellData() {
 
@@ -160,5 +162,21 @@ public class CellData extends BaseData {
 
     public void setFontSize(short fontSize) {
         this.fontSize = fontSize;
+    }
+
+    public short getFontBlodWeight() {
+        return fontBlodWeight;
+    }
+
+    public void setFontBlodWeight(short fontBlodWeight) {
+        this.fontBlodWeight = fontBlodWeight;
+    }
+
+    public String getCellPicStr() {
+        return cellPicStr;
+    }
+
+    public void setCellPicStr(String cellPicStr) {
+        this.cellPicStr = cellPicStr;
     }
 }

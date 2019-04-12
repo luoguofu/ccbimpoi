@@ -1,19 +1,14 @@
 package com.example.ccbim.ccbimpoi.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.ccbim.ccbimpoi.R;
 import com.weqia.utils.view.CommonImageView;
@@ -25,7 +20,7 @@ import java.io.InputStream;
  * Created by lgf on 2019/3/18.
  */
 
-public class PictureShowActivity extends AppCompatActivity{
+public class PictureShowActivity extends BaseActivity{
     private CommonImageView civPicture;
     private String assetsName;
 

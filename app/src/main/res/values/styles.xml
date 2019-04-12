@@ -8,6 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="myAppTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/myActionBar</item> <!--设置ActionBarStyle-->
+    </style>
+    <style name="myActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#FF4FA9DC</item>
+        <item name="android:backgroundStacked">#FF4FA9DC</item>
+        <item name="android:titleTextStyle">@style/actionBarTitle</item> <!--设置titleTextStyle-->
+    </style>
+
+    <style name="actionBarTitle">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="btn_color">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">44dp</item>

@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_home_item"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
     <CheckBox
         android:id="@+id/box_select_excel"
         style="@style/mCheckbox"
@@ -11,8 +14,8 @@
         android:focusableInTouchMode="false"
         android:visibility="visible"/>
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_gravity="center"
         android:id="@+id/iv_dir"
         android:src="@mipmap/icon_wenjianjia"
@@ -21,11 +24,13 @@
         android:visibility="gone"/>
     <TextView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
         android:id="@+id/tv_excel_name"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="30dp"
         android:id="@+id/bt_edit"
         android:text="填写"

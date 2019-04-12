@@ -34,6 +34,11 @@ public class ProjectCheckData extends BaseData{
     private int completeStatus = 0;         //0表示未完成，1表示已完成
     private String excelName;           //表格名称
     private String excelFullName;        //表格全名
+    private int isExport = 0;              //是否导出，0是未导出，1是导出
+    private long exportDate;
+    private int excelType = 1;             //1表示是记录表，2表示是整改单
+    private String tabPicStr;              //整改单的附图
+    private int isDelete = 1;                //判断是否删除 ，1表示未删除，2表示已删除
 //    private ArrayList<CellData> tabPic;         //表格的附图样表
 
 
@@ -203,5 +208,45 @@ public class ProjectCheckData extends BaseData{
 
     public void setExcelFullName(String excelFullName) {
         this.excelFullName = excelFullName;
+    }
+
+    public int getIsExport() {
+        return isExport;
+    }
+
+    public void setIsExport(int isExport) {
+        this.isExport = isExport;
+    }
+
+    public long getExportDate() {
+        return exportDate;
+    }
+
+    public void setExportDate(long exportDate) {
+        this.exportDate = exportDate;
+    }
+
+    public int getExcelType() {
+        return excelType;
+    }
+
+    public void setExcelType(int excelType) {
+        this.excelType = excelType;
+    }
+
+    public String getTabPicStr() {
+        return tabPicStr;
+    }
+
+    public void setTabPicStr(String tabPicStr) {
+        this.tabPicStr = tabPicStr;
+    }
+
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 }

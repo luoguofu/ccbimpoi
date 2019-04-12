@@ -50,7 +50,7 @@
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:persistent="true"
-        android:theme="@style/AppTheme">
+        >
 
         <service
             android:name="com.spinytech.macore.router.WideRouterConnectService"

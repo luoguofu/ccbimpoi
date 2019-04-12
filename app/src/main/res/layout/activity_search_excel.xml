@@ -17,6 +17,7 @@
             android:layout_weight="1"
             android:background="@color/saixuan_chongzhi"
             android:text="重置"
+            android:visibility="gone"
             android:textColor="@color/main_color" />
 
         <TextView
@@ -132,14 +133,20 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             />
-        <Spinner
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp_select_excel"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            ></Spinner>
-        <TextView
+            android:background="@drawable/bg_edit">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_select_excel"
+                ></Spinner>
+        </LinearLayout>
+
+<!--        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="关键词："
@@ -154,7 +161,7 @@
             android:id="@+id/et_search_key"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/bg_edit"/>
+            android:background="@drawable/bg_edit"/>-->
 
     </LinearLayout>
 

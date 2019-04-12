@@ -1,10 +1,8 @@
 package com.example.ccbim.ccbimpoi.widget;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ccbim.ccbimpoi.R;
@@ -21,9 +20,9 @@ import com.example.ccbim.ccbimpoi.activity.FormListActivity;
 import com.example.ccbim.ccbimpoi.activity.HomeActivity;
 import com.example.ccbim.ccbimpoi.data.ExcelEnum;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
+import com.example.ccbim.ccbimpoi.util.BaseUtil;
 import com.weqia.utils.ViewUtils;
 import com.weqia.utils.datastorage.db.DbUtil;
-import com.weqia.wq.component.db.WeqiaDbUtil;
 import com.weqia.wq.component.utils.DialogUtil;
 import com.weqia.wq.data.global.WeqiaApplication;
 
@@ -31,6 +30,7 @@ import java.io.File;
 import java.util.List;
 
 import static com.example.ccbim.ccbimpoi.MainNewActivity.getPoiExcelDir;
+import static com.example.ccbim.ccbimpoi.activity.HomeActivity.getExcelFileIntent;
 import static com.example.ccbim.ccbimpoi.util.ConstantUtil.PROJECTEXTRA;
 
 /**
@@ -64,8 +64,13 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ProjectCheckData projectCheckData = projectCheckDataList.get(position);
         if (projectCheckData.getFileType() == ExcelEnum.ProjectFileType.FILE.value()) {
-            ViewUtils.showViews(holder.selectBox, holder.editBt);
+            ViewUtils.showView(holder.selectBox);
             ViewUtils.hideView(holder.DirIv);
+            if (projectCheckData.getExcelType() == 1) {
+                ViewUtils.showView(holder.editBt);
+            } else {
+                ViewUtils.hideView(holder.editBt);
+            }
         } else {
             ViewUtils.hideViews(holder.selectBox, holder.editBt);
             ViewUtils.showView(holder.DirIv);
@@ -82,6 +87,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             });
         }
         holder.excelNameTv.setText(projectCheckData.getExcelFullName());
+        holder.selectBox.setChecked(false);
         holder.selectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -119,6 +125,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                             case -1:
                                                 DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
                                                 dbUtil.deleteById(ProjectCheckData.class, projectCheckData.getId());
+                                                BaseUtil.deleteFile(new File(getPoiExcelDir() + File.separator + projectCheckData.getExcelFullName() + ".xls"));
+                                                mContext.initData();
                                                 break;
 
                                         }
@@ -129,6 +137,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                 break;
                             case 1:
                                 mContext.exportExcel(projectCheckData);
+                                File file = new File(getPoiExcelDir() + File.separator + projectCheckData.getExcelFullName() + ".xls");
+                                getExcelFileIntent(file, mContext);
                                 break;
                         }
                     }
@@ -138,7 +148,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             }
         });
     }
-    //android获取一个用于打开Excel文件的intent
+/*    //android获取一个用于打开Excel文件的intent
     public static Intent getExcelFileIntent(File file) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
@@ -146,7 +156,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         Uri uri = Uri.fromFile(file);
         intent.setDataAndType(uri, "application/vnd.ms-excel");
         return intent;
-    }
+    }*/
 
     @Override
     public int getItemCount() {
@@ -157,6 +167,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
      * RecyclerView的持有者类
      */
     static class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout homeItemLl;
         CheckBox selectBox;
         TextView excelNameTv;
         Button editBt;
@@ -164,6 +175,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
+            homeItemLl = view.findViewById(R.id.ll_home_item);
             selectBox = view.findViewById(R.id.box_select_excel);
             excelNameTv = view.findViewById(R.id.tv_excel_name);
             editBt = view.findViewById(R.id.bt_edit);

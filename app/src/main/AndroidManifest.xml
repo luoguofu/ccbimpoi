@@ -74,6 +74,21 @@
         <activity android:name=".activity.PictureShowActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".activity.BaseActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.SearchExcelActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.BatchAddActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.ExportedActivity"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name=".wxapi.WXEntryActivity"
