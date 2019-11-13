@@ -36,6 +36,13 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         etCompanyName = (EditText) findViewById(R.id.et_companyname);
         etProjectName = (EditText) findViewById(R.id.et_projectname);
         ViewUtils.bindClickListenerOnViews(this, this, R.id.tv_add_batch, R.id.tv_exported_excel, R.id.tv_excel_manage, R.id.tv_recycle, R.id.tv_about);
+        initData();
+    }
+
+    private void initData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("setting", Context.MODE_PRIVATE);
+        etCompanyName.setText(sharedPreferences.getString("companyName", ""));
+        etProjectName.setText(sharedPreferences.getString("projectName", ""));
     }
 
     @Override
@@ -53,6 +60,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.tv_recycle:
                 break;
             case R.id.tv_about:
+                Intent intent = new Intent(SettingActivity.this, AboutActivity.class);
+                startActivity(intent);
                 break;
 
         }

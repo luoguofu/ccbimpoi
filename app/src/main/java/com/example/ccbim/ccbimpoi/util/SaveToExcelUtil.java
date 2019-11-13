@@ -165,7 +165,7 @@ public class SaveToExcelUtil {
         HSSFSheet hs = null;
         hwb = new HSSFWorkbook();
         hs = hwb.createSheet("sheet1");
-        hs.setDefaultRowHeightInPoints(15);
+        hs.setDefaultRowHeightInPoints(25);
 //        hs.setDefaultColumnWidth(256 * 5);
         if (projectCheckData != null) {
 /*            if (StrUtil.notEmptyOrNull(projectCheckData.getRowHeight())) {
@@ -180,10 +180,10 @@ public class SaveToExcelUtil {
                 for (int i = 0; i < cols.size(); i++) {
                     String col = cols.get(i);
 //                    hs.setColumnWidth(i, Integer.parseInt(col) * 256 * 2);
-                    if (i <= 8) {
-                        hs.setColumnWidth(i, 2579);
+                    if (i >= 2 && i <= 4) {
+                        hs.setColumnWidth(i, 3200);
                     } else {
-                        hs.setColumnWidth(i, 2400);
+                        hs.setColumnWidth(i, 2300);
                     }
 
                 }
@@ -193,32 +193,34 @@ public class SaveToExcelUtil {
             //封装附图
             ArrayList<PicBean> picBeans = new ArrayList<>();
             for (CellData cellData : projectCheckData.getTabBody()) {
-                for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
-                    if (StrUtil.notEmptyOrNull(checkDetailData.getPicPathsStr())) {
-                        PicBean picBean = new PicBean();
-                        picBean.setCheckPath(num + checkDetailData.getCheckPath());
-                        String paths = checkDetailData.getPicPathsStr();
-                        List<String> list = Arrays.asList(paths.split(","));
-                        picBean.setCheckPic(list);
-                        picBeans.add(picBean);
-                        checkDetailData.getCheckPic().setCellName(num + "");
-                        num++;
+                if (StrUtil.listNotNull(cellData.getSubCellList())) {
+                    for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
+                        if (StrUtil.notEmptyOrNull(checkDetailData.getPicPathsStr())) {
+                            PicBean picBean = new PicBean();
+                            picBean.setCheckPath(num + checkDetailData.getCheckPath());
+                            String paths = checkDetailData.getPicPathsStr();
+                            List<String> list = Arrays.asList(paths.split(","));
+                            picBean.setCheckPic(list);
+                            picBeans.add(picBean);
+                            checkDetailData.getCheckPic().setCellName(num + "");
+                            num++;
+                        }
                     }
                 }
             }
             ArrayList<CellData> filePic = new ArrayList<>();
             boolean isSingle = true;
-            int singleFistRow = 3;
-            int singleLastRow = 10;
-            int notSingleFistRow = 3;
-            int notSingleLastRow = 10;
+            int singleFistRow = 1;
+            int singleLastRow = 7;
+            int notSingleFistRow = 1;
+            int notSingleLastRow = 7;
             for (int i = 0; i < picBeans.size(); i++) {
                 int count = 0;
                 if (isSingle) {
                     for (String path : picBeans.get(i).getCheckPic()) {
                         if (count == 0) {
-                            filePic.add(new CellData(picBeans.get(i).getCheckPath(), singleFistRow + "", singleFistRow + "", "9", "12"));
-                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow, 0, 250);
+                            filePic.add(new CellData(picBeans.get(i).getCheckPath(), singleFistRow + "", singleFistRow + "", "9", "12",3));
+                            insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow, 0, 180);
                         } else {
                             insertPic(hs, hwb, path, 9, singleFistRow, 12, singleLastRow, 0, 0);
                         }
@@ -230,8 +232,8 @@ public class SaveToExcelUtil {
                 } else {
                     for (String path : picBeans.get(i).getCheckPic()) {
                         if (count == 0) {
-                            filePic.add(new CellData(picBeans.get(i).getCheckPath(), notSingleFistRow + "", notSingleFistRow + "", "13", "16"));
-                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 0, 250);
+                            filePic.add(new CellData(picBeans.get(i).getCheckPath(), notSingleFistRow + "", notSingleFistRow + "", "13", "16", 3));
+                            insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 0, 180);
                         } else {
                             insertPic(hs, hwb, path, 13, notSingleFistRow, 16, notSingleLastRow, 0, 0);
                         }
@@ -270,7 +272,7 @@ public class SaveToExcelUtil {
                     if (row == null) {
                         row = hs.createRow(Integer.parseInt(rowStr));
                     }
-                    row.setHeightInPoints(13);
+                    row.setHeightInPoints(20);
                     for (CellData cellData : projectCheckData.getTabHead()) {
                         setCell(row, hwb, cellData, hs);
                     }
@@ -281,7 +283,7 @@ public class SaveToExcelUtil {
             }
             if (StrUtil.listNotNull(projectCheckData.getTabBody())) {
                 for (CellData cellData : projectCheckData.getTabBody()) {
-                    if (StrUtil.listNotNull(cellData.getSubCellList())) {
+//                    if (StrUtil.listNotNull(cellData.getSubCellList())) {
                         for (int i = Integer.parseInt(cellData.getFirtRow()); i <= Integer.parseInt(cellData.getLastRow()); i++) {
                             Row row = hs.getRow(i);
                             if (row == null) {
@@ -292,24 +294,26 @@ public class SaveToExcelUtil {
                                 for (int j = 0; j < rows.size(); j++) {
                                     String rowHeight = rows.get(i);
                                     if (row.getRowNum() == j) {
-                                        row.setHeightInPoints(Integer.parseInt(rowHeight) * 13);
+                                        row.setHeightInPoints(Integer.parseInt(rowHeight) * 15);
                                     }
                                 }
                             }
                             setCell(row, hwb, cellData, hs);
-                            for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
-                                setCell(row, hwb, checkDetailData.getCheckName(), hs);
-                                setCell(row, hwb, checkDetailData.getCheckStandard(), hs);
-                                setCell(row, hwb, checkDetailData.getCheckPass(), hs);
-                                setCell(row, hwb, checkDetailData.getCheckInvolve(), hs);
-                                setCell(row, hwb, checkDetailData.getCheckPic(), hs);
+                            if (StrUtil.listNotNull(cellData.getSubCellList())) {
+                                for (CheckDetailData checkDetailData : cellData.getSubCellList()) {
+                                    setCell(row, hwb, checkDetailData.getCheckName(), hs);
+                                    setCell(row, hwb, checkDetailData.getCheckStandard(), hs);
+                                    setCell(row, hwb, checkDetailData.getCheckPass(), hs);
+                                    setCell(row, hwb, checkDetailData.getCheckInvolve(), hs);
+                                    setCell(row, hwb, checkDetailData.getCheckPic(), hs);
+                                }
                             }
                             for (CellData picdata : filePic) {
                                 setCell(row, hwb, picdata, hs);
                             }
                         }
 
-                    }
+//                    }
                 }
             }
 
@@ -322,7 +326,7 @@ public class SaveToExcelUtil {
                     if (row == null) {
                         row = hs.createRow(Integer.parseInt(rowStr));
                     }
-                    row.setHeightInPoints(15);
+                    row.setHeightInPoints(25);
                     for (CellData cellData : projectCheckData.getTabFoot()) {
                         setCell(row, hwb, cellData, hs);
                     }
@@ -561,6 +565,12 @@ public class SaveToExcelUtil {
             if (cellData.getCellLayout() == 1 || (Integer) cellData.getCellLayout() == null) {
                 hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
                 hssfCellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);      //居中
+            } else if (cellData.getCellLayout() == 2) {
+                hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);                    //左对齐
+                hssfCellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+            } else if (cellData.getCellLayout() == 3) {
+                hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+                hssfCellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_TOP);            //上对齐
             }
 
 

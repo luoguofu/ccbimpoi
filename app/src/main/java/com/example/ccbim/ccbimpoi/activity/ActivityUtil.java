@@ -45,4 +45,11 @@ public class ActivityUtil {
         System.exit(0);
     }
 
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
+    }
 }

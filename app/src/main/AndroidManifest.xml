@@ -42,7 +42,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.WelcomeActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppStartLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,6 +88,9 @@
             android:screenOrientation="portrait"
             />
         <activity android:name=".activity.ExportedActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.AboutActivity"
             android:screenOrientation="portrait"
             />
 

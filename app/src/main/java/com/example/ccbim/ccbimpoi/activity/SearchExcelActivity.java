@@ -14,15 +14,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ccbim.ccbimpoi.R;
-import com.example.ccbim.ccbimpoi.data.ExcelEnum;
+import com.example.ccbim.ccbimpoi.data.ExcelData;
 import com.example.ccbim.ccbimpoi.util.BaseUtil;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
 import com.weqia.utils.TimeUtils;
 import com.weqia.utils.ViewUtils;
+import com.weqia.wq.component.db.WeqiaDbUtil;
+import com.weqia.wq.data.global.WeqiaApplication;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lgf on 2019/4/8.
@@ -60,8 +63,15 @@ public class SearchExcelActivity extends BaseActivity implements View.OnClickLis
 
     private void initSpinner() {
         excelList.clear();
-        for (ExcelEnum excelEnum : ExcelEnum.values()) {
-            excelList.add(excelEnum.getStrName());
+//        for (ExcelEnum excelEnum : ExcelEnum.values()) {
+//            excelList.add(excelEnum.getStrName());
+//        }
+        WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+        List<ExcelData> list = dbUtil.findAll(ExcelData.class);
+        if (StrUtil.listNotNull(list)) {
+            for (ExcelData excelData : list) {
+                excelList.add(excelData.getExcelName());
+            }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, excelList);
         spSelect.setAdapter(adapter);

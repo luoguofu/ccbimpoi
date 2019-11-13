@@ -46,4 +46,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="AppTheme.Launcher" >
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
 </resources>

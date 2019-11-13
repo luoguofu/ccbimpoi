@@ -22,8 +22,8 @@ android {
 //        targetSdkVersion targetSdk
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName poiVersion
+        versionCode 100
+        versionName "1.0.0"
 
         multiDexEnabled true
         manifestPlaceholders = [
@@ -91,6 +91,7 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support:appcompat-v7:25.1.1'
+    compile 'org.apache.httpcomponents:httpcore:4.4.4'  //识别 EncodingUtils
 //    implementation "com.android.support:design:$supportLibVersion"
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
 //    implementation 'com.android.support:design:27.1.1'

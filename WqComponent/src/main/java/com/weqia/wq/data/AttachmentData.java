@@ -57,6 +57,7 @@ public class AttachmentData extends BaseData {
 
     private String versionId;      //版本id
     private String convertTime;      //转换版本id
+    private String realUrl;
 
 
 //    private String picUri;
@@ -362,5 +363,13 @@ public class AttachmentData extends BaseData {
 
     public void setConvertTime(String convertTime) {
         this.convertTime = convertTime;
+    }
+
+    public String getRealUrl() {
+        return realUrl;
+    }
+
+    public void setRealUrl(String realUrl) {
+        this.realUrl = realUrl;
     }
 }

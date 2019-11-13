@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CellData;
-import com.example.ccbim.ccbimpoi.data.ExcelEnum;
+import com.example.ccbim.ccbimpoi.data.ExcelData;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.weqia.utils.L;
 import com.weqia.utils.StrUtil;
@@ -66,8 +66,15 @@ public class BatchAddActivity extends BaseActivity {
     }
     private void initSpinner() {
         excelList.clear();
-        for (ExcelEnum excelEnum : ExcelEnum.values()) {
-            excelList.add(excelEnum.getStrName());
+//        for (ExcelEnum excelEnum : ExcelEnum.values()) {
+//            excelList.add(excelEnum.getStrName());
+//        }
+        WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+        List<ExcelData> list = dbUtil.findAll(ExcelData.class);
+        if (StrUtil.listNotNull(list)) {
+            for (ExcelData excelData : list) {
+                excelList.add(excelData.getExcelName());
+            }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, excelList);
         spExcelSelecr.setAdapter(adapter);
@@ -114,13 +121,18 @@ public class BatchAddActivity extends BaseActivity {
                     L.toastShort("请先填写单层数量");
                 }
                 WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                List<ProjectCheckData> rootList = dbUtil.findAllByWhere(ProjectCheckData.class, "excelFullName = '" + etBuildingNum.getText().toString() + "' and parentId = -1 and fileType = 2");
                 //楼号
                 ProjectCheckData buildingData = new ProjectCheckData();
-                buildingData.setExcelFullName(etBuildingNum.getText().toString());
-                buildingData.setLevel(1);
-                buildingData.setParentId(-1);
-                buildingData.setFileType(2);
-                dbUtil.save(buildingData);
+                if (StrUtil.listNotNull(rootList)) {
+                    buildingData = rootList.get(0);
+                } else {
+                    buildingData.setExcelFullName(etBuildingNum.getText().toString());
+                    buildingData.setLevel(1);
+                    buildingData.setParentId(-1);
+                    buildingData.setFileType(2);
+                    dbUtil.save(buildingData);
+                }
 
                 ProjectCheckData floorParentData = null;
                 List<ProjectCheckData> list = dbUtil.findAllByWhere(ProjectCheckData.class, "excelFullName = '" + buildingData.getExcelFullName() + "' and parentId = -1");
@@ -128,14 +140,19 @@ public class BatchAddActivity extends BaseActivity {
                     floorParentData = list.get(0);
                 }
                 if (StrUtil.notEmptyOrNull(selectExcelName) && floorParentData != null) {
+                    List<ProjectCheckData> secondList = dbUtil.findAllByWhere(ProjectCheckData.class, "excelFullName = '" + selectExcelName + "' and parentId = " + floorParentData.getId() + " and fileType = 2");
 
                     //表单名
                     ProjectCheckData floorData = new ProjectCheckData();
-                    floorData.setExcelFullName(selectExcelName);
-                    floorData.setLevel(2);
-                    floorData.setParentId(floorParentData.getId());
-                    floorData.setFileType(2);
-                    dbUtil.save(floorData);
+                    if (StrUtil.listNotNull(secondList)) {
+                        floorData = secondList.get(0);
+                    } else {
+                        floorData.setExcelFullName(selectExcelName);
+                        floorData.setLevel(2);
+                        floorData.setParentId(floorParentData.getId());
+                        floorData.setFileType(2);
+                        dbUtil.save(floorData);
+                    }
 
                     List<ProjectCheckData> floorist = dbUtil.findAllByWhere(ProjectCheckData.class, "excelFullName = '" + selectExcelName + "' and parentId = " + floorParentData.getId());
                     ProjectCheckData excelParentData = null;
@@ -147,7 +164,17 @@ public class BatchAddActivity extends BaseActivity {
                             if (excelParentData != null) {
                                 for (int j = 1; j <= Integer.parseInt(etFloorNum.getText().toString()); j++) {
                                     for (int i = 1; i <= Integer.parseInt(etExcelNum.getText().toString()); i++) {
-                                        ProjectCheckData data = JSON.parseObject(ExcelEnum.nameOf(selectExcelName).getValue(), ProjectCheckData.class);
+//                                        WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                                        List<ExcelData> excellist = dbUtil.findAllByWhere(ExcelData.class, "excelName = '" + selectExcelName + "'");
+                                        ExcelData excelData = null;
+                                        if (StrUtil.listNotNull(excellist)) {
+                                            excelData = excellist.get(0);
+                                        }
+                                        if (excelData == null) {
+                                            L.toastShort("创建失败");
+                                            break;
+                                        }
+                                        ProjectCheckData data = JSON.parseObject(excelData.getExcelJson(), ProjectCheckData.class);
                                         data.setCheckPartName(etBuildingNum.getText().toString() + SPLITEXCEL + j + "F" + SPLITEXCEL + i);
                                         data.setExcelFullName(data.getCheckPartName() + data.getExcelName());
                                         if (StrUtil.notEmptyOrNull(companyName)) {

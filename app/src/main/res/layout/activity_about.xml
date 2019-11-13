@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_setting_color">
+    <TableRow
+        android:id="@+id/about_app_vercode"
+        style="@style/setting_table_row_bottom"
+        android:layout_width="match_parent"
+        android:visibility="visible">
+
+        <TextView
+            style="@style/setting_title_text"
+            android:layout_weight="0"
+            android:text="APP版本" />
+
+        <TextView
+            android:id="@+id/tv_app_vercode"
+            style="@style/setting_title_text"
+            android:gravity="right"
+            android:textColor="@color/new_cs_project_right" />
+
+        <com.weqia.utils.view.CommonImageView
+            style="@style/setting_image_arrow"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/about_resource_version"
+        style="@style/setting_table_row_bottom"
+        android:layout_width="match_parent"
+        android:visibility="visible">
+
+        <TextView
+            style="@style/setting_title_text"
+            android:layout_weight="0"
+            android:text="资源版本" />
+
+        <TextView
+            android:id="@+id/tv_resource_version"
+            style="@style/setting_title_text"
+            android:gravity="right"
+            android:textColor="@color/new_cs_project_right" />
+
+        <com.weqia.utils.view.CommonImageView
+            style="@style/setting_image_arrow"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+    </TableRow>
+
+</LinearLayout>

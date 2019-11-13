@@ -51,6 +51,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         this.mContext = context;
         this.projectCheckDataList = projectCheckDataList;
     }
+
+    public void update(List<ProjectCheckData> projectCheckDataList) {
+        this.projectCheckDataList = projectCheckDataList;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,11 +82,15 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             holder.excelNameTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mContext.getNavHandler().addNavData(projectCheckData);
-                    mContext.setLevel(projectCheckData.getLevel());
+                    ProjectCheckData data = projectCheckDataList.get(position);
+                    if (data.getFileType() == ExcelEnum.ProjectFileType.FILE.value()) {
+                        return;
+                    }
+                    mContext.getNavHandler().addNavData(data);
+                    mContext.setLevel(data.getLevel());
 //                    DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
 //                    List<ProjectCheckData> list = dbUtil.findAllByWhereN(ProjectCheckData.class, "parentId = " + projectCheckData.getId(), "id");
-                    mContext.setParentId(projectCheckData.getId());
+                    mContext.setParentId(data.getId());
                     mContext.initData();
                 }
             });
@@ -161,6 +170,14 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     @Override
     public int getItemCount() {
         return projectCheckDataList.size();
+    }
+
+    public List<ProjectCheckData> getProjectCheckDataList() {
+        return projectCheckDataList;
+    }
+
+    public void setProjectCheckDataList(List<ProjectCheckData> projectCheckDataList) {
+        this.projectCheckDataList = projectCheckDataList;
     }
 
     /**

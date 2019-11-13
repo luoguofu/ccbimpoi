@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,9 +30,11 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.data.CellData;
-import com.example.ccbim.ccbimpoi.data.ExcelEnum;
+import com.example.ccbim.ccbimpoi.data.CodeData;
+import com.example.ccbim.ccbimpoi.data.ExcelData;
 import com.example.ccbim.ccbimpoi.data.NavigHandler;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
+import com.example.ccbim.ccbimpoi.util.BaseUtil;
 import com.example.ccbim.ccbimpoi.util.SaveToExcelUtil;
 import com.example.ccbim.ccbimpoi.widget.HomeListAdapter;
 import com.weqia.utils.L;
@@ -39,18 +43,40 @@ import com.weqia.utils.TimeUtils;
 import com.weqia.utils.ViewUtils;
 import com.weqia.utils.ZipUtils;
 import com.weqia.utils.datastorage.db.DbUtil;
+import com.weqia.utils.http.HttpUtil;
+import com.weqia.utils.http.okgo.callback.FileCallback;
+import com.weqia.wq.component.AttachService;
+import com.weqia.wq.component.db.WeqiaDbUtil;
+import com.weqia.wq.component.receiver.AttachMsgReceiver;
 import com.weqia.wq.component.utils.DialogUtil;
+import com.weqia.wq.data.AttachmentData;
 import com.weqia.wq.data.eventbus.RefreshEvent;
+import com.weqia.wq.data.global.GlobalConstants;
 import com.weqia.wq.data.global.WeqiaApplication;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okio.BufferedSink;
+import okio.Okio;
+import okio.Sink;
+
+import static com.example.ccbim.ccbimpoi.MainNewActivity.getExcelHsfDir;
 import static com.example.ccbim.ccbimpoi.MainNewActivity.getPoiExcelDir;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
@@ -78,6 +104,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     public static int REQUESTCODE_SEARCH = 1001;
     private String companyName;
     private String projectName;
+    private String realUrl = "https://ccbimpoi.oss-cn-hangzhou.aliyuncs.com/ccbimpoiExcel.zip";
+    private ArrayList<String> excelList = new ArrayList<>();
 //    private ArrayList
 
     @Override
@@ -86,13 +114,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.home_activity_layout);
         EventBus.getDefault().register(this);
         initView();
+        initResourse();
         SharedPreferences sharedPreferences= getSharedPreferences("setting", Context.MODE_PRIVATE);
         companyName = sharedPreferences.getString("companyName", "");
         projectName = sharedPreferences.getString("projectName", "");
+//        downExcelFile(realUrl, getExcelHsfDir() + File.separator + "ccbimpoiExcel.zip");
+        downloadFile3("https://ccbimpoi.oss-cn-hangzhou.aliyuncs.com/excelCode.txt");
         ProjectCheckData root = new ProjectCheckData();
         root.setExcelFullName("根目录");
         root.setId(-1);
         getNavHandler().addNavData(root);
+    }
+
+    private void initResourse() {
+        if (downReceive != null) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(GlobalConstants.DOWNLOAD_COUNT_SERVICE_NAME);
+            filter.setPriority(Integer.MAX_VALUE);
+            registerReceiver(downReceive, filter);
+        }
     }
 
     @SuppressLint("NewApi")
@@ -184,7 +224,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         listData.clear();
         selectProjectData.clear();
         listData.addAll(list);
-        homeListAdapter.notifyDataSetChanged();
+
+        homeListAdapter.update(listData);
     }
 
     @Override
@@ -273,7 +314,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             projectCheckData.setTabFoot(tabFoot);
             projectCheckData.setExportDate(System.currentTimeMillis());
 //        projectCheckData.getTabHead().add(new CellData(TimeUtils.getDateYMDFromLong(Long.parseLong(projectCheckData.getExportDate())), "5", "5", "6", "7"));
-            projectCheckData.getTabHead().get(8).setCellName(TimeUtils.getDateYMDFromLong(projectCheckData.getExportDate()));
+            projectCheckData.getTabHead().get(7).setCellName(TimeUtils.getDateYMDFromLong(projectCheckData.getExportDate()));
             projectCheckData.setIsExport(1);
             DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
             dbUtil.save(projectCheckData, true);
@@ -405,11 +446,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private void showAddFormDialog() {
 //        final String[] items = {"防水检查1", "防水检查2", "防水检查3", "防水检查4"};
-        ArrayList<String> excelList = new ArrayList<>();
+//        ArrayList<String> excelList = new ArrayList<>();
+        excelList.clear();
         excelList.add("新建文件夹");
-        for (ExcelEnum excelEnum : ExcelEnum.values()) {
-            excelList.add(excelEnum.getStrName());
-        }
+//        for (ExcelEnum excelEnum : ExcelEnum.values()) {
+//            excelList.add(excelEnum.getStrName());
+//        }
         final String[] items = excelList.toArray(new String[excelList.size()]);
 /*        AlertDialog.Builder listDialog =
                 new AlertDialog.Builder(this);
@@ -434,6 +476,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             }
         });
         listDialog.show();*/
+        WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+        List<ExcelData> list = dbUtil.findAll(ExcelData.class);
+        if (StrUtil.listNotNull(list)) {
+            for (ExcelData excelData : list) {
+                excelList.add(excelData.getExcelName());
+            }
+        }
 
         dialog=DialogUtil.initListDialog(this, "表单选择", excelList, new View.OnClickListener() {
             @Override
@@ -458,13 +507,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (StrUtil.notEmptyOrNull(dirEt.getText().toString())) {
-                    ProjectCheckData data = new ProjectCheckData();
-                    data.setExcelFullName(dirEt.getText().toString());
-                    data.setLevel(level + 1);
-                    data.setParentId(parentId);
-                    data.setFileType(2);
-                    DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
-                    dbUtil.save(data);
+                    WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                    List<ProjectCheckData> rootList = dbUtil.findAllByWhere(ProjectCheckData.class, "excelFullName = '" + dirEt.getText().toString() + "' and parentId = -1 and fileType = 2");
+
+                    if (StrUtil.listNotNull(rootList) && parentId == -1) {
+
+                    } else {
+                        ProjectCheckData data = new ProjectCheckData();
+                        data.setExcelFullName(dirEt.getText().toString());
+                        data.setLevel(level + 1);
+                        data.setParentId(parentId);
+                        data.setFileType(2);
+                        dbUtil.save(data);
+                    }
                     initData();
                 } else {
                     L.toastShort("文件夹名称不能为空");
@@ -488,22 +543,32 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                         EditText edit_text =
                                 (EditText) dialogView.findViewById(R.id.edit_text);
                         if (StrUtil.notEmptyOrNull(edit_text.getText().toString())) {
-                            ProjectCheckData data = JSON.parseObject(ExcelEnum.nameOf(name).getValue(), ProjectCheckData.class);
+                            WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+                            List<ExcelData> list = dbUtil.findAllByWhere(ExcelData.class, "excelName = '" + name + "'");
+                            ExcelData excelData = null;
+                            if (StrUtil.listNotNull(list)) {
+                                excelData = list.get(0);
+                            }
+                            if (excelData == null) {
+                                L.toastShort("创建失败");
+                                return;
+                            }
+                            ProjectCheckData data = JSON.parseObject(excelData.getExcelJson(), ProjectCheckData.class);
                             data.setCheckPartName(edit_text.getText().toString());
                             data.setExcelFullName(data.getCheckPartName() + data.getExcelName());
                             if (StrUtil.notEmptyOrNull(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("companyName", ""))) {
-                                data.getTabHead().get(4).setCellName(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("companyName", ""));
+                                data.getTabHead().get(3).setCellName(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("companyName", ""));
                             }
                             if (StrUtil.notEmptyOrNull(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("projectName", ""))) {
-                                data.getTabHead().get(10).setCellName(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("projectName", ""));
+                                data.getTabHead().get(9).setCellName(getSharedPreferences("setting", Context.MODE_PRIVATE).getString("projectName", ""));
                             }
-                            data.getTabHead().add(new CellData(edit_text.getText().toString(), "6", "6", "6", "7"));
+                            data.getTabHead().add(new CellData(edit_text.getText().toString(), "3", "3", "6", "7"));
                             data.setTabHeadStr(data.getTabHead().toString());
                             data.setTabBodyStr(data.getTabBody().toString());
                             data.setTabFootStr(data.getTabFoot().toString());
                             data.setLevel(level + 1);
                             data.setParentId(parentId);
-                            DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+//                            DbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
                             dbUtil.save(data);
                             initData();
 /*                            ArrayList<ProjectCheckData> list = (ArrayList<ProjectCheckData>) dbUtil.findAll(ProjectCheckData.class);
@@ -580,6 +645,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (downReceive != null) {
+            unregisterReceiver(downReceive);
+        }
     }
 
     @Override
@@ -624,5 +692,178 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         listData.clear();
         listData.addAll(list);
         homeListAdapter.notifyDataSetChanged();
+    }
+
+    private void downExcelFile(final String realUrl, final String filePath) {
+/*        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                download(realUrl, filePath);
+            }
+        }).start();*/
+        AttachmentData data = new AttachmentData();
+        data.setUrl(realUrl);
+        data.setRealUrl(realUrl);
+        data.setName(filePath.substring(filePath.lastIndexOf("/") + 1));
+        Intent intent = new Intent(this, AttachService.class);
+        intent.putExtra(GlobalConstants.KEY_ATTACH_OP, data);
+        startService(intent);
+    }
+
+    private AttachMsgReceiver downReceive = new AttachMsgReceiver() {
+        @Override
+        public void downloadCountReceived(Intent intent) {
+            if (intent != null) {
+                String urlStr = intent.getStringExtra(GlobalConstants.KEY_DOWN_ID);
+                String downPercent = intent.getStringExtra(GlobalConstants.KEY_DOWN_PERCENT);
+                Boolean bComplete =
+                        intent.getBooleanExtra(GlobalConstants.KEY_DOWN_COMPLETE, false);
+                if (StrUtil.isEmptyOrNull(urlStr) || StrUtil.isEmptyOrNull(downPercent)
+                        || bComplete == null) {
+                    return;
+                }
+
+                if (bComplete) {
+                    File file = (File) intent.getSerializableExtra(GlobalConstants.KEY_DOWN_FILE);
+                    String path = intent.getStringExtra(GlobalConstants.KEY_DOWN_ID);
+
+
+                    File file1 = new File(getExcelHsfDir() + "/hsf");
+                    if (file1.exists()) {
+                        BaseUtil.deleteFile(file1);
+                    }
+                    unZipSources(file);
+                    saveExcel();
+
+
+                }
+            }
+        }
+    };
+
+    private void download(String realUrl,String filePath) {
+        HttpUtil.getInstance().download(realUrl, filePath, "", new FileCallback() {
+
+            @Override
+            public void onSuccess(final File file) {
+                // 刷新下载的数据
+                File file1 = new File(getExcelHsfDir() + "/hsf");
+                if (file1.exists()) {
+                    BaseUtil.deleteFile(file1);
+                }
+                unZipSources(file);
+                saveExcel();
+                L.d("下载完成，返回True，让程序继续往下走");
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                L.e("下载错误，这次不再下载");
+            }
+        });
+    }
+    private void unZipSources(File file) {
+        try {
+            ZipUtils.unZip(file, getExcelHsfDir() + "/hsf/", "utf-8");
+        } catch (IOException e) {
+            L.e("素材压缩包解压失败");
+            e.printStackTrace();
+        }
+
+    }
+
+    private void saveExcel() {
+        WeqiaDbUtil dbUtil = WeqiaApplication.getInstance().getDbUtil();
+        dbUtil.clear(ExcelData.class);
+        File excelFile = new File(getExcelHsfDir() + "/hsf/ccbimpoiExcel");
+        if (excelFile.exists()) {
+            File[] files = excelFile.listFiles();
+            for (File subFile : files) {
+                File jsonFile = new File(subFile.getAbsolutePath() + File.separator + "excelJson.txt");
+                if (jsonFile.exists()) {
+                    String excelJson = getFileContent(jsonFile);
+                    if (StrUtil.notEmptyOrNull(excelJson)) {
+                        ProjectCheckData projectCheckData=JSON.parseObject(excelJson, ProjectCheckData.class);
+                        ExcelData excelData = new ExcelData();
+                        excelData.setExcelJson(excelJson);
+                        excelData.setPath(subFile.getAbsolutePath());
+                        excelData.setExcelName(projectCheckData.getExcelName());
+                        dbUtil.save(excelData);
+                        L.e(excelData.getExcelName());
+                    }
+                }
+            }
+        }
+    }
+
+    //读取指定目录下的所有TXT文件的文件内容
+    public static String getFileContent(File file) {
+        String content = "";
+        if (!file.isDirectory()) { //检查此路径名的文件是否是一个目录(文件夹)
+            if (file.getName().endsWith("txt")) {//文件格式为""文件
+                try {
+                    InputStream instream = new FileInputStream(file);
+                    if (instream != null) {
+                        InputStreamReader inputreader
+                                = new InputStreamReader(instream, "gb2312");
+                        BufferedReader buffreader = new BufferedReader(inputreader);
+//                        BufferedReader buffreader = new BufferedReader(new FileReader(file));
+                        String line = "";
+                        //分行读取
+                        while ((line = buffreader.readLine()) != null) {
+                            content += line + "\n";
+                        }
+                        instream.close();//关闭输入流
+                    }
+                } catch (java.io.FileNotFoundException e) {
+                    Log.d("TestFile", "The File doesn't not exist.");
+                } catch (IOException e) {
+                    Log.d("TestFile", e.getMessage());
+                }
+            }
+        }
+//        EncodingUtils.(strLine.getBytes(),"utf-8");
+        return content;
+    }
+
+    private void downloadFile3(final String url) {
+        Request request = new Request.Builder().url(url).build();
+        new OkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                L.e("资源下载失败");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Sink sink = null;
+                BufferedSink bufferedSink = null;
+                String mSDCardPath = getExcelHsfDir();
+                File dest = new File(mSDCardPath, url.substring(url.lastIndexOf("/") + 1));
+                if (dest.exists()) {
+                    dest.delete();
+                }
+                sink = Okio.sink(dest);
+                bufferedSink = Okio.buffer(sink);
+                bufferedSink.writeAll(response.body().source());
+                bufferedSink.close();
+                L.e("资源文件地址：" + dest.getAbsolutePath());
+                String currentCode = getFileContent(dest);
+                SharedPreferences sharedPreferences= getSharedPreferences("excelCode", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String lastCode = sharedPreferences.getString("resourceCode", "");
+                File hsfFile = new File(getExcelHsfDir() + "/hsf");
+                if (StrUtil.notEmptyOrNull(currentCode)) {
+                    CodeData codeData = JSON.parseObject(currentCode, CodeData.class);
+                    if (!lastCode.equals(codeData.getExcelCode()) || !hsfFile.exists()) {
+                        downExcelFile(realUrl, getExcelHsfDir() + File.separator + "ccbimpoiExcel.zip");
+                        editor.putString("resourceCode", codeData.getExcelCode());
+                        editor.commit();
+                    }
+                }
+            }
+
+        });
     }
 }

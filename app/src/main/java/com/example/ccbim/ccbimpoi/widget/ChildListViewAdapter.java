@@ -1,6 +1,5 @@
 package com.example.ccbim.ccbimpoi.widget;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ccbim.ccbimpoi.R;
 import com.example.ccbim.ccbimpoi.activity.FormListActivity;
 import com.example.ccbim.ccbimpoi.activity.SingleFormActivity;
-import com.example.ccbim.ccbimpoi.data.CellData;
 import com.example.ccbim.ccbimpoi.data.CheckDetailData;
-import com.example.ccbim.ccbimpoi.data.ChildItemBean;
 import com.example.ccbim.ccbimpoi.util.ConstantUtil;
+import com.weqia.utils.StrUtil;
 
 import java.util.List;
 
@@ -61,7 +58,12 @@ public class ChildListViewAdapter extends BaseAdapter {
         }else{
             vh=(ViewHolder)convertView.getTag();
         }
-        vh.child_item_title.setText(childItemBean.getCheckName().getCellName());
+        String substringCheck = "";
+        if (StrUtil.notEmptyOrNull(childItemBean.getCheckStandard().getCellName())) {
+            String checkStandard = childItemBean.getCheckStandard().getCellName();
+            substringCheck = checkStandard.length() >= 7 ? checkStandard.substring(0, 7) : checkStandard;
+        }
+        vh.child_item_title.setText(childItemBean.getCheckName().getCellName() + substringCheck);
         if (childItemBean.getStatus() == 0) {
             vh.child_item_status.setText("");
         }else if (childItemBean.getStatus() == 1||childItemBean.getStatus() == 2) {

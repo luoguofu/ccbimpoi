@@ -7,17 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-
 import com.alibaba.fastjson.JSON;
-import com.example.ccbim.ccbimpoi.data.CellData;
-import com.example.ccbim.ccbimpoi.data.CheckDetailData;
 import com.example.ccbim.ccbimpoi.data.ExcelEnum;
 import com.example.ccbim.ccbimpoi.data.ProjectCheckData;
 import com.example.ccbim.ccbimpoi.util.SaveToExcelUtil;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainNewActivity extends Activity implements View.OnClickListener {
     private Button bt_export_excel, bt_read_excel;
@@ -56,6 +51,22 @@ public class MainNewActivity extends Activity implements View.OnClickListener {
                 .toString();
         File dir = new File(sdcardPath + File.separator + "Excel"
                 + File.separator + "ExcelFile");
+
+        if (dir.exists()) {
+            return dir.toString();
+
+        } else {
+            dir.mkdirs();
+            Log.e("TAG", "保存路径不存在,");
+            return dir.toString();
+        }
+    }
+    public static String getExcelHsfDir() {
+        // SD卡指定文件夹
+        String sdcardPath = Environment.getExternalStorageDirectory()
+                .toString();
+        File dir = new File(sdcardPath + File.separator + "Excel"
+                + File.separator + "HsfFile");
 
         if (dir.exists()) {
             return dir.toString();

@@ -21,7 +21,7 @@ public class CellData extends BaseData {
     private String lastRow;                //单元格结束行
     private String lastColumn;              //单元格结束列
     private ArrayList<String> picPath;        //图片路径
-    private int cellLayout = 1;                   //单元格的布局（居中等，默认是居中）
+    private int cellLayout = 1;                   //单元格的布局（居中等，默认是居中） ,2左对齐，3上对齐
     private String fontName;                       //字体名称
     private short fontSize;                       //字体大小
     private short fontBlodWeight = 400;                //字体粗细,默认是400
@@ -36,6 +36,14 @@ public class CellData extends BaseData {
         this.firtColumn = firtColumn;
     }
 
+    public CellData(String cellName, String firtRow, String lastRow, String firtColumn, String lastColumn, int cellLayout) {
+        this.cellName = cellName;
+        this.firtRow = firtRow;
+        this.firtColumn = firtColumn;
+        this.lastRow = lastRow;
+        this.lastColumn = lastColumn;
+        this.cellLayout = cellLayout;
+    }
     public CellData(String cellName, String firtRow, String lastRow, String firtColumn, String lastColumn) {
         this.cellName = cellName;
         this.firtRow = firtRow;

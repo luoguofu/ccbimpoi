@@ -4,11 +4,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.spinytech.macore.MaApplication;
@@ -234,7 +236,7 @@ public class AttachService extends Service {
         // 得到真实下载路径
         String downName = data.getName();
         String realUrl = "";
-        if (data.getType() == AttachType.PICTURE.value())
+/*        if (data.getType() == AttachType.PICTURE.value())
             realUrl = UserService.getBitmapUrl(data.getUrl());
         else {
             String key = data.getUrl();
@@ -290,6 +292,13 @@ public class AttachService extends Service {
             } else {
                 filePath = downLoadPath + File.separator;
             }
+        }*/
+        if (StrUtil.notEmptyOrNull(data.getRealUrl())) {
+            realUrl = data.getRealUrl();
+        }
+        String filePath = "";
+        if (StrUtil.notEmptyOrNull(data.getName())) {
+            filePath = getExcelHsfDir() + File.separator + data.getName();
         }
         final String pjId = data.getProject_id();
         UserService.getHttpUtil().download(realUrl, filePath, data.getUrl(), new FileCallback() {
@@ -439,7 +448,7 @@ public class AttachService extends Service {
                         data.toString(), AttachType.FILE.value());
         LnUtil.saveData(localNetPath);
         data.setLoaclUrl(file.getAbsolutePath());
-        MaApplication.getMaApplication().onDownloadFileOp(data.toString(), 1);
+//        MaApplication.getMaApplication().onDownloadFileOp(data.toString(), 1);
         PushData pushData = new PushData();
         pushData.setMsgType(LOCAL_DOWNLOAD_FILE_SUCCESS);
         pushData.setMessage(data.toString());
@@ -1147,6 +1156,23 @@ public class AttachService extends Service {
     public static void removeSendingIds(WaitSendData sendData) {
         WeqiaApplication.getInstance().getgSendingIds().remove((Integer) sendData.getgId());
         opSuccess();
+    }
+
+    public static String getExcelHsfDir() {
+        // SD卡指定文件夹
+        String sdcardPath = Environment.getExternalStorageDirectory()
+                .toString();
+        File dir = new File(sdcardPath + File.separator + "Excel"
+                + File.separator + "HsfFile");
+
+        if (dir.exists()) {
+            return dir.toString();
+
+        } else {
+            dir.mkdirs();
+            Log.e("TAG", "保存路径不存在,");
+            return dir.toString();
+        }
     }
 
 }
